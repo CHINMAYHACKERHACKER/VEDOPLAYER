@@ -5,5 +5,4 @@ const LOGIN = () => {
     <div>LOGIN</div>
   )
 }
-
 export default LOGIN;

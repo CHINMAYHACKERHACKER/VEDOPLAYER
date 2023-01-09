@@ -1,55 +1,31 @@
 import React from 'react'
-import {
-    CDBSidebar,
-    CDBSidebarContent,
-    CDBSidebarFooter,
-    CDBSidebarHeader,
-    CDBSidebarMenu,
-    CDBSidebarMenuItem,
-  } from 'cdbreact';
-  import { NavLink } from 'react-router-dom';
+import HOMECLONE from "./HOMECLONE.js";
+import "./HOME.css";
+import { Link } from 'react-router-dom';
 
 const HOME = () => {
-  return<>
-   <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
-      <CDBSidebar textColor="#fff" backgroundColor="#333">
-        <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
-            Sidebar
-          </a>
-        </CDBSidebarHeader>
-
-        <CDBSidebarContent className="sidebar-content">
-          <CDBSidebarMenu>
-            <NavLink exact to="/HOME" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/FILE" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="upload">Upload</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/analytics" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
-            </NavLink>
-
-            <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="exclamation-circle">404 page</CDBSidebarMenuItem>
-            </NavLink>
-          </CDBSidebarMenu>
-        </CDBSidebarContent>
-
-        <CDBSidebarFooter style={{ textAlign: 'center'}}>
-          <div
-            style={{
-              padding: '20px 5px',
-            }}
-          >
+  return <>
+        <nav className="navbar navbar-expand-lg bg-body-tertiary gradient-custom">
+        <div className="container-fluid">
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon" />
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link className="nav-link text-white" aria-current="page" to="/HOME">Home</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="/FILE">Uplaod</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="#">Pricing</Link>
+              </li>
+            </ul>
           </div>
-        </CDBSidebarFooter>
-      </CDBSidebar>
-    </div>
+        </div>
+      </nav>
+    <HOMECLONE/>
   </>
 }
 export default HOME;

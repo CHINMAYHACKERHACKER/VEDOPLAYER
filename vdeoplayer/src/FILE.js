@@ -1,5 +1,4 @@
 import React from 'react';
-import "./FLE.css";
 import { useState } from 'react';
 import axios from "axios";
 
@@ -26,13 +25,13 @@ const FILE = () => {
                                     <div className="mb-md-5 mt-md-4 pb-5">
                                         <h2 className="fw-bold mb-2 text-uppercase">Upload</h2>
                                         <p className="text-white-50 mb-5">Please Uplaod Your Video!</p>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Video Name</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Video Name" onChange={(e)=>setVIDEONAME(e.target.value)} />
-                                        </div>
                                         <div className="form-outline form-white mb-4">
                                             <label for="formFileMultiple" class="form-label"></label>
                                             <input className="form-control" type="file" id="formFileMultiple" onChange={(e)=>setVIDEO(e.target.value)} multiple />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Enter Descp</label>
+                                            <textarea type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Descp" onChange={(e)=>setVIDEONAME(e.target.value)} />
                                         </div><br /><br /><br />
                                         <div className="form-outline form-white mb-4">
                                             <button className="btn btn-outline-light btn-lg px-5" type="submit" onClick={METHOD}>Upload</button>
