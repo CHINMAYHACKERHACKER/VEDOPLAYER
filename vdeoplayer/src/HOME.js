@@ -19,7 +19,7 @@ const HOME = () => {
                 <Link className="nav-link text-white" to="/FILE">Chat</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white" to="#">Pricing</Link>
+                <Link className="nav-link text-white" to="#">Video call</Link>
               </li>
             </ul>
           </div>

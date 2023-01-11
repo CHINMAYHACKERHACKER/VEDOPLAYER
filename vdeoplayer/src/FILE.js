@@ -1,10 +1,15 @@
 import React from 'react';
-import { CometChat } from "@cometchat-pro/chat";
-
+import { useState } from 'react';
+import LOGIN from "./LOGIN.js";
+import CHAT from "./CHAT.js";
 
 const FILE = () => {
+    const [user, setUser] = useState();
 
-    return <>
-    </>
+    if (!user) {
+        return <LOGIN onAuth={(user) => setUser(user)} />;
+    } else {
+        return <CHAT user={user} />;
+    }
 }
 export default FILE;

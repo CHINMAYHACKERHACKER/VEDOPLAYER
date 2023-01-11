@@ -5,12 +5,14 @@ import LOGIN from "./LOGIN.js";
 import FILE from "./FILE.js";
 
 
+
 const APP = () => {
   return  <>
   <BrowserRouter>
   <Routes>
     <Route path="/" element={<HOME/>}/>
     <Route path="/FILE" element={<FILE/>}/>
+    <Route path="/LOGIN" element={<LOGIN/>}/>
   </Routes>
   </BrowserRouter>
   </>

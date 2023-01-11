@@ -6,6 +6,7 @@ const HOMECLONE = () => {
         <div className="typing" style={{ background: "#121215"}}>
             <h2 className="TEXT">Welcome...</h2>
         </div>
+      
     </>
 }
 
