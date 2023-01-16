@@ -10,8 +10,10 @@ const LOGIN = (props) => {
   const [email, setEmail] = useState();
   const [first_name, setFirstName] = useState();
   const [last_name, setLastName] = useState();
-  const [showModal, setShowModal] = useState([]);
-  console.log(showModal);
+  const [PROFESSION, setPROFESSION] = useState("");
+  const [LANGUAGE, setLANGUAGE] = useState("");
+  const [IMAGE, setIMAGE] = useState("");
+  console.log(IMAGE);
 
 
   const onLogin = (e) => {
@@ -32,9 +34,22 @@ const LOGIN = (props) => {
         last_name,
       })
     alert("You have signed up");
+    METHOD();
   }
-  useEffect(() => {
-  }, [])
+
+  const METHOD=()=>{
+
+    const FORMDATA=new FormData();
+    FORMDATA.append("FIRSTNAME",first_name);
+    FORMDATA.append("LASTNAME",last_name);
+    FORMDATA.append("IMAGE",IMAGE);
+    FORMDATA.append("PROFESSION",PROFESSION);
+    FORMDATA.append("LANGUAGE",LANGUAGE);
+
+
+    axios
+    .post("http://localhost:3001/USERDATA",FORMDATA);
+  }
 
   return <>
     <div className="vh-200 gradient-custom">
@@ -72,24 +87,34 @@ const LOGIN = (props) => {
                 <form onSubmit={onSignup}>
                   <div className="form-group">
                     <label htmlFor="username">Username:</label>
-                    <input type="text" className="form-control" onChange={(e) => setUsername(e.target.value)} />
+                    <input type="text" className="form-control" onChange={(e) => setUsername(e.target.value)} required/>
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Password:</label>
-                    <input type="password" className="form-control" onChange={(e) => setSecret(e.target.value)} />
+                    <input type="password" className="form-control" onChange={(e) => setSecret(e.target.value)} required/>
                   </div>
                   <div className="form-group">
                     <label htmlFor="email">Email:</label>
-                    <input type="email" className="form-control" onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" className="form-control" onChange={(e) => setEmail(e.target.value)} required/>
                   </div>
                   <div className="form-group">
                     <label htmlFor="First Name">First Name:</label>
-                    <input type="text" className="form-control" onChange={(e) => setFirstName(e.target.value)} />
+                    <input type="text" className="form-control" onChange={(e) => setFirstName(e.target.value)} required/>
                   </div>
                   <div className="form-group">
                     <label htmlFor="Last Name">Last Name:</label>
-                    <input type="text" className="form-control" onChange={(e) => setLastName(e.target.value)} />
+                    <input type="text" className="form-control" onChange={(e) => setLastName(e.target.value)} required/>
                   </div>
+                  <div className="form-group">
+                    <label htmlFor="Last Name">Profession :</label>
+                    <input type="text" className="form-control" onChange={(e) => setPROFESSION(e.target.value)} required/>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="Last Name">programming languages:</label>
+                    <textarea type="text" className="form-control" onChange={(e) => setLANGUAGE(e.target.value)} placeholder="Write Programming Languages and Frameworks Give Some Comma After Each" required/>
+                  </div>
+                    <p>Upload Your Image</p>
+                    <input type="file" className="form-control-file" onChange={(e) => setIMAGE(e.target.files[0])} required/><br/>
                   <button type="submit" className="btn" id="signup-button">Sign Up</button>
                 </form>
               </div>
