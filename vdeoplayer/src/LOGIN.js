@@ -1,5 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
+import { Modal } from 'react-bootstrap';
+import { useEffect } from "react";
+
 
 const LOGIN = (props) => {
   const [username, setUsername] = useState();
@@ -7,6 +10,9 @@ const LOGIN = (props) => {
   const [email, setEmail] = useState();
   const [first_name, setFirstName] = useState();
   const [last_name, setLastName] = useState();
+  const [showModal, setShowModal] = useState([]);
+  console.log(showModal);
+
 
   const onLogin = (e) => {
     e.preventDefault();
@@ -25,11 +31,13 @@ const LOGIN = (props) => {
         first_name,
         last_name,
       })
-      alert("You have signed up");
+    alert("You have signed up");
   }
+  useEffect(() => {
+  }, [])
 
   return <>
-    <div className="vh-100 gradient-custom">
+    <div className="vh-200 gradient-custom">
       <title>Login and Sign Up</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
       <style dangerouslySetInnerHTML={{ __html: "\n    /* Custom CSS styles */\n    body {\n      background-color: #f2f2f2;\n    }\n    .card {\n      width: 400px;\n      margin: 50px auto;\n    }\n    .card-header {\n      background-color: #6CB2EB;\n      color: white;\n      text-align: center;\n    }\n    .form-control {\n      margin-bottom: 15px;\n    }\n    #login-button {\n      background-color: #6CB2EB;\n      color: white;\n      width: 100%;\n      margin-top: 20px;\n    }\n    #signup-button {\n      background-color: #4CAF50;\n      color: white;\n      width: 100%;\n      margin-top: 20px;\n    }\n  " }} />
@@ -44,11 +52,11 @@ const LOGIN = (props) => {
                 <form onSubmit={onLogin}>
                   <div className="form-group">
                     <label htmlFor="username">Username:</label>
-                    <input type="text" className="form-control" id="user" name="user"   onChange={(e) => setUsername(e.target.value)}/>
+                    <input type="text" className="form-control" id="user" name="user" onChange={(e) => setUsername(e.target.value)} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Password:</label>
-                    <input type="password" className="form-control" id="pass" name="pass"  onChange={(e) => setSecret(e.target.value)}/>
+                    <input type="password" className="form-control" id="pass" name="pass" onChange={(e) => setSecret(e.target.value)} />
                   </div>
                   <button type="submit" className="btn" id="login-button">Login</button>
                 </form>
@@ -64,23 +72,23 @@ const LOGIN = (props) => {
                 <form onSubmit={onSignup}>
                   <div className="form-group">
                     <label htmlFor="username">Username:</label>
-                    <input type="text" className="form-control"  onChange={(e) => setUsername(e.target.value)}/>
+                    <input type="text" className="form-control" onChange={(e) => setUsername(e.target.value)} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Password:</label>
-                    <input type="password" className="form-control"  onChange={(e) => setSecret(e.target.value)}/>
+                    <input type="password" className="form-control" onChange={(e) => setSecret(e.target.value)} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="email">Email:</label>
-                    <input type="email" className="form-control"  onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" className="form-control" onChange={(e) => setEmail(e.target.value)} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="First Name">First Name:</label>
-                    <input type="text" className="form-control"  onChange={(e) => setFirstName(e.target.value)}/>
+                    <input type="text" className="form-control" onChange={(e) => setFirstName(e.target.value)} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="Last Name">Last Name:</label>
-                    <input type="text" className="form-control" onChange={(e) => setLastName(e.target.value)}/>
+                    <input type="text" className="form-control" onChange={(e) => setLastName(e.target.value)} />
                   </div>
                   <button type="submit" className="btn" id="signup-button">Sign Up</button>
                 </form>

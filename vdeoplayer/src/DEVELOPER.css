@@ -1,0 +1,40 @@
+.user-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.user-card {
+    width: 600px;
+    height: 150px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #c2c2c2;
+    padding: 20px;
+    margin: 20px;
+}
+
+.user-img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    float: left;
+    margin-right: 20px;
+}
+
+.user-info {
+    text-align: left;
+}
+
+.user-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.user-email {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 10px;
+}
