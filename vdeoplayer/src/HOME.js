@@ -27,6 +27,9 @@ const HOME = () => {
               <li className="nav-item">
                 <Link className="nav-link text-white" to="/DEV" target="_blank">Developers</Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="/CONTACT">Contact</Link>
+              </li>
             </ul>
           </div>
         </div>
