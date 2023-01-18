@@ -60,8 +60,8 @@ const DEV = () => {
                   <img className="user-img" src={`http://localhost:3001/${value.IMAGE}`} alt="User" />
                   <div className="user-info">
                     <h3 key={i}>{value.FIRSTNAME} {value.LASTNAME}</h3>
-                    <p className="user-title">{value.PROFESSION}</p>
-                    <p className="user-title">{value.LANGUAGE}</p>
+                    <p className="user-title">Profession :{value.PROFESSION}</p>
+                    <p className="user-title">programming languages:{value.LANGUAGE}</p>
                   </div>
                 </div>
               </div>
