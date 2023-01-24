@@ -6,10 +6,7 @@ import FILE from "./FILE.js";
 import DEV from "./DEV.js";
 import CONTACT from "./CONTACT.js";
 import ABOUT from "./ABOUT.js";
-
-
-
-
+import RESOURCES from "./RESOURCES.js";
 
 const APP = () => {
   return  <>
@@ -21,6 +18,7 @@ const APP = () => {
     <Route path="/DEV" element={<DEV/>}/>
     <Route path="/CONTACT" element={<CONTACT/>}/>
     <Route path="/ABOUT" element={<ABOUT/>}/>
+    <Route path="/RES" element={<RESOURCES/>}/>
   </Routes>
   </BrowserRouter>
   </>

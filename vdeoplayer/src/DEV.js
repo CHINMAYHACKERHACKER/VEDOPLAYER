@@ -3,7 +3,6 @@ import "./DEVELOPER.css";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { useState } from "react";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 
 
@@ -12,10 +11,10 @@ const DEV = () => {
   const [USER, setUSER] = useState([]);
   const [SEARCH, setSEARCH] = useState("");
 
-  const METHOD = () => {
-    axios.get("http://localhost:3001/USERDATA")
+  const METHOD = async() => {
+   await axios.get("http://localhost:3001/USERDATA")
       .then((RES) => {
-        console.log(RES.data);
+        console.log(RES);
         setUSER(RES.data);
       })
   }

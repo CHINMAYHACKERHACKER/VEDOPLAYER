@@ -30,7 +30,7 @@ const CHAT = (props) => {
       </nav>
     <div style={{ height: "100vh", width: "100vw" }}>
       <PrettyChatWindow
-        projectId="b157b9e9-1343-43f4-9f61-1f84ff024426"
+        projectId="aa9bb253-495e-4e8d-a683-18d43f8f556c"
         username={props.user.username} // adam
         secret={props.user.secret} // pass1234
         style={{ height: "100%" }}

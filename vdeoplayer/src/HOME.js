@@ -7,6 +7,10 @@ const HOME = () => {
   const METHOD=()=>{
     window.open("http://localhost:5000", '_blank').focus();
   }
+
+  // const FUNCTION=()=>{
+  //   window.open("http://localhost:3002", '_blank').focus();
+  // }
   return <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary gradient-custom">
         <div className="container-fluid">
@@ -18,14 +22,20 @@ const HOME = () => {
               <li className="nav-item">
                 {/* <Link className="nav-link text-white" aria-current="page" to="/HOME">Home</Link> */}
               </li>
+              {/* <li className="nav-item">
+                <Link className="nav-link text-white" onClick={FUNCTION}>Chat</Link>
+              </li> */}
               <li className="nav-item">
-                <Link className="nav-link text-white" to="/FILE">Chat</Link>
+                <Link className="nav-link text-white"  to="/FILE">Chat</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link text-white" to="/DEV" target="_blank">Developers</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="/RES" target="_blank">Resources</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link text-white" to="/ABOUT">About Us</Link>
