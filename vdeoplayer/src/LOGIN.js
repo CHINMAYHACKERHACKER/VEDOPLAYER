@@ -189,7 +189,6 @@ const LOGIN = (props) => {
   //   button { margin-top: 12px; width: 100%; padding: 8px; }
   //   `}</style>
   // </div>
-
 }
 
 export default LOGIN;
