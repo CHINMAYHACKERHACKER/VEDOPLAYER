@@ -4,15 +4,16 @@ import "./HOME.css";
 import { Link } from 'react-router-dom';
 
 const HOME = () => {
-  const METHOD=()=>{
-    window.open("http://localhost:5000", '_blank').focus();
-  }
+
+  // const METHOD=()=>{
+  //   window.open("http://localhost:5000", '_blank').focus();
+  // }
 
   // const FUNCTION=()=>{
   //   window.open("http://localhost:3002", '_blank').focus();
   // }
   return <>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary gradient-custom">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
         <div className="container-fluid">
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
@@ -28,17 +29,23 @@ const HOME = () => {
               <li className="nav-item">
                 <Link className="nav-link text-white"  to="/FILE">Chat</Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
+              </li> */}
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="/DEV">Developers</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white" to="/DEV" target="_blank">Developers</Link>
+                <Link className="nav-link text-white" to="/RES">Resources</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white" to="/RES" target="_blank">Resources</Link>
+                <Link className="nav-link text-white" to="/UPLOAD">Upload Videos</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white" to="/ABOUT">About Us</Link>
+                <Link className="nav-link text-white" to="/VIDEO">Videos</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="/ABOUT" target="_blank">About Us</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link text-white" to="/CONTACT">Contact</Link>

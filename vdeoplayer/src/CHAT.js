@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 
 
 const CHAT = (props) => {
-  const METHOD=()=>{
-    window.open("http://localhost:5000", '_blank').focus();
-  }
+
+
+  // const METHOD=()=>{
+  //   window.open("http://localhost:5000", '_blank').focus();
+  // }
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark py-0">
@@ -18,24 +20,30 @@ const CHAT = (props) => {
               <li className="nav-item">
                 {/* <Link className="nav-link text-white" aria-current="page" to="/HOME">Home</Link> */}
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
+              </li> */}
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="/">Home</Link>
               </li>
               <li className="nav-item">
-             <Link className="nav-link text-white" to="/DEV" target="_blank">Developers</Link>
+                <Link className="nav-link text-white" to="/DEV" target="_blank">Developers</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="/RES" target="_blank">Resources</Link>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-    <div style={{ height: "100vh", width: "100vw" }}>
-      <PrettyChatWindow
-        projectId="aa9bb253-495e-4e8d-a683-18d43f8f556c"
-        username={props.user.username} // adam
-        secret={props.user.secret} // pass1234
-        style={{ height: "100%" }}
-      />
-    </div>
+      <div style={{ height: "100vh", width: "100vw" }}>
+        <PrettyChatWindow
+          projectId="b1bd226e-e241-456e-a306-612bafbe7d63"
+          username={props.user.username} // adam
+          secret={props.user.secret} // pass1234
+          style={{ height: "100%" }}
+        />
+      </div>
     </>
   );
 }

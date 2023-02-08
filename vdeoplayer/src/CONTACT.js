@@ -21,6 +21,48 @@ const CONTACT = () => {
             })
     }
     return <>
+     <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
+      <div className="container-fluid">
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon" />
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              {/* <Link className="nav-link text-white" aria-current="page" to="/HOME">Home</Link> */}
+            </li>
+            {/* <li className="nav-item">
+                <Link className="nav-link text-white" onClick={FUNCTION}>Chat</Link>
+              </li> */}
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/">Home</Link>
+            </li>
+            {/* <li className="nav-item">
+                <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
+              </li> */}
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/DEV">Developers</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/RES" target="_blank">Resources</Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link text-white" to="/UPLOAD">Upload Videos</Link>
+              </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/VIDEO">Videos</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/ABOUT" target="_blank">About Us</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/CONTACT">Contact</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
         <div>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous" />
             <div className="container">

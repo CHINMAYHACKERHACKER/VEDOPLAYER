@@ -57,3 +57,41 @@ input {
 .form-outline {
     width: 500px;
 }
+.thumb-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
+  
+  .thumb-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .thumb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    cursor: pointer;
+  }
+  
+  .thumb i {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  
+  .thumb-count {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  h5{
+    text-align: center;
+  }
+
+  .checked {
+    color: orange;
+  }
+  

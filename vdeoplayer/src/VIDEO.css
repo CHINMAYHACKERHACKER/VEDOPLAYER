@@ -1,0 +1,15 @@
+video {
+    padding: 10px;
+}
+
+h5 {
+    text-align: center;
+}
+
+.col-sm-10 {
+    margin-left: 10%;
+}
+
+.fas.fa-heart.liked {
+    color: red;
+}

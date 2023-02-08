@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Modal } from 'react-bootstrap';
 import { useEffect } from "react";
+import {Link} from "react-router-dom";
 
 
 const LOGIN = (props) => {
@@ -37,21 +38,63 @@ const LOGIN = (props) => {
     METHOD();
   }
 
-  const METHOD=()=>{
+  const METHOD = () => {
 
-    const FORMDATA=new FormData();
-    FORMDATA.append("FIRSTNAME",first_name);
-    FORMDATA.append("LASTNAME",last_name);
-    FORMDATA.append("IMAGE",IMAGE);
-    FORMDATA.append("PROFESSION",PROFESSION);
-    FORMDATA.append("LANGUAGE",LANGUAGE);
+    const FORMDATA = new FormData();
+    FORMDATA.append("FIRSTNAME", first_name);
+    FORMDATA.append("LASTNAME", last_name);
+    FORMDATA.append("IMAGE", IMAGE);
+    FORMDATA.append("PROFESSION", PROFESSION);
+    FORMDATA.append("LANGUAGE", LANGUAGE);
 
 
     axios
-    .post("http://localhost:3001/USERDATA",FORMDATA);
+      .post("http://localhost:3001/USERDATA", FORMDATA);
   }
 
   return <>
+    <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
+      <div className="container-fluid">
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon" />
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              {/* <Link className="nav-link text-white" aria-current="page" to="/HOME">Home</Link> */}
+            </li>
+            {/* <li className="nav-item">
+                <Link className="nav-link text-white" onClick={FUNCTION}>Chat</Link>
+              </li> */}
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/">Home</Link>
+            </li>
+            {/* <li className="nav-item">
+                <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
+              </li> */}
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/DEV">Developers</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/RES">Resources</Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link text-white" to="/UPLOAD">Upload Videos</Link>
+              </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/VIDEO">Videos</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/ABOUT" target="_blank">About Us</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white" to="/CONTACT">Contact</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <div className="vh-200 gradient-custom">
       <title>Login and Sign Up</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
@@ -87,34 +130,34 @@ const LOGIN = (props) => {
                 <form onSubmit={onSignup}>
                   <div className="form-group">
                     <label htmlFor="username">Username:</label>
-                    <input type="text" className="form-control" onChange={(e) => setUsername(e.target.value)} required/>
+                    <input type="text" className="form-control" onChange={(e) => setUsername(e.target.value)} required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Password:</label>
-                    <input type="password" className="form-control" onChange={(e) => setSecret(e.target.value)} required/>
+                    <input type="password" className="form-control" onChange={(e) => setSecret(e.target.value)} required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="email">Email:</label>
-                    <input type="email" className="form-control" onChange={(e) => setEmail(e.target.value)} required/>
+                    <input type="email" className="form-control" onChange={(e) => setEmail(e.target.value)} required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="First Name">First Name:</label>
-                    <input type="text" className="form-control" onChange={(e) => setFirstName(e.target.value)} required/>
+                    <input type="text" className="form-control" onChange={(e) => setFirstName(e.target.value)} required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="Last Name">Last Name:</label>
-                    <input type="text" className="form-control" onChange={(e) => setLastName(e.target.value)} required/>
+                    <input type="text" className="form-control" onChange={(e) => setLastName(e.target.value)} required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="Last Name">Profession :</label>
-                    <input type="text" className="form-control" onChange={(e) => setPROFESSION(e.target.value)} required/>
+                    <input type="text" className="form-control" onChange={(e) => setPROFESSION(e.target.value)} required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="Last Name">programming languages:</label>
-                    <textarea type="text" className="form-control" onChange={(e) => setLANGUAGE(e.target.value)} placeholder="Write Programming Languages and Frameworks Give Some Comma After Each" required/>
+                    <textarea type="text" className="form-control" onChange={(e) => setLANGUAGE(e.target.value)} placeholder="Write Programming Languages and Frameworks Give Some Comma After Each" required />
                   </div>
-                    <p>Upload Your Image</p>
-                    <input type="file" className="form-control-file" onChange={(e) => setIMAGE(e.target.files[0])} required/><br/>
+                  <p>Upload Your Image</p>
+                  <input type="file" className="form-control-file" onChange={(e) => setIMAGE(e.target.files[0])}  required /><br />
                   <button type="submit" className="btn" id="signup-button">Sign Up</button>
                 </form>
               </div>

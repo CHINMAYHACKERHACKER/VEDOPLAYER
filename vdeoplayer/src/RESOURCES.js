@@ -12,8 +12,6 @@ const RESOURCES = () => {
     const [RES, setRES] = useState([]);
     const [SEARCH, setSEARCH] = useState("");
 
-
-
     const METHOD = (RESOURCE, RESOURCELINK) => {
         if (RESOURCE == "" && RESOURCELINK == "") {
             alert("Provide Resource Name And Resource Link");
@@ -33,12 +31,15 @@ const RESOURCES = () => {
                 setRES(RES.data);
             })
     }
+
+
     useEffect(() => {
         FUNCTION();
     }, [])
 
+
     return <>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary gradient-custom">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
             <div className="container-fluid">
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
@@ -57,18 +58,18 @@ const RESOURCES = () => {
                     <input type="search" id="form1" className="form-control" placeholder="Search Resource" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
                 </div>
             </div>
-        </nav><br/>
-        <div className="container">
-                <div className="col-md-15">
-                    <form className="form-inline">
-                        <label htmlFor="RESOURCE">Enter Resource Name:</label>
-                        <input type="text" onChange={(e) => setRESOURCE(e.target.value)} required />
-                        <label htmlFor="RESOURCELINK">Resource Link:</label>
-                        <input type="text" onChange={(e) => setRESOURCELINK(e.target.value)} required />
-                        <button type="submit" className="btn-lg btn-primary" onClick={() => METHOD(RESOURCE, RESOURCELINK)}>Post</button>
-                    </form>
-                </div>
+        </nav><br />
+        <div className="container bg-white" style={{ marginTop: "0%" }}>
+            <div className="col-md-15">
+                <form className="form-inline">
+                    <label htmlFor="RESOURCE">Enter Resource Name:</label>
+                    <input type="text" onChange={(e) => setRESOURCE(e.target.value)} required />
+                    <label htmlFor="RESOURCELINK">Resource Link:</label>
+                    <input type="text" onChange={(e) => setRESOURCELINK(e.target.value)} required />
+                    <button type="submit" className="btn-lg btn-primary" onClick={() => METHOD(RESOURCE, RESOURCELINK)}>Post</button>
+                </form>
             </div>
+        </div>
         {
             RES.filter((value) => {
                 if (SEARCH == "") {
@@ -78,13 +79,25 @@ const RESOURCES = () => {
                     return value;
                 }
             }).map((value, i) => {
-                return <>
+                return <><br />
+                    {/* <div className="card bg-dark text-white" >
+                        <h3><div className="card-body">{value.RESOURCE}</div></h3>
+                        <h3 key={i}> <a href={value.LINK}>{value.LINK}</a></h3>
+                    </div> */}
+
                     <div class="row">
                         <div class="column">
                             <div className="user-cards-container">
-                                <div className="user-card">
+                                <div className="user-card"><br />
                                     <div className="user-info">
-                                        <h5 key={i}>{value.RESOURCE} <a href={value.LINK}>{value.LINK}</a></h5>
+                                        <h5 key={i}>{value.RESOURCE}</h5><br />
+                                        <h5 key={i}> <a href={value.LINK}>{value.LINK}</a></h5>
+                                        {/* <span className="fa fa-star checked" />
+                                        <span className="fa fa-star checked" />
+                                        <span className="fa fa-star checked" />
+                                        <span className="fa fa-star checked" />
+                                        <span className="fa fa-star checked"/> */}
+                                        
                                     </div>
                                 </div>
                             </div>

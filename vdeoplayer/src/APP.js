@@ -7,6 +7,9 @@ import DEV from "./DEV.js";
 import CONTACT from "./CONTACT.js";
 import ABOUT from "./ABOUT.js";
 import RESOURCES from "./RESOURCES.js";
+import UPLOAD from "./UPLOAD.js";
+import VIDEO from "./VIDEO.js";
+
 
 const APP = () => {
   return  <>
@@ -19,6 +22,8 @@ const APP = () => {
     <Route path="/CONTACT" element={<CONTACT/>}/>
     <Route path="/ABOUT" element={<ABOUT/>}/>
     <Route path="/RES" element={<RESOURCES/>}/>
+    <Route path="/UPLOAD" element={<UPLOAD/>}/>
+    <Route path="/VIDEO" element={<VIDEO/>}/>
   </Routes>
   </BrowserRouter>
   </>
