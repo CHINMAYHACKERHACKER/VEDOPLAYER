@@ -95,10 +95,81 @@ const LOGIN = (props) => {
       </div>
     </nav>
 
-    <div className="vh-200 gradient-custom">
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#login">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#signup">Sign Up</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div id="login" class="tab-pane active">
+                  <form onSubmit={onLogin}>
+                    <div class="form-group">
+                      <label for="email">Username:</label>
+                      <input type="text" class="form-control" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)}/>
+                    </div>
+                    <div class="form-group">
+                      <label for="pwd">Password:</label>
+                      <input type="password" class="form-control" placeholder="Enter password" onChange={(e) => setSecret(e.target.value)}/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                  </form>
+                </div>
+                <div id="signup" class="tab-pane">
+                  <form onSubmit={onSignup}>
+                    <div class="form-group">
+                      <label for="name">Username:</label>
+                      <input type="text" class="form-control" placeholder="Enter name"  onChange={(e) => setUsername(e.target.value)} required />
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Password:</label>
+                      <input type="password" class="form-control" placeholder="Enter Password"  onChange={(e) => setSecret(e.target.value)} required />
+                    </div>
+                    <div class="form-group">
+                      <label for="pwd">Email:</label>
+                      <input type="email" class="form-control" placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} required />
+                    </div>
+                    <div class="form-group">
+                      <label for="pwd">First Name:</label>
+                      <input type="text" class="form-control" placeholder="Enter First Name" onChange={(e) => setFirstName(e.target.value)} required />
+                    </div>
+                    <div class="form-group">
+                      <label for="pwd">Last Name:</label>
+                      <input type="text" class="form-control" placeholder="Enter Last Name" onChange={(e) => setLastName(e.target.value)} required />
+                    </div>
+                    <div class="form-group">
+                      <label for="pwd">Profession:</label>
+                      <input type="text" class="form-control" placeholder="Enter Profession" onChange={(e) => setPROFESSION(e.target.value)} required />
+                    </div>
+                    <div class="form-group">
+                      <label for="pwd">programming languages:</label>
+                      <textarea type="text" class="form-control" placeholder="Enter programming languages"  onChange={(e) => setLANGUAGE(e.target.value)} required />
+                    </div>
+                    <div class="form-group">
+                      <label for="pwd">Upload Your Image:</label>
+                      <input type="file" class="form-control" onChange={(e) => setIMAGE(e.target.files[0])}  required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* <div className="vh-200 gradient-custom">
       <title>Login and Sign Up</title>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-      <style dangerouslySetInnerHTML={{ __html: "\n    /* Custom CSS styles */\n    body {\n      background-color: #f2f2f2;\n    }\n    .card {\n      width: 400px;\n      margin: 50px auto;\n    }\n    .card-header {\n      background-color: #6CB2EB;\n      color: white;\n      text-align: center;\n    }\n    .form-control {\n      margin-bottom: 15px;\n    }\n    #login-button {\n      background-color: #6CB2EB;\n      color: white;\n      width: 100%;\n      margin-top: 20px;\n    }\n    #signup-button {\n      background-color: #4CAF50;\n      color: white;\n      width: 100%;\n      margin-top: 20px;\n    }\n  " }} />
       <div className="container">
         <div className="row">
           <div className="col-md-6">
@@ -165,73 +236,8 @@ const LOGIN = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </div> */}
   </>
-  // <div className="login-page">
-  //   <div className="card">
-  //     {/* Login Form */}
-  //     <form onSubmit={onLogin}>
-  //       <div className="title">Login</div>
-  //       <input
-  //         type="text"
-  //         name="username"
-  //         placeholder="Username"
-  //         onChange={(e) => setUsername(e.target.value)}
-  //       />
-  //       <input
-  //         type="password"
-  //         name="secret"
-  //         placeholder="Password"
-  //         onChange={(e) => setSecret(e.target.value)}
-  //       />
-  //       <button type="submit">LOG IN</button>
-  //     </form>
-
-  //     {/* Sign Up Form */}
-  //     <form onSubmit={onSignup}>
-  //       <div className="title">or Sign Up</div>
-  //       <input
-  //         type="text"
-  //         name="username"
-  //         placeholder="Username"
-  //         onChange={(e) => setUsername(e.target.value)}
-  //       />
-  //       <input
-  //         type="password"
-  //         name="secret"
-  //         placeholder="Password"
-  //         onChange={(e) => setSecret(e.target.value)}
-  //       />
-  //       <input
-  //         type="text"
-  //         name="email"
-  //         placeholder="Email"
-  //         onChange={(e) => setEmail(e.target.value)}
-  //       />
-  //       <input
-  //         type="text"
-  //         name="first_name"
-  //         placeholder="First name"
-  //         onChange={(e) => setFirstName(e.target.value)}
-  //       />
-  //       <input
-  //         type="text"
-  //         name="last_name"
-  //         placeholder="Last name"
-  //         onChange={(e) => setLastName(e.target.value)}
-  //       />
-  //       <button type="submit">SIGN UP</button>
-  //     </form>
-  //   </div>
-
-  //   <style>{`
-  //   .login-page { width: 100vw; height: 100vh; padding-top: 6vw; background: linear-gradient(180deg, rgba(117,84,160,1) 7%, rgba(117,84,160,1) 17%, rgba(106,95,168,1) 29%, rgba(99,103,174,1) 44%, rgba(87,116,184,1) 66%, rgba(70,135,198,1) 83%, rgba(44,163,219,1) 96%, rgba(22,188,237,1) 100%, rgba(0,212,255,1) 100%); }
-  //   .card { width: 200px; position: relative; left: calc(50vw - 100px); text-align: center; }
-  //   .title { padding-top: 32px; font-size: 22px; color: white; font-weight: 700; }
-  //   input { width: calc(100% - 16px); margin-top: 12px; padding: 8px; background-color: #e6f7ff; outline: none; border: 1px solid #e6f7ff; }
-  //   button { margin-top: 12px; width: 100%; padding: 8px; }
-  //   `}</style>
-  // </div>
 }
 
 export default LOGIN;

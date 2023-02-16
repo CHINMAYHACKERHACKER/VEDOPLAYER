@@ -88,57 +88,17 @@ const VIDEO = () => {
                 else if (value.TITLE.toLowerCase().includes(SEARCH.toLowerCase())) {
                     return value;
                 }
-            }).map((value, i) => {
-                return <>
-                    {/* {shouldShowAd() ? (
-                         ADVIDEOLIST.map((v, i)=>{
-                            return  <> <video src={`http://localhost:3001/${v.USERVIDEOAD}`} type="video/mp4" autoPlay></video></>
-                         })
-                    ) : (
-                        <video
-                            onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
-                            src={`http://localhost:3001/${value.VIDEO}`}
-                            type="video/mp4" controls
-                        />
-                    )} */}
+            }).map((value, index) => (
 
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-sm-10 card">
-                                {shouldShowAd() ? (
-                                    ADVIDEOLIST.map((v, i) => {
-                                        return <>
-                                            <video src={`http://localhost:3001/${v.USERVIDEOAD}`} type="video/mp4" autoPlay></video>
-                                            <button onClick={closeAd}>Close Ad</button>
-                                        </>
-                                    })
-                                ) : (
-                                    <video
-                                        onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
-                                        src={`http://localhost:3001/${value.VIDEO}`}
-                                        type="video/mp4" controls
-                                    />
-                                )}
-                            </div>
-                        </div>
-                        <div className="card-body">
-                            <h5 className="card-title text-white" style={{ backgroundColor: "grey" }}>{value.TITLE}</h5>
-                        </div>
+                <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                    <div class="video">
+                        <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%" }} controls></video>
                     </div>
-
-                    {/* <div className="container">
-                        <div className="row">
-                            <div className="col-sm-10 card">
-                                <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" controls></video>
-                            </div>
-                        </div>
-                        <div className="card-body">
-                            <h5 className="card-title text-white" style={{backgroundColor: "grey"}}>{value.TITLE}</h5>
-                        </div>
-                    </div> */}
-                </>
-            })
-        }
+                    <div class="text">
+                        <p style={{ marginRight: "100%"}}><h4>Title:</h4><h6>{value.TITLE}</h6></p>
+                    </div>
+                </div>
+            ))}
     </>
 }
 export default VIDEO;
