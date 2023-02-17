@@ -13,6 +13,7 @@ const HOME = () => {
   //   window.open("http://localhost:3002", '_blank').focus();
   // }
   return <>
+ 
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
         <div className="container-fluid">
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

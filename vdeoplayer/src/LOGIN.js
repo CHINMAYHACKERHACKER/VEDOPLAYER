@@ -3,6 +3,7 @@ import axios from "axios";
 import { Modal } from 'react-bootstrap';
 import { useEffect } from "react";
 import {Link} from "react-router-dom";
+import "./LOG.css";
 
 
 const LOGIN = (props) => {
@@ -52,7 +53,9 @@ const LOGIN = (props) => {
       .post("http://localhost:3001/USERDATA", FORMDATA);
   }
 
+
   return <>
+  <body className="page">
     <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
       <div className="container-fluid">
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -237,6 +240,7 @@ const LOGIN = (props) => {
         </div>
       </div>
     </div> */}
+    </body>
   </>
 }
 

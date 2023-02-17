@@ -3,11 +3,11 @@ import "./DESIGN.css";
 
 const HOMECLONE = () => {
     return <>
-        <div className="typing" style={{ background: "#121215"}}>
+      <body className="HOMEPAGE">
+        <div className="typing">
             <h2 className="TEXT">Welcome...</h2>
         </div>
-      
+        </body>
     </>
 }
-
 export default HOMECLONE;

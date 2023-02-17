@@ -1,0 +1,6 @@
+.page {
+    background-image: url('IMAGE.jpg');
+    background-repeat:no-repeat;
+    background-size: cover;
+    height: 950px;
+}

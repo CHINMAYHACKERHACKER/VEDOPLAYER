@@ -3,6 +3,7 @@ import "../src/VIDEO.css";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "./UPLOADIMAGE.css";
 
 const UPLOAD = () => {
     const [TITLE, setTITLE] = useState("");
@@ -23,6 +24,7 @@ const UPLOAD = () => {
     }
 
     return <>
+     <body className="UPLOAD">
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
             <div className="container-fluid">
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,6 +86,7 @@ const UPLOAD = () => {
                 <button type="submit" className="btn btn-primary" onClick={METHOD}>Upload</button>
             </form>
         </div>
+        </body>
     </>
 }
 export default UPLOAD;

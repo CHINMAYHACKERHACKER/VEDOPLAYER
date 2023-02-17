@@ -39,8 +39,14 @@
     color: #666;
     margin-bottom: 10px;
 }
+
 .form-outline {
     width: 500px;
 }
 
-
+.pc {
+    background-image: url('PC.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 950px;
+}

@@ -39,6 +39,7 @@ const RESOURCES = () => {
 
 
     return <>
+    <body className="mac">
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
             <div className="container-fluid">
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +60,8 @@ const RESOURCES = () => {
                 </div>
             </div>
         </nav><br />
-        <div className="container bg-white" style={{ marginTop: "0%" }}>
+        <p><h5>Developer can provide resources</h5></p>
+        <div className="container bg-white" style={{ marginTop: "3%" }}>
             <div className="col-md-15">
                 <form className="form-inline">
                     <label htmlFor="RESOURCE">Enter Resource Name:</label>
@@ -106,6 +108,7 @@ const RESOURCES = () => {
                 </>
             })
         }
+        </body>
     </>
 }
 export default RESOURCES;
