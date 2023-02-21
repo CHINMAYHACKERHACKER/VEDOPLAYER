@@ -1,9 +1,23 @@
-
 .video,
 .text {
     flex: 1;
 }
-P{
+
+P {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.user-img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    float: left;
+    margin-right: 20px;
+}
+
+h5{
     white-space: nowrap;
     text-overflow: ellipsis;
 }

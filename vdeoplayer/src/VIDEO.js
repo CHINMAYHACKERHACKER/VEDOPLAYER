@@ -11,6 +11,8 @@ const VIDEO = () => {
     const [SEARCH, setSEARCH] = useState("");
     const [currentTime, setCurrentTime] = useState(0);
     const [showAd, setShowAd] = useState(true);
+    const [USERIMAGE, setUSERIMAGE] = useState([]);
+
 
     const shouldShowAd = () => currentTime >= 10 && showAd;
 
@@ -34,9 +36,18 @@ const VIDEO = () => {
         setShowAd(false);
     };
 
+    const USERIMAGEDATA = async () => {
+        await axios.get("http://localhost:3001/USERDATA")
+            .then((RES) => {
+                console.log(RES);
+                setUSERIMAGE(RES.data);
+            })
+    }
+
     useEffect(() => {
         METHOD();
         ADMETHOD();
+        USERIMAGEDATA();
     }, [])
 
 
@@ -80,6 +91,7 @@ const VIDEO = () => {
             </div>
         </nav>
 
+
         {
             USERVIDEOLIST.filter((value) => {
                 if (SEARCH == "") {
@@ -88,6 +100,7 @@ const VIDEO = () => {
                 else if (value.TITLE.toLowerCase().includes(SEARCH.toLowerCase())) {
                     return value;
                 }
+
             }).map((value, index) => (
 
                 <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
@@ -95,10 +108,19 @@ const VIDEO = () => {
                         <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%" }} controls></video>
                     </div>
                     <div class="text">
-                        <p style={{ marginRight: "100%"}}><h4>Title:</h4><h6>{value.TITLE}</h6></p>
+                        {
+                            USERIMAGE.map((val, i) => {
+                                return <>
+                                    <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
+                                   <h4 key={i}>Uploaded By:{val.FIRSTNAME} {val.LASTNAME}</h4>
+                                </>
+                            })
+                        }
+                        <p style={{ marginRight: "100%" }}><h5>Title:</h5><h6>{value.TITLE}</h6></p>
                     </div>
                 </div>
-            ))}
+            ))
+        }
     </>
 }
 export default VIDEO;
