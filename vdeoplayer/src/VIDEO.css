@@ -21,3 +21,11 @@ h5{
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+
+.VIDEOBACKGROUND {
+    background-image: url('5569777.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 700px;
+}
