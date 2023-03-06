@@ -15,6 +15,23 @@ const VIDEO = () => {
     const [USERLIKE, setUSERLIKE] = useState(0);
     const [USERDISLIKE, setUSERDISLIKE] = useState(0);
 
+    const [USER, setUSERNAME] = useState("");
+    const [USERKEY, setUSERKEY] = useState("");
+
+    const [USERIMAGEUPLOADED, setUSERIMAGEUPLOADED] = useState([]);
+
+
+
+    useEffect(() => {
+        setUSERNAME(localStorage.getItem("USERNAME"));
+        setUSERKEY(localStorage.getItem("USERSIGNUPID"));
+    }, [])
+
+    console.log("USER", USER);
+    console.log("USERKEY", USERKEY);
+
+
+
 
     const shouldShowAd = () => currentTime >= 10 && showAd;
 
@@ -80,7 +97,19 @@ const VIDEO = () => {
         METHOD();
         ADMETHOD();
         USERIMAGEDATA();
+        USERUPLOADIMAGE();
     }, [])
+
+    const USERUPLOADIMAGE = async () => {
+        await axios.get(`http://localhost:3001/SIGN`)
+            .then((RES) => {
+                console.log(RES);
+                setUSERIMAGEUPLOADED(RES.data);
+            })
+    }
+
+    console.log("USERIMAGEUPLOADED", USERIMAGEUPLOADED);
+
 
 
     return <>
@@ -144,12 +173,20 @@ const VIDEO = () => {
                         </div>
                         <div class="text">
                             {
-                                USERIMAGE.map((val, i) => {
-                                    return <>
-                                        <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
-                                        <h4 key={i}>Uploaded By:{val.FIRSTNAME} {val.LASTNAME}</h4>
-                                    </>
+                                USERIMAGEUPLOADED.map((val, i) => {
+                                    if (val.USERNAME === USER && val.USERUNIQUEID === USERKEY) {
+                                        return <>
+                                            <img className="user-img" src={`http://localhost:3001/${val.USERUPLOADIMAGE}`} alt="User" />
+                                            {
+                                                USERIMAGE.map((VAL) => {
+                                                    return <h4 key={i}>Uploaded By:{VAL.FIRSTNAME} {VAL.LASTNAME}</h4>
+                                                })
+                                            }
+
+                                        </>
+                                    }
                                 })
+
                             }
                             <p style={{ marginRight: "100%" }}><h5>Title:</h5><h6>{value.TITLE}</h6></p>
                         </div>
