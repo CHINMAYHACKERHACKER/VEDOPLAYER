@@ -174,7 +174,7 @@ const VIDEO = () => {
                         <div class="text">
                             {
                                 USERIMAGEUPLOADED.map((val, i) => {
-                                    if (val.USERNAME === USER && val.USERUNIQUEID === USERKEY) {
+                                    if (val.USERNAME ==USER && val.USERUNIQUEID == USERKEY) {
                                         return <>
                                             <img className="user-img" src={`http://localhost:3001/${val.USERUPLOADIMAGE}`} alt="User" />
                                             {
@@ -182,7 +182,6 @@ const VIDEO = () => {
                                                     return <h4 key={i}>Uploaded By:{VAL.FIRSTNAME} {VAL.LASTNAME}</h4>
                                                 })
                                             }
-
                                         </>
                                     }
                                 })

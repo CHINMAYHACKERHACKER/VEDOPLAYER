@@ -52,7 +52,6 @@ const LOGIN = (props) => {
       })
     alert("You have signed up");
     METHOD();
-    USERUPLOADUNIQUEID();
   }
 
   const USERUPLOADUNIQUEID = (e) => {
@@ -78,6 +77,8 @@ const LOGIN = (props) => {
 
     axios
       .post("http://localhost:3001/USERDATA", FORMDATA);
+      
+    USERUPLOADUNIQUEID();
   }
 
 
