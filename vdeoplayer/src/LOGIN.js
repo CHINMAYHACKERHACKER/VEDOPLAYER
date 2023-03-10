@@ -17,6 +17,8 @@ const LOGIN = (props) => {
   const [LANGUAGE, setLANGUAGE] = useState("");
   const [IMAGE, setIMAGE] = useState("");
   const [USERSIGNUPID, setUSERSIGNUPID] = useState();
+  const [USERGENERATEDID, setUSERGENERATEDID] = useState("");
+
 
 
   const passwordHintId = uuidv4();
@@ -32,13 +34,6 @@ const LOGIN = (props) => {
       .catch((e) => console.log(JSON.stringify(e.response.data)));
   };
 
-  useEffect(() => {
-    USERUNIQUEID();
-  }, []);
-
-  const USERUNIQUEID = () => {
-    setUSERSIGNUPID(passwordHintId);
-  }
 
   const onSignup = (e) => {
     axios
@@ -48,24 +43,11 @@ const LOGIN = (props) => {
         email,
         first_name,
         last_name,
-        USERSIGNUPID
       })
     alert("You have signed up");
     METHOD();
   }
 
-  const USERUPLOADUNIQUEID = (e) => {
-    const FORMDATA = new FormData();
-    FORMDATA.append("USERIMAGE", IMAGE);
-    FORMDATA.append("username", username);
-    FORMDATA.append("USERSIGNUPID", USERSIGNUPID);
-
-    axios
-      .post("http://localhost:3001/SIGN", FORMDATA);
-
-    localStorage.setItem("USERSIGNUPID", USERSIGNUPID);
-    localStorage.setItem("USERNAME", username);
-  }
 
   const METHOD = () => {
     const FORMDATA = new FormData();
@@ -74,11 +56,15 @@ const LOGIN = (props) => {
     FORMDATA.append("IMAGE", IMAGE);
     FORMDATA.append("PROFESSION", PROFESSION);
     FORMDATA.append("LANGUAGE", LANGUAGE);
+    FORMDATA.append("USERGENERATEDID", USERGENERATEDID);
 
     axios
       .post("http://localhost:3001/USERDATA", FORMDATA);
       
-    USERUPLOADUNIQUEID();
+  }
+
+  const USERGENERATE=()=>{
+    setUSERGENERATEDID(passwordHintId);
   }
 
 
@@ -126,70 +112,74 @@ const LOGIN = (props) => {
         </div>
       </nav>
 
-      <div class="container mt-5">
-        <div class="row justify-content-center">
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                  <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#login">Login</a>
+      <div className="container mt-2">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <div className="card">
+              <div className="card-header">
+                <ul className="nav nav-tabs card-header-tabs">
+                  <li className="nav-item">
+                    <a className="nav-link active" data-toggle="tab" href="#login">Login</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#signup">Sign Up</a>
+                  <li className="nav-item">
+                    <a className="nav-link" data-toggle="tab" href="#signup">Sign Up</a>
                   </li>
                 </ul>
               </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div id="login" class="tab-pane active">
+              <div className="card-body">
+                <div className="tab-content">
+                  <div id="login" className="tab-pane active">
                     <form onSubmit={onLogin}>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="email">Username:</label>
-                        <input type="text" class="form-control" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)} />
+                        <input type="text" className="form-control" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)} />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="pwd">Password:</label>
-                        <input type="password" class="form-control" placeholder="Enter password" onChange={(e) => setSecret(e.target.value)} />
+                        <input type="password" className="form-control" placeholder="Enter password" onChange={(e) => setSecret(e.target.value)} />
                       </div>
-                      <button type="submit" class="btn btn-primary">Login</button>
+                      <button type="submit" className="btn btn-primary">Login</button>
                     </form>
                   </div>
-                  <div id="signup" class="tab-pane">
+                  <div id="signup" className="tab-pane">
                     <form onSubmit={onSignup}>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="name">Username:</label>
-                        <input type="text" class="form-control" placeholder="Enter name" onChange={(e) => setUsername(e.target.value)} required />
+                        <input type="text" className="form-control" placeholder="Enter name" onChange={(e) => setUsername(e.target.value)} required />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="email">Password:</label>
-                        <input type="password" class="form-control" placeholder="Enter Password" onChange={(e) => setSecret(e.target.value)} required />
+                        <input type="password" className="form-control" placeholder="Enter Password" onChange={(e) => setSecret(e.target.value)} required />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="pwd">Email:</label>
-                        <input type="email" class="form-control" placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} required />
+                        <input type="email" className="form-control" placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} required />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="pwd">First Name:</label>
-                        <input type="text" class="form-control" placeholder="Enter First Name" onChange={(e) => setFirstName(e.target.value)} required />
+                        <input type="text" className="form-control" placeholder="Enter First Name" onChange={(e) => setFirstName(e.target.value)} required />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="pwd">Last Name:</label>
-                        <input type="text" class="form-control" placeholder="Enter Last Name" onChange={(e) => setLastName(e.target.value)} required />
+                        <input type="text" className="form-control" placeholder="Enter Last Name" onChange={(e) => setLastName(e.target.value)} required />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="pwd">Profession:</label>
-                        <input type="text" class="form-control" placeholder="Enter Profession" onChange={(e) => setPROFESSION(e.target.value)} required />
+                        <input type="text" className="form-control" placeholder="Enter Profession" onChange={(e) => setPROFESSION(e.target.value)} required />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="pwd">programming languages:</label>
-                        <textarea type="text" class="form-control" placeholder="Enter programming languages" onChange={(e) => setLANGUAGE(e.target.value)} required />
+                        <input type="text" className="form-control" placeholder="Enter programming languages" onChange={(e) => setLANGUAGE(e.target.value)} required />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
+                        <label for="pwd">Click To Generate Id(Save your Unique Id):</label>
+                        <input type="text" className="form-control" value={USERGENERATEDID} required/><button type="button" className="btn btn-primary" onClick={USERGENERATE}>Generate</button>
+                      </div>
+                      <div className="form-group">
                         <label for="pwd">Upload Your Image:</label>
-                        <input type="file" class="form-control" onChange={(e) => setIMAGE(e.target.files[0])} required />
+                        <input type="file" className="form-control" onChange={(e) => setIMAGE(e.target.files[0])} required />
                       </div>
-                      <button type="submit" class="btn btn-primary">Sign Up</button>
+                      <button type="submit" className="btn btn-primary">Sign Up</button>
                     </form>
                   </div>
                 </div>

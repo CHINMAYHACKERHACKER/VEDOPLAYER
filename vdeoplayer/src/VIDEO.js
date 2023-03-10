@@ -14,24 +14,8 @@ const VIDEO = () => {
     const [USERIMAGE, setUSERIMAGE] = useState([]);
     const [USERLIKE, setUSERLIKE] = useState(0);
     const [USERDISLIKE, setUSERDISLIKE] = useState(0);
-
-    const [USER, setUSERNAME] = useState("");
-    const [USERKEY, setUSERKEY] = useState("");
-
-    const [USERIMAGEUPLOADED, setUSERIMAGEUPLOADED] = useState([]);
-
-
-
-    useEffect(() => {
-        setUSERNAME(localStorage.getItem("USERNAME"));
-        setUSERKEY(localStorage.getItem("USERSIGNUPID"));
-    }, [])
-
-    console.log("USER", USER);
-    console.log("USERKEY", USERKEY);
-
-
-
+    console.log("USERIMAGE", USERIMAGE);
+    console.log("USERVIDEOLIST", USERVIDEOLIST);
 
     const shouldShowAd = () => currentTime >= 10 && showAd;
 
@@ -97,19 +81,7 @@ const VIDEO = () => {
         METHOD();
         ADMETHOD();
         USERIMAGEDATA();
-        USERUPLOADIMAGE();
     }, [])
-
-    const USERUPLOADIMAGE = async () => {
-        await axios.get(`http://localhost:3001/SIGN`)
-            .then((RES) => {
-                console.log(RES);
-                setUSERIMAGEUPLOADED(RES.data);
-            })
-    }
-
-    console.log("USERIMAGEUPLOADED", USERIMAGEUPLOADED);
-
 
 
     return <>
@@ -168,26 +140,22 @@ const VIDEO = () => {
                         <div class="video"><br />
                             <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid black" }} controls></video>
                             <div>
-                                <i style={{ border: '1px solid' }} className="fas fa-thumbs-up fa-border fa-1x" onClick={() => USERLIKEFUNCTION(value.id)} />   {USERLIKE[value.id] || 0} <i style={{ border: '1px solid' }} className="fas fa-thumbs-down fa-border fa-1x" onClick={() => USERDISLIKEFUNCTION(value.id)} />  {USERDISLIKE[value.id] || 0}<br />
+                                <i style={{ border: '1px solid' }} className="fas fa-thumbs-up fa-border fa-1x bg-white" onClick={() => USERLIKEFUNCTION(value.id)} />  <i className="text-white">{USERLIKE[value.id] || 0}</i> <i style={{ border: '1px solid' }} className="fas fa-thumbs-down fa-border fa-1x bg-white" onClick={() => USERDISLIKEFUNCTION(value.id)} />  <i className="text-white">{USERDISLIKE[value.id] || 0}</i><br />
                             </div>
                         </div>
                         <div class="text">
                             {
-                                USERIMAGEUPLOADED.map((val, i) => {
-                                    if (val.USERNAME ==USER && val.USERUNIQUEID == USERKEY) {
-                                        return <>
-                                            <img className="user-img" src={`http://localhost:3001/${val.USERUPLOADIMAGE}`} alt="User" />
-                                            {
-                                                USERIMAGE.map((VAL) => {
-                                                    return <h4 key={i}>Uploaded By:{VAL.FIRSTNAME} {VAL.LASTNAME}</h4>
-                                                })
-                                            }
-                                        </>
-                                    }
-                                })
+                                USERIMAGE.map((val, i) => {
+                                        if (val.USERUIQUEID === value.USERID){
+                                            return <>
+                                                <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
 
+                                                <h4 key={i} className="text-white">Uploaded By:{val.FIRSTNAME} {val.LASTNAME}</h4>
+                                            </>
+                                        }
+                                })
                             }
-                            <p style={{ marginRight: "100%" }}><h5>Title:</h5><h6>{value.TITLE}</h6></p>
+                            <p style={{ marginRight: "100%" }} className="text-white"><h5>Title:</h5><h6>{value.TITLE}</h6></p>
                         </div>
                     </div>
                 ))

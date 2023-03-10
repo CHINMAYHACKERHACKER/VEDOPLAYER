@@ -9,6 +9,7 @@ const UPLOAD = () => {
     const [TITLE, setTITLE] = useState("");
     // const [DESCRIPTION, setDESCRIPTION] = useState("");
     const [VIDEO, setVIDEO] = useState("");
+    const [USERUNIQUEID, setUSERUNIQUEID] = useState("");
     console.log(VIDEO);
 
     const METHOD = (e) => {
@@ -17,6 +18,7 @@ const UPLOAD = () => {
         FORMDATA.append("TITLE", TITLE);
         // FORMDATA.append("DESCRIPTION", DESCRIPTION);
         FORMDATA.append("VIDEO", VIDEO);
+        FORMDATA.append("USERUNIQUEID", USERUNIQUEID);
 
         axios
             .post("http://localhost:3001/VIDEO", FORMDATA);
@@ -73,11 +75,15 @@ const UPLOAD = () => {
             <form>
                 <div className="form-group">
                     <label for="video" >Select Video:</label>
-                    <input type="file" className="form-control-file" id="video" name="video" onChange={(e) => setVIDEO(e.target.files[0])} />
+                    <input type="file" className="form-control-file"  onChange={(e) => setVIDEO(e.target.files[0])} />
                 </div>
                 <div className="form-group">
                     <label for="title" >Title:</label>
-                    <input type="text" className="form-control" id="title" name="title" onChange={(e) => setTITLE(e.target.value)} />
+                    <input type="text" className="form-control"  onChange={(e) => setTITLE(e.target.value)} />
+                </div>
+                <div className="form-group">
+                    <label for="title" >Enter Saved Unique Id:</label>
+                    <input type="text" className="form-control"  onChange={(e) => setUSERUNIQUEID(e.target.value)} />
                 </div>
                 {/* <div className="form-group">
                     <label for="description" >Description:</label>
