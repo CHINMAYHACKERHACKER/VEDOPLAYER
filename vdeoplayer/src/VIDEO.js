@@ -140,7 +140,7 @@ const VIDEO = () => {
                         <div class="video"><br />
                             <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid black" }} controls></video>
                             <div>
-                                <i style={{ border: '1px solid' }} className="fas fa-thumbs-up fa-border fa-1x bg-white" onClick={() => USERLIKEFUNCTION(value.id)} />  <i className="text-white">{USERLIKE[value.id] || 0}</i> <i style={{ border: '1px solid' }} className="fas fa-thumbs-down fa-border fa-1x bg-white" onClick={() => USERDISLIKEFUNCTION(value.id)} />  <i className="text-white">{USERDISLIKE[value.id] || 0}</i><br />
+                                <i style={{ border: '1px solid' }} className="fas fa-thumbs-up fa-border fa-1x bg-white" onClick={() => USERLIKEFUNCTION(value.id)} />  <i className="text-white">{USERLIKE[value.id] || 0}</i> <i style={{ border: '1px solid' }} className="fas fa-thumbs-down fa-border fa-1x bg-white" onClick={() => USERDISLIKEFUNCTION(value.id)} />  <i className="text-white">{USERDISLIKE[value.id] || 0}</i>   <i class="fa-solid fa-comment fa-border fa-1x  bg-white" aria-hidden="true"></i><br />
                             </div>
                         </div>
                         <div class="text">
@@ -150,7 +150,7 @@ const VIDEO = () => {
                                             return <>
                                                 <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
 
-                                                <h4 key={i} className="text-white">Uploaded By:{val.FIRSTNAME} {val.LASTNAME}</h4>
+                                                <h4 key={i} className="text-white">{val.FIRSTNAME} {val.LASTNAME}</h4>
                                             </>
                                         }
                                 })

@@ -89,7 +89,7 @@ const UPLOAD = () => {
                     <label for="description" >Description:</label>
                     <textarea className="form-control" id="description" name="description" onChange={(e) => setDESCRIPTION(e.target.value)}></textarea>
                 </div> */}
-                <button type="submit" className="btn btn-primary" onClick={METHOD}>Upload</button>
+                <button type="submit" className="btn btn-primary" style={{marginLeft:"1%"}} onClick={METHOD}>Upload</button>
             </form>
         </div>
         </body>

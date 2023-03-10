@@ -138,7 +138,7 @@ const LOGIN = (props) => {
                         <label for="pwd">Password:</label>
                         <input type="password" className="form-control" placeholder="Enter password" onChange={(e) => setSecret(e.target.value)} />
                       </div>
-                      <button type="submit" className="btn btn-primary">Login</button>
+                      <button type="submit" className="btn btn-primary" style={{marginLeft:"1%"}}>Login</button>
                     </form>
                   </div>
                   <div id="signup" className="tab-pane">
@@ -173,13 +173,13 @@ const LOGIN = (props) => {
                       </div>
                       <div className="form-group">
                         <label for="pwd">Click To Generate Id(Save your Unique Id):</label>
-                        <input type="text" className="form-control" value={USERGENERATEDID} required/><button type="button" className="btn btn-primary" onClick={USERGENERATE}>Generate</button>
+                        <input type="text" className="form-control" value={USERGENERATEDID} required/><button type="button" className="btn btn-primary" style={{marginLeft:"1%"}} onClick={USERGENERATE}>Generate</button>
                       </div>
                       <div className="form-group">
                         <label for="pwd">Upload Your Image:</label>
                         <input type="file" className="form-control" onChange={(e) => setIMAGE(e.target.files[0])} required />
                       </div>
-                      <button type="submit" className="btn btn-primary">Sign Up</button>
+                      <button type="submit" className="btn btn-primary" style={{marginLeft:"1%"}}>Sign Up</button>
                     </form>
                   </div>
                 </div>
