@@ -9,6 +9,7 @@ import ABOUT from "./ABOUT.js";
 import RESOURCES from "./RESOURCES.js";
 import UPLOAD from "./UPLOAD.js";
 import VIDEO from "./VIDEO.js";
+import COMMENT from "./COMMENT.js";
 
 
 const APP = () => {
@@ -24,6 +25,7 @@ const APP = () => {
     <Route path="/RES" element={<RESOURCES/>}/>
     <Route path="/UPLOAD" element={<UPLOAD/>}/>
     <Route path="/VIDEO" element={<VIDEO/>}/>
+    <Route path="/COMMENT/:id" element={<COMMENT/>}/>
   </Routes>
   </BrowserRouter>
   </>

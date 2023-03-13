@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import "../src/VIDEO.css";
+import { useNavigate } from "react-router-dom";
+import { createContext } from "react";
+import COMMENT from "./COMMENT.js";
+
+export const CONTEXT = createContext();
 
 const VIDEO = () => {
 
@@ -14,10 +19,14 @@ const VIDEO = () => {
     const [USERIMAGE, setUSERIMAGE] = useState([]);
     const [USERLIKE, setUSERLIKE] = useState(0);
     const [USERDISLIKE, setUSERDISLIKE] = useState(0);
+    const [COMENT, setCOMENT] = useState(0);
+
     console.log("USERIMAGE", USERIMAGE);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
 
     const shouldShowAd = () => currentTime >= 10 && showAd;
+
+    const NAVIGATE = useNavigate();
 
     const METHOD = async () => {
         await axios.get("http://localhost:3001/USERVIDEOVIDEO")
@@ -77,6 +86,10 @@ const VIDEO = () => {
         }
     }, []);
 
+    const COMMENTFUNCTION = (ID) => {
+        NAVIGATE(`/COMMENT/${ID}`);
+    }
+
     useEffect(() => {
         METHOD();
         ADMETHOD();
@@ -124,7 +137,6 @@ const VIDEO = () => {
                     </div>
                 </div>
             </nav>
-
             {
                 USERVIDEOLIST.filter((value) => {
                     if (SEARCH == "") {
@@ -136,23 +148,26 @@ const VIDEO = () => {
 
                 }).map((value, index) => (
 
+
                     <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                         <div class="video"><br />
-                            <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid black" }} controls></video>
+                            <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid white"}} controls></video>
                             <div>
-                                <i style={{ border: '1px solid' }} className="fas fa-thumbs-up fa-border fa-1x bg-white" onClick={() => USERLIKEFUNCTION(value.id)} />  <i className="text-white">{USERLIKE[value.id] || 0}</i> <i style={{ border: '1px solid' }} className="fas fa-thumbs-down fa-border fa-1x bg-white" onClick={() => USERDISLIKEFUNCTION(value.id)} />  <i className="text-white">{USERDISLIKE[value.id] || 0}</i>   <i class="fa-solid fa-comment fa-border fa-1x  bg-white" aria-hidden="true"></i><br />
+                                <i style={{ border: '1px solid' }} className="fas fa-thumbs-up fa-border fa-1x bg-white" onClick={() => USERLIKEFUNCTION(value.id)} />  <i className="text-white">{USERLIKE[value.id] || 0}</i> <i style={{ border: '1px solid' }} className="fas fa-thumbs-down fa-border fa-1x bg-white" onClick={() => USERDISLIKEFUNCTION(value.id)} />  <i className="text-white">{USERDISLIKE[value.id] || 0}</i>   <i style={{ border: '1px solid' }} class="fas fa-comment fa-border fa-1x  bg-white" aria-hidden="true" onClick={()=>COMMENTFUNCTION(value.id)}></i><br />
+
                             </div>
                         </div>
                         <div class="text">
                             {
                                 USERIMAGE.map((val, i) => {
-                                        if (val.USERUIQUEID === value.USERID){
-                                            return <>
-                                                <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
 
-                                                <h4 key={i} className="text-white">{val.FIRSTNAME} {val.LASTNAME}</h4>
-                                            </>
-                                        }
+                                    if (val.USERUIQUEID === value.USERID) {
+                                        return <>
+                                            <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
+
+                                            <h4 key={i} className="text-white">{val.FIRSTNAME} {val.LASTNAME}</h4>
+                                        </>
+                                    }
                                 })
                             }
                             <p style={{ marginRight: "100%" }} className="text-white"><h5>Title:</h5><h6>{value.TITLE}</h6></p>
@@ -160,6 +175,7 @@ const VIDEO = () => {
                     </div>
                 ))
             }
+
         </body>
     </>
 }
