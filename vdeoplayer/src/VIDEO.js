@@ -86,8 +86,12 @@ const VIDEO = () => {
         }
     }, []);
 
-    const COMMENTFUNCTION = (ID) => {
-        NAVIGATE(`/COMMENT/${ID}`);
+    // const COMMENTFUNCTION = (ID) => {
+    //     NAVIGATE(`/COMMENT/${ID}`);
+    // }
+
+    const VIDEOFUNCTION = (ID, VIDEO) => {
+        NAVIGATE(`/COMMENT/${VIDEO}/${ID}`);
     }
 
     useEffect(() => {
@@ -151,10 +155,13 @@ const VIDEO = () => {
 
                     <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                         <div class="video"><br />
-                            <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid white"}} controls></video>
-                            <div>
-                                <i style={{ border: '1px solid' }} className="fas fa-thumbs-up fa-border fa-1x bg-white" onClick={() => USERLIKEFUNCTION(value.id)} />  <i className="text-white">{USERLIKE[value.id] || 0}</i> <i style={{ border: '1px solid' }} className="fas fa-thumbs-down fa-border fa-1x bg-white" onClick={() => USERDISLIKEFUNCTION(value.id)} />  <i className="text-white">{USERDISLIKE[value.id] || 0}</i>   <i style={{ border: '1px solid' }} class="fas fa-comment fa-border fa-1x  bg-white" aria-hidden="true" onClick={()=>COMMENTFUNCTION(value.id)}></i><br />
+                            <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid white" }} onClick={() => VIDEOFUNCTION(value.id, value.VIDEO)}></video>
+                            {/* <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid white"}} onClick={VIDEOFUNCTION} controls></video> */}
 
+                            <div>
+                                <i style={{ border: '1px solid' }} className="fas fa-thumbs-up fa-border fa-1x bg-white" onClick={() => USERLIKEFUNCTION(value.id)} />  <i className="text-white">{USERLIKE[value.id] || 0}</i> <i style={{ border: '1px solid' }} className="fas fa-thumbs-down fa-border fa-1x bg-white" onClick={() => USERDISLIKEFUNCTION(value.id)} />  <i className="text-white">{USERDISLIKE[value.id] || 0}</i><br />
+
+                                {/* <i style={{ border: '1px solid' }} class="fas fa-comment fa-border fa-1x  bg-white" aria-hidden="true" onClick={() => COMMENTFUNCTION(value.id)}></i> */}
                             </div>
                         </div>
                         <div class="text">
@@ -170,7 +177,7 @@ const VIDEO = () => {
                                     }
                                 })
                             }
-                            <p style={{ marginRight: "100%" }} className="text-white"><h5>Title:</h5><h6>{value.TITLE}</h6></p>
+                            <p style={{ marginRight: "100%" }} className="text-white"><h6>Title:</h6><h6>{value.TITLE}</h6></p>
                         </div>
                     </div>
                 ))

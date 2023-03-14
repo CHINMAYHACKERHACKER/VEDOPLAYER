@@ -9,7 +9,7 @@ import "./COMENT.css";
 const COMMENT = () => {
 
     const PARAM = useParams();
-    console.log(PARAM);
+    console.log("PARAM",PARAM);
 
     const [USERCOMMENT, setUSERCOMMENT] = useState("");
     const [USERCOMET, setUSERCOMET] = useState([]);
@@ -65,19 +65,19 @@ const COMMENT = () => {
                 </div>
             </div>
         </nav>
+        <video src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="video/mp4" style={{ width: "70%", border: "5px solid white",marginLeft:"13%"}} controls></video>
         <div className="form-group shadow-textarea">
-            <label for="exampleFormControlTextarea6">Write Comment</label>
-            <textarea className="form-control z-depth-1" id="exampleFormControlTextarea6" rows="2" placeholder="Write something here..." style={{ width: "100%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea>
-            <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.id)}>Comment</button>
+            <textarea className="form-control z-depth-1" id="exampleFormControlTextarea6" rows="2" placeholder="Write something here..." style={{ width: "70%",marginLeft:"13%"}} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea>
+            <button type="button" class="btn btn-primary" style={{ marginLeft: "13%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID)}>Comment</button>
         </div>
         {
             USERCOMET.map((value, i) => {
-                if (value.USERVIDEOID == PARAM.id) {
+                if (value.USERVIDEOID == PARAM.ID) {
                     return <><br />
                         <div class="row">
                             <div class="column">
                                 <div className="user-cards-container">
-                                    <div className="user-card" style={{ height: "3%", width: "100%", marginRight: "20%" }}><br />
+                                    <div className="user-card" style={{ height: "3%", width: "100%", marginLeft: "-20%", backgroundColor: "grey"}}><br />
                                         <div className="user-info">
                                             <h5 key={i}>{value.USERCOMMENT}</h5>
                                         </div>

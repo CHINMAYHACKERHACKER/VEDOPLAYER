@@ -25,7 +25,7 @@ const APP = () => {
     <Route path="/RES" element={<RESOURCES/>}/>
     <Route path="/UPLOAD" element={<UPLOAD/>}/>
     <Route path="/VIDEO" element={<VIDEO/>}/>
-    <Route path="/COMMENT/:id" element={<COMMENT/>}/>
+    <Route path="/COMMENT/VIDEO/:VIDEOID/:ID" element={<COMMENT/>}/>
   </Routes>
   </BrowserRouter>
   </>
