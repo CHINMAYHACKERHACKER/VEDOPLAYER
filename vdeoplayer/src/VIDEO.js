@@ -4,10 +4,6 @@ import { useState } from "react";
 import axios from "axios";
 import "../src/VIDEO.css";
 import { useNavigate } from "react-router-dom";
-import { createContext } from "react";
-import COMMENT from "./COMMENT.js";
-
-export const CONTEXT = createContext();
 
 const VIDEO = () => {
 
@@ -94,14 +90,15 @@ const VIDEO = () => {
         NAVIGATE(`/COMMENT/${VIDEO}/${ID}`);
     }
 
+
     useEffect(() => {
         METHOD();
-        ADMETHOD();
         USERIMAGEDATA();
     }, [])
 
 
     return <>
+
         <body className="VIDEOBACKGROUND">
             <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
                 <div className="container-fluid">
@@ -164,21 +161,22 @@ const VIDEO = () => {
                                 {/* <i style={{ border: '1px solid' }} class="fas fa-comment fa-border fa-1x  bg-white" aria-hidden="true" onClick={() => COMMENTFUNCTION(value.id)}></i> */}
                             </div>
                         </div>
-                        <div class="text">
-                            {
-                                USERIMAGE.map((val, i) => {
+                       
+                            <div class="text">
+                                {
+                                    USERIMAGE.map((val, i) => {
 
-                                    if (val.USERUIQUEID === value.USERID) {
-                                        return <>
-                                            <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
+                                        if (val.USERUIQUEID === value.USERID) {
+                                            return <>
+                                                <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
 
-                                            <h4 key={i} className="text-white">{val.FIRSTNAME} {val.LASTNAME}</h4>
-                                        </>
-                                    }
-                                })
-                            }
-                            <p style={{ marginRight: "100%" }} className="text-white"><h6>Title:</h6><h6>{value.TITLE}</h6></p>
-                        </div>
+                                                <h4 key={i} className="text-white">{val.FIRSTNAME} {val.LASTNAME}</h4>
+                                            </>
+                                        }
+                                    })
+                                }
+                                <p style={{ marginRight: "100%" }} className="text-white"><h6>Title:</h6><h6>{value.TITLE}</h6></p>
+                            </div>
                     </div>
                 ))
             }
