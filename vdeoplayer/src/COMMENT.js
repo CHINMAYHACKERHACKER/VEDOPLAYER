@@ -5,6 +5,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import "./COMENT.css";
+import VIDEOCOMMENT from "./VIDEOCOMMENT.js";
 
 const COMMENT = () => {
 
@@ -98,13 +99,18 @@ const COMMENT = () => {
                 </div>
             </div>
         </nav>
-        <video src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="video/mp4" style={{ width: "70%", border: "5px solid white", marginLeft: "0%" }} controls></video>
+        <video src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="video/mp4" style={{ width: "70%", border: "5px solid white", marginLeft: "0%", backgroundColor: "black" }} controls></video>
+
+        <div className="" style={{height: '18rem', width: '18rem', marginLeft: '75%', marginTop: "-63%" }}>
+        </div>
+
+        <VIDEOCOMMENT />
         <div className="form-group shadow-textarea">
-            <textarea className="form-control z-depth-1" id="exampleFormControlTextarea6" rows="2" placeholder="Write something here..." style={{ width: "70%", marginLeft: "0%"}} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea>
+            <textarea className="form-control z-depth-1" id="exampleFormControlTextarea6" rows="2" placeholder="Write something here..." style={{ width: "70%", marginLeft: "0%", marginTop: "-29%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea>
             <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID)}>Comment</button>
         </div>
         <h5 style={{ marginLeft: "-90%", marginTop: "5%" }}>Comments</h5>
-        <hr className="hr" style={{background: 'grey',color: 'grey',borderColor: 'grey',height: '10px',width: '75%'}}/>
+        <hr className="hr" style={{ background: 'grey', color: 'grey', borderColor: 'grey', height: '5px', width: '60%' }} />
         {
             USERCOMET.map((value, i) => {
                 if (value.USERVIDEOID == PARAM.ID) {
