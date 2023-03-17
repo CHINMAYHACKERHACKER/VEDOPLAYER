@@ -72,7 +72,7 @@ const VIDEOCOMMENT = () => {
                                 if (val.USERUIQUEID === value.USERID) {
                                     return <>
                                         <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginLeft: "75%", borderRadius: "50%", width: "39px", height: "39px" }} />
-                                        <h5 key={i} style={{ marginLeft: "79%"}}><h6>User:</h6>{val.FIRSTNAME} {val.LASTNAME}</h5>
+                                        <h5 key={i} style={{ marginLeft: "79%"}}>{val.FIRSTNAME} {val.LASTNAME}</h5>
                                     </>
                                 }
                             })
