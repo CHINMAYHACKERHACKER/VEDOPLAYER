@@ -17,6 +17,7 @@ const VIDEO = () => {
     const [USERDISLIKE, setUSERDISLIKE] = useState(0);
     const [COMENT, setCOMENT] = useState(0);
 
+
     console.log("USERIMAGE", USERIMAGE);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
 
@@ -88,6 +89,15 @@ const VIDEO = () => {
 
     const VIDEOFUNCTION = (ID, VIDEO) => {
         NAVIGATE(`/COMMENT/${VIDEO}/${ID}`);
+        window.scrollTo(0, 0);
+    }
+
+    const USERDATA=(USERUIQUEID,USERID, IMAGE,FIRSTNAME,LASTNAME)=>{
+        console.log("USERUIQUEID",USERUIQUEID);
+        console.log("USERID",USERID);
+        console.log("IMAGE",IMAGE);
+        console.log("FIRSTNAME",FIRSTNAME);
+        console.log("LASTNAME",LASTNAME);
     }
 
 
@@ -161,22 +171,22 @@ const VIDEO = () => {
                                 {/* <i style={{ border: '1px solid' }} class="fas fa-comment fa-border fa-1x  bg-white" aria-hidden="true" onClick={() => COMMENTFUNCTION(value.id)}></i> */}
                             </div>
                         </div>
-                       
-                            <div class="text">
-                                {
-                                    USERIMAGE.map((val, i) => {
 
-                                        if (val.USERUIQUEID === value.USERID) {
-                                            return <>
-                                                <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
+                        <div class="text">
+                            {
+                                USERIMAGE.map((val, i) => {
 
-                                                <h4 key={i} className="text-white">{val.FIRSTNAME} {val.LASTNAME}</h4>
-                                            </>
-                                        }
-                                    })
-                                }
-                                <p style={{ marginRight: "100%" }} className="text-white"><h6>Title:</h6><h6>{value.TITLE}</h6></p>
-                            </div>
+                                    if (val.USERUIQUEID === value.USERID) {
+                                        return <>
+                                            <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User"/>
+
+                                            <h4 key={i} className="text-white">{val.FIRSTNAME} {val.LASTNAME}</h4>
+                                        </>
+                                    }
+                                })
+                            }
+                            <p style={{ marginRight: "100%" }} className="text-white"><h6>Title:</h6><h6>{value.TITLE}</h6></p>
+                        </div>
                     </div>
                 ))
             }

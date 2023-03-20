@@ -10,6 +10,10 @@ import VIDEOCOMMENT from "./VIDEOCOMMENT.js";
 
 const COMMENT = () => {
     const [USERCOMMENT, setUSERCOMMENT] = useState("");
+    const [STATUS, setSTATUS] = useState("Follow");
+    const [USERCOLOR, setUSERCOLOR] = useState("black");
+    const [SEARCH, setSEARCH] = useState("");
+
 
     const PARAM = useParams();
     console.log("PARAM", PARAM);
@@ -30,6 +34,22 @@ const COMMENT = () => {
 
     function FULLWINDOWPOPUP(ID) {
         window.open(`http://localhost:3000/USERCOMMENT/${ID}`, "bfs", "fullscreen,scrollbars");
+    }
+
+    const ONCHANGECOLOR = () => {
+        setUSERCOLOR("red");
+    }
+    const USERCHANGECOLOR = () => {
+        if (STATUS == "Following") {
+            setUSERCOLOR("red")
+        }
+        else {
+            setUSERCOLOR("black");
+        }
+    }
+
+    const METHOD = () => {
+        setSTATUS("Following")
     }
 
     return <>
@@ -57,16 +77,24 @@ const COMMENT = () => {
                         </li>
                     </ul>
                 </div>
+                <div className="form-outline">
+                    <input type="search" id="form1" className="form-control" placeholder="Search Videos" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
+                </div>
             </div>
         </nav>
         <video src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="video/mp4" style={{ width: "70%", border: "5px solid white", marginLeft: "0%", backgroundColor: "black" }} controls></video>
-        <div className="form-group shadow-textarea">
+        <button type="button" class="btn btn-primary" style={{ marginLeft: "-69%", marginTop: "5%", backgroundColor: USERCOLOR, borderColor: "black", width: "10%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={METHOD}>{STATUS}</button><br />
+        {/* <div className="form-group shadow-textarea">
             <textarea className="form-control z-depth-1" id="exampleFormControlTextarea6" rows="2" placeholder="Write something here..." style={{ width: "70%", marginLeft: "0%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea>
-            <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "-0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)} value="CLICK HERE">View Comments</button>
+            <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)}>View Comments</button>
+        </div> */}
+        <div className="md-form mb-3 pink-textarea active-pink-textarea"><br />
+            <textarea id="form18" className="md-textarea form-control" rows="1" placeholder="Write Comment..." style={{ width: "70%", marginLeft: "0%", borderColor: "white", height: "5%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea><br />
+            <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)}>View Comments</button>
         </div>
-        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '75%', marginTop: "-71%" }}>
+        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '75%', marginTop: "-76%" }}>
         </div>
-        <VIDEOCOMMENT />
+        <VIDEOCOMMENT value={SEARCH}/>
     </>
 }
 export default COMMENT;
