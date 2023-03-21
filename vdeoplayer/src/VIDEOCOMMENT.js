@@ -56,20 +56,20 @@ const VIDEOCOMMENT = (props) => {
                 }
             }).map((value, index) => (
                 <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                    <div class="video"><br />
-                        <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "30%", border: "5px solid white", marginLeft: "75%", marginTop: "0%" }} onClick={() => VIDEOFUNCTION(value.id, value.VIDEO)}></video>
+                    <div class="video"><br/>
+                        <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "15%", border: "5px solid white", marginLeft: "63%", marginTop: "0%" }} onClick={() => VIDEOFUNCTION(value.id, value.VIDEO)}></video>
                         {
                             USERIMAGE.map((val, i) => {
 
                                 if (val.USERUIQUEID === value.USERID) {
                                     return <>
-                                        <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginLeft: "75%", borderRadius: "50%", width: "39px", height: "39px" }} />
-                                        <h5 key={i} style={{ marginLeft: "79%" }}>{val.FIRSTNAME} {val.LASTNAME}</h5>
+                                        <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginLeft: "79%", marginTop: "-9%", borderRadius: "50%", width: "39px", height: "39px" }} />
+                                        <h5 key={i} style={{ marginLeft: "77%" , marginTop: "-7%"}}>{val.FIRSTNAME} {val.LASTNAME}</h5>
                                     </>
                                 }
                             })
                         }
-                        <p style={{ marginLeft: "59%" }}><h6 style={{ marginLeft: "45%" }}>{value.TITLE}</h6></p>
+                        <p style={{ marginLeft: "50%" }}><h6 style={{ marginLeft: "57%"}}>{value.TITLE}</h6></p>
                     </div>
                 </div>
             ))

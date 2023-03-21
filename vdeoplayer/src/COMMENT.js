@@ -13,6 +13,12 @@ const COMMENT = () => {
     const [STATUS, setSTATUS] = useState("Follow");
     const [USERCOLOR, setUSERCOLOR] = useState("black");
     const [SEARCH, setSEARCH] = useState("");
+    const [USERVIDEO, setUSERVIDEO] = useState([]);
+    const [USERVIDEOLIST, setUSERVIDEOLIST] = useState([]);
+
+    console.log("USERVIDEO", USERVIDEO);
+    console.log("USERVIDEOLIST", USERVIDEOLIST);
+
 
 
     const PARAM = useParams();
@@ -48,9 +54,31 @@ const COMMENT = () => {
         }
     }
 
-    const METHOD = () => {
-        setSTATUS("Following")
+    const METHOD = (USERUIQUEID, USERID, VIDEO, VIDEOID, id, ID) => {
+        if (USERUIQUEID == USERID && VIDEO == `VIDEO/${VIDEOID}` && id == ID) {
+            setSTATUS("Following");
+        }
+        else{
+            setSTATUS("Follow");
+        }
     }
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/VIDEOINFORMATION")
+            .then((RES) => {
+                console.log(RES.data);
+                setUSERVIDEO(RES.data);
+            })
+    }, [])
+
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/USERVIDEOLISTINFORMATION")
+            .then((RES) => {
+                console.log(RES.data);
+                setUSERVIDEOLIST(RES.data);
+            })
+    }, [])
 
     return <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
@@ -82,19 +110,32 @@ const COMMENT = () => {
                 </div>
             </div>
         </nav>
-        <video src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="video/mp4" style={{ width: "70%", border: "5px solid white", marginLeft: "0%", backgroundColor: "black" }} controls></video>
-        <button type="button" class="btn btn-primary" style={{ marginLeft: "-69%", marginTop: "5%", backgroundColor: USERCOLOR, borderColor: "black", width: "10%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={METHOD}>{STATUS}</button><br />
+        <video src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="video/mp4" style={{ width: "60%", border: "5px solid white", marginLeft: "-0%", backgroundColor: "black" }} controls></video>
+        {
+            USERVIDEO.map((val, i) => {
+                return USERVIDEOLIST.map((value, i) => {
+                    if (val.USERUIQUEID == value.USERID && value.VIDEO == `VIDEO/${PARAM.VIDEOID}` && value.id == PARAM.ID) {
+                        return <>
+                            {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "35%", borderRadius: "50%", width: "60px", height: "60px" }} /> */}
+                            <h6 key={i}>{val.FIRSTNAME} {val.LASTNAME}</h6>
+                            <p style={{ marginRight: "100%" }}><h6>{value.TITLE}</h6></p>
+                            <button type="button" class="btn btn-primary" style={{ marginLeft: "0%", backgroundColor: USERCOLOR, borderColor: "black", width: "10%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERUIQUEID, value.USERID, value.VIDEO, PARAM.VIDEOID, value.id, PARAM.ID)}>{STATUS}</button><br />
+                        </>
+                    }
+                })
+            })
+        }
         {/* <div className="form-group shadow-textarea">
             <textarea className="form-control z-depth-1" id="exampleFormControlTextarea6" rows="2" placeholder="Write something here..." style={{ width: "70%", marginLeft: "0%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea>
             <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)}>View Comments</button>
         </div> */}
         <div className="md-form mb-3 pink-textarea active-pink-textarea"><br />
-            <textarea id="form18" className="md-textarea form-control" rows="1" placeholder="Write Comment..." style={{ width: "70%", marginLeft: "0%", borderColor: "white", height: "5%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea><br />
+            <textarea id="form18" className="md-textarea form-control" rows="1" placeholder="Write Comment..." style={{ width: "50%", marginLeft: "0%", borderColor: "white", height: "5%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea><br />
             <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)}>View Comments</button>
         </div>
-        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '75%', marginTop: "-76%" }}>
+        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '79%', marginTop: "-75%" }}>
         </div>
-        <VIDEOCOMMENT value={SEARCH}/>
+        <VIDEOCOMMENT value={SEARCH} />
     </>
 }
 export default COMMENT;

@@ -92,12 +92,12 @@ const VIDEO = () => {
         window.scrollTo(0, 0);
     }
 
-    const USERDATA=(USERUIQUEID,USERID, IMAGE,FIRSTNAME,LASTNAME)=>{
-        console.log("USERUIQUEID",USERUIQUEID);
-        console.log("USERID",USERID);
-        console.log("IMAGE",IMAGE);
-        console.log("FIRSTNAME",FIRSTNAME);
-        console.log("LASTNAME",LASTNAME);
+    const USERDATA = (USERUIQUEID, USERID, IMAGE, FIRSTNAME, LASTNAME) => {
+        console.log("USERUIQUEID", USERUIQUEID);
+        console.log("USERID", USERID);
+        console.log("IMAGE", IMAGE);
+        console.log("FIRSTNAME", FIRSTNAME);
+        console.log("LASTNAME", LASTNAME);
     }
 
 
@@ -175,11 +175,9 @@ const VIDEO = () => {
                         <div class="text">
                             {
                                 USERIMAGE.map((val, i) => {
-
                                     if (val.USERUIQUEID === value.USERID) {
                                         return <>
-                                            <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User"/>
-
+                                            <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
                                             <h4 key={i} className="text-white">{val.FIRSTNAME} {val.LASTNAME}</h4>
                                         </>
                                     }
