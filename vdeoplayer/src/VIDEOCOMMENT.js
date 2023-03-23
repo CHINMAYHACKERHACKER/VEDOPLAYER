@@ -69,7 +69,7 @@ const VIDEOCOMMENT = (props) => {
                                 }
                             })
                         }
-                        <p style={{ marginLeft: "50%" }}><h6 style={{ marginLeft: "57%"}}>{value.TITLE}</h6></p>
+                        <p style={{ marginLeft: "50%" }}><h6 style={{ marginLeft: "57%"}}>{value.TITLE.substring(0,40)}</h6></p>
                     </div>
                 </div>
             ))
