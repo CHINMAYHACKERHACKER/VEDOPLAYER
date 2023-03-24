@@ -8,6 +8,7 @@ import "./COMENT.css";
 import VIDEOCOMMENT from "./VIDEOCOMMENT.js";
 
 
+
 const COMMENT = () => {
     const [USERCOMMENT, setUSERCOMMENT] = useState("");
     const [STATUS, setSTATUS] = useState("Follow");
@@ -18,11 +19,8 @@ const COMMENT = () => {
     const [USERFOLLOW, setUSERFOLLOW] = useState(0);
     const [USERSUBSCRIBE, setUSERSUBSCRIBE] = useState("Subscribe");
 
-
     console.log("USERVIDEO", USERVIDEO);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
-
-
 
     const PARAM = useParams();
     console.log("PARAM", PARAM);
@@ -60,10 +58,10 @@ const COMMENT = () => {
     const METHOD = (USERUIQUEID, USERID, VIDEO, VIDEOID, id, ID, FIRSTNAME, LASTNAME) => {
         if (USERUIQUEID == USERID && VIDEO == `VIDEO/${VIDEOID}` && id == ID) {
             setSTATUS("Following");
-            setUSERFOLLOW(USERFOLLOW+1);
-            alert("You Started Following"+" "+FIRSTNAME+" "+LASTNAME);
+            setUSERFOLLOW(USERFOLLOW + 1);
+            alert("You Started Following" + " " + FIRSTNAME + " " + LASTNAME);
         }
-        else{
+        else {
             setSTATUS("Follow");
         }
     }
@@ -124,8 +122,13 @@ const COMMENT = () => {
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "35%", borderRadius: "50%", width: "60px", height: "60px" }} /> */}
                             <h6 key={i}>{val.FIRSTNAME} {val.LASTNAME}</h6>
                             <p style={{ marginRight: "100%" }}><h6>{value.TITLE}</h6></p>
-                            <button type="button" class="btn btn-primary" style={{ marginLeft: "0.3%", marginTop: "-1.5%", width: "7%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERUIQUEID, value.USERID, value.VIDEO, PARAM.VIDEOID, value.id, PARAM.ID)}>{USERSUBSCRIBE}</button><i class="bi bi-person-fill" style={{ marginLeft: "1%", fontSize: "39px"}} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERUIQUEID, value.USERID, value.VIDEO, PARAM.VIDEOID, value.id, PARAM.ID, val.FIRSTNAME,val.LASTNAME)}></i><br />
-                            <p style={{ marginLeft: "-71%", marginTop: "-2.5%" }}>{STATUS}</p> <p style={{ marginLeft: "-63%", marginTop: "-3%" }}>{USERFOLLOW}</p>
+                            <button type="button" class="btn btn-primary" style={{ marginLeft: "0.3%", marginTop: "-1.5%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button><i class="bi bi-person-fill" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERUIQUEID, value.USERID, value.VIDEO, PARAM.VIDEOID, value.id, PARAM.ID, val.FIRSTNAME, val.LASTNAME)}></i><br />
+                            <p style={{ marginLeft: "-71%", marginTop: "-2.5%" }}>{STATUS}</p> <p style={{ marginLeft: "-63%", marginTop: "-3%" }}>{USERFOLLOW}</p><br />
+                            <h5 style={{ marginLeft: "-87%" }} >Download MP3</h5>
+                            <audio style={{ marginLeft: "0%" }} controls>
+                                <source src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="audio/mp3" />
+                                Your browser does not support the audio tag.
+                            </audio>
                         </>
                     }
                 })
@@ -139,7 +142,7 @@ const COMMENT = () => {
             <textarea id="form18" className="md-textarea form-control" rows="1" placeholder="Write Comment..." style={{ width: "50%", marginLeft: "0%", borderColor: "white", height: "5%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea><br />
             <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)}>View Comments</button>
         </div>
-        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '79%', marginTop: "-77%" }}>
+        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '79%', marginTop: "-85%" }}>
         </div>
         <VIDEOCOMMENT value={SEARCH} />
     </>
