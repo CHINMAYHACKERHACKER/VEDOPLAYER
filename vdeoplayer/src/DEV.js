@@ -39,7 +39,7 @@ const DEV = () => {
           </ul>
         </div>
         <div className="form-outline">
-          <input type="search" id="form1" className="form-control" placeholder="Search Dev Name  Frameworks  programming languages" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
+          <input type="search" id="form1" className="form-control" placeholder="Search Users Name" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
         </div>
       </div>
     </nav>
@@ -48,7 +48,7 @@ const DEV = () => {
         if (SEARCH == "") {
           return value;
         }
-        else if (value.FIRSTNAME.toLowerCase().includes(SEARCH.toLowerCase()) || value.LASTNAME.toLowerCase().includes(SEARCH.toLowerCase()) || value.LANGUAGE.toLowerCase().includes(SEARCH.toLowerCase())) {
+        else if (value.FIRSTNAME.toLowerCase().includes(SEARCH.toLowerCase()) || value.LASTNAME.toLowerCase().includes(SEARCH.toLowerCase())) {
           return value;
         }
       }).map((value, i) => {
@@ -56,12 +56,9 @@ const DEV = () => {
           <div class="row">
             <div class="column">
               <div className="user-cards-container">
-                <div className="user-card">
-                  <img className="user-img" src={`http://localhost:3001/${value.IMAGE}`} alt="User" />
+                <div className="user-card" style={{height:"0%"}}>
                   <div className="user-info">
-                    <h3 key={i}>{value.FIRSTNAME} {value.LASTNAME}</h3>
-                    <p className="user-title">Profession :{value.PROFESSION}</p>
-                    <p className="user-title">programming languages:{value.LANGUAGE}</p>
+                    <h3 key={i} style={{marginLeft:"33%"}}>{value.FIRSTNAME} {value.LASTNAME}</h3>
                   </div>
                 </div>
               </div>

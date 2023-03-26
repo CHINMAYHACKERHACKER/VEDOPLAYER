@@ -55,11 +55,11 @@ const COMMENT = () => {
         }
     }
 
-    const METHOD = (USERUIQUEID, USERID, VIDEO, VIDEOID, id, ID, FIRSTNAME, LASTNAME) => {
-        if (USERUIQUEID == USERID && VIDEO == `VIDEO/${VIDEOID}` && id == ID) {
+    const METHOD = (USERGENERATEDID, USERID, VIDEO, VIDEOID, id, ID, USERNAME) => {
+        if (USERGENERATEDID == USERID && VIDEO == `VIDEO/${VIDEOID}` && id == ID) {
             setSTATUS("Following");
             setUSERFOLLOW(USERFOLLOW + 1);
-            alert("You Started Following" + " " + FIRSTNAME + " " + LASTNAME);
+            alert("You Started Following" + " " + USERNAME );
         }
         else {
             setSTATUS("Follow");
@@ -67,7 +67,7 @@ const COMMENT = () => {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:3001/VIDEOINFORMATION")
+        axios.get("http://localhost:3001/USERIMAGEDATA")
             .then((RES) => {
                 console.log(RES.data);
                 setUSERVIDEO(RES.data);
@@ -98,7 +98,7 @@ const COMMENT = () => {
                 <Link className="nav-link text-white" onClick={FUNCTION}>Chat</Link>
               </li> */}
                         <li className="nav-item">
-                            <Link className="nav-link text-white" to="/">Home</Link>
+                            <Link className="nav-link text-white" to="/HOME">Home</Link>
                         </li>
                         {/* <li className="nav-item">
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
@@ -117,12 +117,12 @@ const COMMENT = () => {
         {
             USERVIDEO.map((val, i) => {
                 return USERVIDEOLIST.map((value, i) => {
-                    if (val.USERUIQUEID == value.USERID && value.VIDEO == `VIDEO/${PARAM.VIDEOID}` && value.id == PARAM.ID) {
+                    if (val.USERGENERATEDID == value.USERID && value.VIDEO == `VIDEO/${PARAM.VIDEOID}` && value.id == PARAM.ID) {
                         return <>
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "35%", borderRadius: "50%", width: "60px", height: "60px" }} /> */}
-                            <h6 key={i}>{val.FIRSTNAME} {val.LASTNAME}</h6>
+                            <h6 key={i}>{val.USERNAME}</h6>
                             <p style={{ marginRight: "100%" }}><h6>{value.TITLE}</h6></p>
-                            <button type="button" class="btn btn-primary" style={{ marginLeft: "0.3%", marginTop: "-1.5%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button><i class="bi bi-person-fill" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERUIQUEID, value.USERID, value.VIDEO, PARAM.VIDEOID, value.id, PARAM.ID, val.FIRSTNAME, val.LASTNAME)}></i><br />
+                            <button type="button" class="btn btn-primary" style={{ marginLeft: "0.3%", marginTop: "-1.5%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button><i class="bi bi-person-fill" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEO, PARAM.VIDEOID, value.id, PARAM.ID, val.USERNAME)}></i><br />
                             <p style={{ marginLeft: "-71%", marginTop: "-2.5%" }}>{STATUS}</p> <p style={{ marginLeft: "-63%", marginTop: "-3%" }}>{USERFOLLOW}</p><br />
                             <h5 style={{ marginLeft: "-87%" }} >Download MP3</h5>
                             <audio style={{ marginLeft: "0%" }} controls>

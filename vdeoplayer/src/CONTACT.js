@@ -35,16 +35,13 @@ const CONTACT = () => {
                 <Link className="nav-link text-white" onClick={FUNCTION}>Chat</Link>
               </li> */}
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/">Home</Link>
+              <Link className="nav-link text-white" to="/HOME">Home</Link>
             </li>
             {/* <li className="nav-item">
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
               </li> */}
             <li className="nav-item">
-              <Link className="nav-link text-white" to="/DEV">Developers</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-white" to="/RES" target="_blank">Resources</Link>
+              <Link className="nav-link text-white" to="/DEV">Users</Link>
             </li>
             <li className="nav-item">
                 <Link className="nav-link text-white" to="/UPLOAD">Upload Videos</Link>

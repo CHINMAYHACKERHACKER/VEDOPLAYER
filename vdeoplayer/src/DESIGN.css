@@ -18,6 +18,7 @@
     height: 100%;
     background: #4FC3F7;
     animation: cursorBlink 0.0s steps(3) infinite;
+
 }
 
 @keyframes cursorBlink {
@@ -36,6 +37,7 @@
 .typing {
     position: relative;
     -webkit-box-reflect: below 1px linear-gradient(transparent, #3333);
+
 }
 
 .typing h2 {
@@ -46,6 +48,7 @@
     overflow: hidden;
     margin-bottom: 0;
     animation: type 5s steps(11) infinite;
+
 }
 
 @keyframes type {

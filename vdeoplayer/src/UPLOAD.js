@@ -46,7 +46,7 @@ const UPLOAD = () => {
                 <Link className="nav-link text-white" onClick={FUNCTION}>Chat</Link>
               </li> */}
                             <li className="nav-item">
-                                <Link className="nav-link text-white" to="/">Home</Link>
+                                <Link className="nav-link text-white" to="/HOME">Home</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link text-white" to="/FILE">Chat</Link>
@@ -55,10 +55,7 @@ const UPLOAD = () => {
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
               </li> */}
                             <li className="nav-item">
-                                <Link className="nav-link text-white" to="/DEV">Developers</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link text-white" to="/RES">Resources</Link>
+                                <Link className="nav-link text-white" to="/DEV">Users</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link text-white" to="/VIDEO">Videos</Link>

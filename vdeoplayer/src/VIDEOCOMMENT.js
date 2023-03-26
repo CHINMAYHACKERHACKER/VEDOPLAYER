@@ -25,7 +25,7 @@ const VIDEOCOMMENT = (props) => {
 
 
     const USERIMAGEDATA = async () => {
-        await axios.get("http://localhost:3001/USERDATA")
+        await axios.get("http://localhost:3001/USERIMAGEDATA")
             .then((RES) => {
                 console.log(RES);
                 setUSERIMAGE(RES.data);
@@ -61,10 +61,10 @@ const VIDEOCOMMENT = (props) => {
                         {
                             USERIMAGE.map((val, i) => {
 
-                                if (val.USERUIQUEID === value.USERID) {
+                                if (val.USERGENERATEDID === value.USERID) {
                                     return <>
                                         <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginLeft: "79%", marginTop: "-9%", borderRadius: "50%", width: "39px", height: "39px" }} />
-                                        <h5 key={i} style={{ marginLeft: "77%" , marginTop: "-7%"}}>{val.FIRSTNAME} {val.LASTNAME}</h5>
+                                        <h5 key={i} style={{ marginLeft: "77%" , marginTop: "-7%"}}>{val.USERNAME}</h5>
                                     </>
                                 }
                             })

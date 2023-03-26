@@ -46,7 +46,7 @@ const VIDEO = () => {
     };
 
     const USERIMAGEDATA = async () => {
-        await axios.get("http://localhost:3001/USERDATA")
+        await axios.get("http://localhost:3001/USERIMAGEDATA")
             .then((RES) => {
                 console.log(RES);
                 setUSERIMAGE(RES.data);
@@ -124,7 +124,7 @@ const VIDEO = () => {
                 <Link className="nav-link text-white" onClick={FUNCTION}>Chat</Link>
               </li> */}
                             <li className="nav-item">
-                                <Link className="nav-link text-white" to="/">Home</Link>
+                                <Link className="nav-link text-white" to="/HOME">Home</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link text-white" to="/FILE">Chat</Link>
@@ -133,10 +133,7 @@ const VIDEO = () => {
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
               </li> */}
                             <li className="nav-item">
-                                <Link className="nav-link text-white" to="/DEV">Developers</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link text-white" to="/RES">Resources</Link>
+                                <Link className="nav-link text-white" to="/DEV">Users</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link text-white" to="/UPLOAD">Upload Videos</Link>
@@ -175,10 +172,10 @@ const VIDEO = () => {
                         <div class="text">
                             {
                                 USERIMAGE.map((val, i) => {
-                                    if (val.USERUIQUEID === value.USERID) {
+                                    if (val.USERGENERATEDID === value.USERID) {
                                         return <>
                                             <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
-                                            <h4 key={i} className="text-white">{val.FIRSTNAME} {val.LASTNAME}</h4>
+                                            <h4 key={i} className="text-white">{val.USERNAME}</h4>
                                         </>
                                     }
                                 })

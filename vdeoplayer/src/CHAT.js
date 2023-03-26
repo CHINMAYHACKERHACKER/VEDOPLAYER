@@ -24,13 +24,10 @@ const CHAT = (props) => {
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
               </li> */}
               <li className="nav-item">
-                <Link className="nav-link text-white" to="/">Home</Link>
+                <Link className="nav-link text-white" to="/HOME">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white" to="/DEV" target="_blank">Developers</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link text-white" to="/RES" target="_blank">Resources</Link>
+                <Link className="nav-link text-white" to="/DEV" target="_blank">Users</Link>
               </li>
             </ul>
           </div>
