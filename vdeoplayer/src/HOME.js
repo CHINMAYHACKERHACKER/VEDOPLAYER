@@ -30,9 +30,9 @@ const HOME = () => {
             {/* <li className="nav-item">
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
               </li> */}
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link text-white" to="/DEV">Users</Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link className="nav-link text-white" to="/UPLOAD">Upload Videos</Link>
             </li>

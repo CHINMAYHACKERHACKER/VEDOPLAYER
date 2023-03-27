@@ -8,7 +8,6 @@ import "./COMENT.css";
 import VIDEOCOMMENT from "./VIDEOCOMMENT.js";
 
 
-
 const COMMENT = () => {
     const [USERCOMMENT, setUSERCOMMENT] = useState("");
     const [STATUS, setSTATUS] = useState("Follow");
@@ -18,6 +17,8 @@ const COMMENT = () => {
     const [USERVIDEOLIST, setUSERVIDEOLIST] = useState([]);
     const [USERFOLLOW, setUSERFOLLOW] = useState(0);
     const [USERSUBSCRIBE, setUSERSUBSCRIBE] = useState("Subscribe");
+    const [USERSTAUS, setUSERSTAUS] = useState([]);
+    const [COUNT, setCOUNT] = useState([]);
 
     console.log("USERVIDEO", USERVIDEO);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
@@ -57,13 +58,19 @@ const COMMENT = () => {
 
     const METHOD = (USERGENERATEDID, USERID, VIDEO, VIDEOID, id, ID, USERNAME) => {
         if (USERGENERATEDID == USERID && VIDEO == `VIDEO/${VIDEOID}` && id == ID) {
-            setSTATUS("Following");
             setUSERFOLLOW(USERFOLLOW + 1);
-            alert("You Started Following" + " " + USERNAME );
+            alert("You Started Following" + " " + USERNAME);
+            axios.post("http://localhost:3001/STATUS", {
+                id: id,
+                USERNAME: USERNAME,
+                STATUS: STATUS,
+                USERGENERATEDID: USERGENERATEDID
+            })
         }
         else {
             setSTATUS("Follow");
         }
+        window.location.reload();
     }
 
     useEffect(() => {
@@ -82,6 +89,23 @@ const COMMENT = () => {
                 setUSERVIDEOLIST(RES.data);
             })
     }, [])
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/STATUS")
+            .then((RES) => {
+                console.log("STATUS", RES.data);
+                setUSERSTAUS(RES.data);
+            })
+    }, [])
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/USERCOUNTSTATUS")
+            .then((RES) => {
+                console.log("USERCOUNTSTATUS", RES.data);
+                setCOUNT(RES.data);
+            })
+    }, [])
+
 
     return <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
@@ -122,10 +146,22 @@ const COMMENT = () => {
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "35%", borderRadius: "50%", width: "60px", height: "60px" }} /> */}
                             <h6 key={i}>{val.USERNAME}</h6>
                             <p style={{ marginRight: "100%" }}><h6>{value.TITLE}</h6></p>
-                            <button type="button" class="btn btn-primary" style={{ marginLeft: "0.3%", marginTop: "-1.5%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button><i class="bi bi-person-fill" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEO, PARAM.VIDEOID, value.id, PARAM.ID, val.USERNAME)}></i><br />
-                            <p style={{ marginLeft: "-71%", marginTop: "-2.5%" }}>{STATUS}</p> <p style={{ marginLeft: "-63%", marginTop: "-3%" }}>{USERFOLLOW}</p><br />
-                            <h5 style={{ marginLeft: "-87%" }} >Download MP3</h5>
-                            <audio style={{ marginLeft: "0%" }} controls>
+                            <button type="button" class="btn btn-primary" style={{ marginLeft: "0.3%", marginTop: "-1.5%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button>
+                            <i class="bi bi-person-fill" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEO, PARAM.VIDEOID, value.id, PARAM.ID, val.USERNAME)}></i><br />
+                            {
+                                USERSTAUS.map((VAL, I) => {
+                                    return COUNT.map((VALUE, INDEX) => {
+                                        if (VAL.USERID == PARAM.ID && VAL.USERID == VALUE.USERID) {
+                                            return <>
+                                                <p style={{ marginLeft: "-71%", marginTop: "-2.5%" }}>{VAL.STATUS}</p> <p style={{ marginLeft: "-63%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
+                                            </>
+                                        }
+                                    })
+
+                                })
+                            }
+                            <h5 style={{ marginLeft: "-93%" }} >Listen</h5>
+                            <audio style={{ marginLeft: "0%" }} controls controlsList="nodownload">
                                 <source src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="audio/mp3" />
                                 Your browser does not support the audio tag.
                             </audio>

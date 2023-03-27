@@ -16,6 +16,7 @@
     "express": "^4.18.2",
     "ffmpeg-extract-audio": "^1.0.2",
     "fs": "^0.0.1-security",
+    "get-all-files": "^4.1.0",
     "list-react-files": "^0.2.0",
     "moment": "^2.29.4",
     "nodemon": "^2.0.20",

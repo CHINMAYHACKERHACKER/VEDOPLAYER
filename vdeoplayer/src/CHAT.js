@@ -26,9 +26,9 @@ const CHAT = (props) => {
               <li className="nav-item">
                 <Link className="nav-link text-white" to="/HOME">Home</Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link text-white" to="/DEV" target="_blank">Users</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
