@@ -30,6 +30,7 @@
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
     "socket.io": "^4.5.4",
+    "unzipper": "^0.10.11",
     "uuid": "^9.0.0",
     "video-to-audio": "^1.0.1",
     "web-vitals": "^2.1.4",

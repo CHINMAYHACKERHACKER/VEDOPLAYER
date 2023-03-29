@@ -61,7 +61,7 @@ const USERCOMMENT=()=>{
                                 <div className="user-cards-container">
                                     <div className="user-card" style={{ height: "1%", width: "90%", marginLeft: "-31%", backgroundColor: "grey"}}><br />
                                         <div className="user-info"> */}
-                        <h5 key={i} style={{ margin: "0%", display: "inline", color: "grey" }}>{value.USERCOMMENT}</h5> <i style={{ border: '1px solid' }} className="fa fa-thumbs-o-up  fa-border fa-1x bg-blue " onClick={() => USERLIKEFUNCTION(value.id)} />  <i>{USERLIKE[value.id] || 0}</i> <i style={{ border: '1px solid' }} className="fa fa-thumbs-o-down fa-border fa-1x bg-white" onClick={() => USERDISLIKEFUNCTION(value.id)} />  <i>{USERDISLIKE[value.id] || 0}</i><br /><br />
+                        <h5 key={i} style={{ margin: "0%", display: "inline", color: "grey" }}><i style={{ color: "black"}}>Comment:{value.USERCOMMENT}</i></h5> <i style={{ border: '1px solid' }} className="fa fa-thumbs-o-up  fa-border fa-1x bg-blue " onClick={() => USERLIKEFUNCTION(value.id)} />  <i>{USERLIKE[value.id] || 0}</i> <i style={{ border: '1px solid' }} className="fa fa-thumbs-o-down fa-border fa-1x bg-white" onClick={() => USERDISLIKEFUNCTION(value.id)} />  <i>{USERDISLIKE[value.id] || 0}</i><br /><br />
                         {/* </div>
                                     </div>
                                 </div>

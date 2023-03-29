@@ -19,6 +19,8 @@ const COMMENT = () => {
     const [USERSUBSCRIBE, setUSERSUBSCRIBE] = useState("Subscribe");
     const [USERSTAUS, setUSERSTAUS] = useState([]);
     const [COUNT, setCOUNT] = useState([]);
+    const [SONG, setSONG] = useState([]);
+
 
     console.log("USERVIDEO", USERVIDEO);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
@@ -106,6 +108,13 @@ const COMMENT = () => {
             })
     }, [])
 
+    useEffect(() => {
+        axios.get("http://localhost:3001/USERSONG")
+            .then((RES) => {
+                console.log("USERSONG", RES.data);
+                setSONG(RES.data);
+            })
+    }, [])
 
     return <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
@@ -161,10 +170,18 @@ const COMMENT = () => {
                                 })
                             }
                             <h5 style={{ marginLeft: "-93%" }} >Listen</h5>
-                            <audio style={{ marginLeft: "0%" }} controls controlsList="nodownload">
-                                <source src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="audio/mp3" />
-                                Your browser does not support the audio tag.
-                            </audio>
+                            {
+                                SONG.map((VALUE, INDEX) => {
+                                        if (`VIDEO/${VALUE.USERVIDEO}`==`VIDEO/${PARAM.VIDEOID}`){
+                                            return <>
+                                                <audio style={{ marginLeft: "0%" }} controls>
+                                                    <source src={`http://localhost:3001/${VALUE.USERSONG}`} type="audio/mp3" />
+                                                    Your browser does not support the audio tag.
+                                                </audio>
+                                            </>
+                                        }
+                                })
+                            }
                         </>
                     }
                 })
