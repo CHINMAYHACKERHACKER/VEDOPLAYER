@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
 import "./COMENT.css";
 import VIDEOCOMMENT from "./VIDEOCOMMENT.js";
-
+import ReactPlayer from 'react-player/youtube'
+import "./USERCOMMENT.css";
+import videojs from "video.js";
+import "videojs-resolution-switcher";
+import "video.js/dist/video-js.css";
+import "videojs-resolution-switcher/lib/videojs-resolution-switcher.css";
+import "videojs-resolution-switcher/lib/videojs-resolution-switcher.js";
+import "videojs-resolution-switcher/lib/videojs-resolution-switcher.css";
 
 const COMMENT = () => {
     const [USERCOMMENT, setUSERCOMMENT] = useState("");
@@ -21,12 +27,12 @@ const COMMENT = () => {
     const [COUNT, setCOUNT] = useState([]);
     const [SONG, setSONG] = useState([]);
 
-
     console.log("USERVIDEO", USERVIDEO);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
 
     const PARAM = useParams();
     console.log("PARAM", PARAM);
+
 
     const USERCOMMENTFUNCTION = (ID) => {
         if (USERCOMMENT == "") {
@@ -75,6 +81,12 @@ const COMMENT = () => {
         window.location.reload();
     }
 
+    function METHODFUNCTION(e) {
+        e.preventDefault();
+        window.location.reload();
+        window.location.pathname = '/VIDEO';
+    }
+
     useEffect(() => {
         axios.get("http://localhost:3001/USERIMAGEDATA")
             .then((RES) => {
@@ -116,6 +128,60 @@ const COMMENT = () => {
             })
     }, [])
 
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+        const videoElement = videoRef.current;
+        if (!videoElement) {
+            return;
+        }
+
+        const player = videojs(videoElement, {
+            controls: true,
+            plugins: {
+                videoJsResolutionSwitcher: {
+                    default: "low", // Default resolution [{Number}, 'low', 'high'],
+                    dynamicLabel: true,
+                },
+            },
+        });
+
+        player.updateSrc([
+            {
+                src: `http://localhost:3001/VIDEO/${PARAM.VIDEOID}?SD`,
+                type: "video/mp4",
+                label: "SD",
+                res: 480,
+            },
+            {
+                src: `http://localhost:3001/VIDEO/${PARAM.VIDEOID}?HD`,
+                type: "video/mp4",
+                label: "HD",
+                res: 1080,
+            },
+            {
+                src: `http://localhost:3001/VIDEO/${PARAM.VIDEOID}?phone`,
+                type: "video/mp4",
+                label: "phone",
+                res: 144,
+            },
+            {
+                src: `http://localhost:3001/VIDEO/${PARAM.VIDEOID}?4k`,
+                type: "video/mp4",
+                label: "4k",
+                res: 2160,
+            }
+        ])
+
+        player.on("resolutionchange", function () {
+            console.info("Source changed to %s", player.src());
+        })
+
+        return () => {
+            player.dispose();
+        };
+    }, [])
+
     return <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
             <div className="container-fluid">
@@ -137,7 +203,7 @@ const COMMENT = () => {
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
               </li> */}
                         <li className="nav-item">
-                            <Link className="nav-link text-white" to="/VIDEO">Videos</Link>
+                            <Link className="nav-link text-white" to="/VIDEO" onClick={METHODFUNCTION}>Videos</Link>
                         </li>
                     </ul>
                 </div>
@@ -146,7 +212,18 @@ const COMMENT = () => {
                 </div>
             </div>
         </nav>
-        <video src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="video/mp4" style={{ width: "60%", border: "5px solid white", marginLeft: "-0%", backgroundColor: "black" }} controls></video>
+        <div data-vjs-player>
+            <video ref={videoRef} className="video-js vjs-default-skin" controls>
+                <p className="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to
+                    a web browser that
+                    <a href="https://videojs.com/html5-video-support/" target="_blank">
+                        supports HTML5 video
+                    </a>
+                </p>
+            </video>
+        </div>
+        {/* <video src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="video/mp4" quality="100" style={{ width: "60%", border: "5px solid white", marginLeft: "-0%", backgroundColor: "black" }} controls></video> */}
         {
             USERVIDEO.map((val, i) => {
                 return USERVIDEOLIST.map((value, i) => {
@@ -172,14 +249,14 @@ const COMMENT = () => {
                             <h5 style={{ marginLeft: "-93%" }} >Listen</h5>
                             {
                                 SONG.map((VALUE, INDEX) => {
-                                        if (`VIDEO/${VALUE.USERVIDEO}`==`VIDEO/${PARAM.VIDEOID}`){
-                                            return <>
-                                                <audio style={{ marginLeft: "0%" }} controls>
-                                                    <source src={`http://localhost:3001/${VALUE.USERSONG}`} type="audio/mp3" />
-                                                    Your browser does not support the audio tag.
-                                                </audio>
-                                            </>
-                                        }
+                                    if (`VIDEO/${VALUE.USERVIDEO}` == `VIDEO/${PARAM.VIDEOID}`) {
+                                        return <>
+                                            <audio style={{ marginLeft: "0%" }} controls>
+                                                <source src={`http://localhost:3001/${VALUE.USERSONG}`} type="audio/mp3" />
+                                                Your browser does not support the audio tag.
+                                            </audio>
+                                        </>
+                                    }
                                 })
                             }
                         </>
@@ -195,7 +272,7 @@ const COMMENT = () => {
             <textarea id="form18" className="md-textarea form-control" rows="1" placeholder="Write Comment..." style={{ width: "50%", marginLeft: "0%", borderColor: "white", height: "5%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea><br />
             <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)}>View Comments</button>
         </div>
-        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '79%', marginTop: "-85%" }}>
+        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '79%', marginTop: "-73%" }}>
         </div>
         <VIDEOCOMMENT value={SEARCH} />
     </>

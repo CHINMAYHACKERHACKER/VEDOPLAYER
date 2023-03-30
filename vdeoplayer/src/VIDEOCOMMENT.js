@@ -36,6 +36,7 @@ const VIDEOCOMMENT = (props) => {
     const VIDEOFUNCTION = (ID, VIDEO) => {
         NAVIGATE(`/COMMENT/${VIDEO}/${ID}`);
         window.scrollTo(0, 0);
+        window.location.reload();
     }
 
     useEffect(() => {
