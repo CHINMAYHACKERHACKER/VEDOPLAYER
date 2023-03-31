@@ -1,12 +1,4 @@
-.video-js {
-    width: 800px;
-    height: 380px;
-    margin-left: 0%;
-    border: 5px solid white;
-}
-
-.video-js .vjs-tech {
-    object-fit: cover;
-    width: 100px;
-    height: 100px;
+.App {
+  font-family: sans-serif;
+  text-align: center;
 }

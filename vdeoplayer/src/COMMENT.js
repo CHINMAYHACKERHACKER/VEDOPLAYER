@@ -5,14 +5,9 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./COMENT.css";
 import VIDEOCOMMENT from "./VIDEOCOMMENT.js";
-import ReactPlayer from 'react-player/youtube'
 import "./USERCOMMENT.css";
-import videojs from "video.js";
-import "videojs-resolution-switcher";
-import "video.js/dist/video-js.css";
-import "videojs-resolution-switcher/lib/videojs-resolution-switcher.css";
-import "videojs-resolution-switcher/lib/videojs-resolution-switcher.js";
-import "videojs-resolution-switcher/lib/videojs-resolution-switcher.css";
+import JoLPlayer, { callBackType, JoLPlayerRef, qualityKey } from "jol-player";
+import { Button, Input, Switch } from "antd";
 
 const COMMENT = () => {
     const [USERCOMMENT, setUSERCOMMENT] = useState("");
@@ -32,6 +27,12 @@ const COMMENT = () => {
 
     const PARAM = useParams();
     console.log("PARAM", PARAM);
+
+    const qualityOptions = [
+        { value: '1080p', label: '1080p' },
+        { value: '720p', label: '720p' },
+        { value: '480p', label: '480p' },
+    ];
 
 
     const USERCOMMENTFUNCTION = (ID) => {
@@ -112,75 +113,63 @@ const COMMENT = () => {
             })
     }, [])
 
-    useEffect(() => {
-        axios.get("http://localhost:3001/USERCOUNTSTATUS")
-            .then((RES) => {
-                console.log("USERCOUNTSTATUS", RES.data);
-                setCOUNT(RES.data);
-            })
-    }, [])
-
-    useEffect(() => {
-        axios.get("http://localhost:3001/USERSONG")
-            .then((RES) => {
-                console.log("USERSONG", RES.data);
-                setSONG(RES.data);
-            })
-    }, [])
-
     const videoRef = useRef(null);
+    const [theme, setTheme] = useState("#ffb821");
+    const [isShowMultiple, setIsShowMultiple] = useState(true);
+
+    const onProgressMouseUp = (val) => {
+        console.log("onProgressMouseUp", val);
+    };
+    const onEndEd = (val) => {
+        console.log("onEndEd", val);
+    };
+    const onPause = (val) => {
+        console.log("onPause", val);
+    };
+    const onProgressMouseDown = (val) => {
+        console.log("onProgressMouseDown", val);
+    };
+    const onPlay = (val) => {
+        console.log("onPlay", val);
+    };
+    const onTimeChange = (val) => {
+        console.log("onTimeChange", val);
+    };
+    const onvolumechange = (val) => {
+        console.log("onvolumechange", val);
+    };
+    const onError = () => {
+        console.log("onError");
+    };
+    const onQualityChange = (val) => {
+        console.log("onQualityChange", val);
+    };
 
     useEffect(() => {
-        const videoElement = videoRef.current;
-        if (!videoElement) {
-            return;
+        console.log("videoRef.current", videoRef.current);
+    }, [videoRef.current]);
+
+    const videoMethod = (status) => {
+        if (status === "play") {
+            videoRef.current.play();
+        } else if (status === "pause") {
+            videoRef.current.pause();
+        } else if (status === "load") {
+            videoRef.current.load();
+        } else if (status === "volume") {
+            videoRef.current.setVolume(86);
+        } else if (status === "seek") {
+            videoRef.current.seek(500);
         }
+    };
 
-        const player = videojs(videoElement, {
-            controls: true,
-            plugins: {
-                videoJsResolutionSwitcher: {
-                    default: "low", // Default resolution [{Number}, 'low', 'high'],
-                    dynamicLabel: true,
-                },
-            },
-        });
+    const toggle = () => {
+        videoRef.current.setVideoSrc(
+            "https://gs-files.oss-cn-hongkong.aliyuncs.com/okr/test/file/2021/07/01/haiwang.mp4"
+        );
+    };
 
-        player.updateSrc([
-            {
-                src: `http://localhost:3001/VIDEO/${PARAM.VIDEOID}?SD`,
-                type: "video/mp4",
-                label: "SD",
-                res: 480,
-            },
-            {
-                src: `http://localhost:3001/VIDEO/${PARAM.VIDEOID}?HD`,
-                type: "video/mp4",
-                label: "HD",
-                res: 1080,
-            },
-            {
-                src: `http://localhost:3001/VIDEO/${PARAM.VIDEOID}?phone`,
-                type: "video/mp4",
-                label: "phone",
-                res: 144,
-            },
-            {
-                src: `http://localhost:3001/VIDEO/${PARAM.VIDEOID}?4k`,
-                type: "video/mp4",
-                label: "4k",
-                res: 2160,
-            }
-        ])
 
-        player.on("resolutionchange", function () {
-            console.info("Source changed to %s", player.src());
-        })
-
-        return () => {
-            player.dispose();
-        };
-    }, [])
 
     return <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
@@ -212,16 +201,53 @@ const COMMENT = () => {
                 </div>
             </div>
         </nav>
-        <div data-vjs-player>
-            <video ref={videoRef} className="video-js vjs-default-skin" controls>
-                <p className="vjs-no-js">
-                    To view this video please enable JavaScript, and consider upgrading to
-                    a web browser that
-                    <a href="https://videojs.com/html5-video-support/" target="_blank">
-                        supports HTML5 video
-                    </a>
-                </p>
-            </video>
+        <div className="App">
+            <JoLPlayer
+                ref={videoRef}
+                onProgressMouseUp={onProgressMouseUp}
+                onEndEd={onEndEd}
+                onPause={onPause}
+                onProgressMouseDown={onProgressMouseDown}
+                onPlay={onPlay}
+                onTimeChange={onTimeChange}
+                onvolumechange={onvolumechange}
+                onError={onError}
+                onQualityChange={onQualityChange}
+                option={{
+                    videoSrc:
+                        "https://gs-files.oss-cn-hongkong.aliyuncs.com/okr/prod/file/2021/08/31/540p.mp4",
+                    width: 750,
+                    height: 420,
+                    theme,
+                    poster:
+                        "https://gs-files.oss-cn-hongkong.aliyuncs.com/okr/prod/file/2021/08/31/1080pp.png",
+                    language: "en",
+                    isShowMultiple,
+                    pausePlacement: "center",
+                    quality: [
+                        {
+                            name: "BD",
+                            url:
+                                "https://gs-files.oss-cn-hongkong.aliyuncs.com/okr/prod/file/2021/08/31/1080P.mp4"
+                        },
+                        {
+                            name: "FHD",
+                            url:
+                                "https://gs-files.oss-cn-hongkong.aliyuncs.com/okr/prod/file/2021/08/31/720p.mp4"
+                        },
+                        {
+                            name: "HD",
+                            url:
+                                "https://gs-files.oss-cn-hongkong.aliyuncs.com/okr/prod/file/2021/08/31/540p.mp4"
+                        },
+                        {
+                            name: "SD",
+                            url:
+                                "https://gs-files.oss-accelerate.aliyuncs.com/okr/prod/file/2021/08/31/1630377480138360p.mp4"
+                        }
+                    ]
+                }}
+            />
         </div>
         {/* <video src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="video/mp4" quality="100" style={{ width: "60%", border: "5px solid white", marginLeft: "-0%", backgroundColor: "black" }} controls></video> */}
         {
