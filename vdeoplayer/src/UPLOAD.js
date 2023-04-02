@@ -10,6 +10,8 @@ const UPLOAD = () => {
     // const [DESCRIPTION, setDESCRIPTION] = useState("");
     const [VIDEO, setVIDEO] = useState("");
     const [USERUNIQUEID, setUSERUNIQUEID] = useState("");
+    const [NOISEREDUCE, setNOISEREDUCE] = useState("");
+
     console.log(VIDEO);
 
     const METHOD = (e) => {
@@ -23,6 +25,8 @@ const UPLOAD = () => {
             // FORMDATA.append("DESCRIPTION", DESCRIPTION);
             FORMDATA.append("VIDEO", VIDEO);
             FORMDATA.append("USERUNIQUEID", USERUNIQUEID);
+            FORMDATA.append("NOISEREDUCE", NOISEREDUCE);
+
 
             axios
                 .post("http://localhost:3001/VIDEO", FORMDATA);
@@ -78,6 +82,10 @@ const UPLOAD = () => {
                     <div className="form-group">
                         <label for="video" >Select Video:</label>
                         <input type="file" className="form-control-file" onChange={(e) => setVIDEO(e.target.files[0])} required />
+                    </div>
+                     <div className="form-group">
+                        <label for="title" >Noise Reduction:</label>
+                        <input type="text" className="form-control"  placeholder="Type Yes If Your Video Contains Background Noise" onChange={(e) => setNOISEREDUCE(e.target.value)} required />
                     </div>
                     <div className="form-group">
                         <label for="title" >Title:</label>

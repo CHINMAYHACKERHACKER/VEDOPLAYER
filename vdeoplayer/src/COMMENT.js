@@ -65,9 +65,8 @@ const COMMENT = () => {
         }
     }
 
-    const METHOD = (USERGENERATEDID, USERID, VIDEO, VIDEOID, id, ID, USERNAME) => {
-        if (USERGENERATEDID == USERID && VIDEO == `VIDEO/${VIDEOID}` && id == ID) {
-            setUSERFOLLOW(USERFOLLOW + 1);
+    const METHOD = (USERGENERATEDID, USERID, VIDEO, VIDEOONE, id, ID, USERNAME) => {
+        if (USERGENERATEDID == USERID && VIDEO == `VIDEO/${VIDEOONE}` && id == ID) {
             alert("You Started Following" + " " + USERNAME);
             axios.post("http://localhost:3001/STATUS", {
                 id: id,
@@ -91,7 +90,7 @@ const COMMENT = () => {
     useEffect(() => {
         axios.get("http://localhost:3001/USERIMAGEDATA")
             .then((RES) => {
-                console.log(RES.data);
+                console.log("USERVIDEO", RES.data);
                 setUSERVIDEO(RES.data);
             })
     }, [])
@@ -100,7 +99,7 @@ const COMMENT = () => {
     useEffect(() => {
         axios.get("http://localhost:3001/USERVIDEOLISTINFORMATION")
             .then((RES) => {
-                console.log(RES.data);
+                console.log("USERVIDEOLIST", RES.data);
                 setUSERVIDEOLIST(RES.data);
             })
     }, [])
@@ -110,6 +109,14 @@ const COMMENT = () => {
             .then((RES) => {
                 console.log("STATUS", RES.data);
                 setUSERSTAUS(RES.data);
+            })
+    }, [])
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/USERCOUNTSTATUS")
+            .then((RES) => {
+                console.log("COUNT", RES.data);
+                setCOUNT(RES.data);
             })
     }, [])
 
@@ -165,7 +172,7 @@ const COMMENT = () => {
 
     const toggle = () => {
         videoRef.current.setVideoSrc(
-            "https://gs-files.oss-cn-hongkong.aliyuncs.com/okr/test/file/2021/07/01/haiwang.mp4"
+            `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
         );
     };
 
@@ -201,65 +208,61 @@ const COMMENT = () => {
                 </div>
             </div>
         </nav>
-        <div className="App">
-            <JoLPlayer
-                ref={videoRef}
-                onProgressMouseUp={onProgressMouseUp}
-                onEndEd={onEndEd}
-                onPause={onPause}
-                onProgressMouseDown={onProgressMouseDown}
-                onPlay={onPlay}
-                onTimeChange={onTimeChange}
-                onvolumechange={onvolumechange}
-                onError={onError}
-                onQualityChange={onQualityChange}
-                option={{
-                    videoSrc:
-                        "https://gs-files.oss-cn-hongkong.aliyuncs.com/okr/prod/file/2021/08/31/540p.mp4",
-                    width: 750,
-                    height: 420,
-                    theme,
-                    poster:
-                        "https://gs-files.oss-cn-hongkong.aliyuncs.com/okr/prod/file/2021/08/31/1080pp.png",
-                    language: "en",
-                    isShowMultiple,
-                    pausePlacement: "center",
-                    quality: [
-                        {
-                            name: "BD",
-                            url:
-                                "https://gs-files.oss-cn-hongkong.aliyuncs.com/okr/prod/file/2021/08/31/1080P.mp4"
-                        },
-                        {
-                            name: "FHD",
-                            url:
-                                "https://gs-files.oss-cn-hongkong.aliyuncs.com/okr/prod/file/2021/08/31/720p.mp4"
-                        },
-                        {
-                            name: "HD",
-                            url:
-                                "https://gs-files.oss-cn-hongkong.aliyuncs.com/okr/prod/file/2021/08/31/540p.mp4"
-                        },
-                        {
-                            name: "SD",
-                            url:
-                                "https://gs-files.oss-accelerate.aliyuncs.com/okr/prod/file/2021/08/31/1630377480138360p.mp4"
-                        }
-                    ]
-                }}
-            />
-        </div>
+        <JoLPlayer
+            ref={videoRef}
+            onProgressMouseUp={onProgressMouseUp}
+            onEndEd={onEndEd}
+            onPause={onPause}
+            onProgressMouseDown={onProgressMouseDown}
+            onPlay={onPlay}
+            onTimeChange={onTimeChange}
+            onvolumechange={onvolumechange}
+            onError={onError}
+            onQualityChange={onQualityChange}
+            option={{
+                videoSrc:
+                    `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`,
+                theme,
+                width: "50%",
+                height: "50%",
+                language: "en",
+                isShowMultiple,
+                pausePlacement: "center",
+                quality: [
+                    {
+                        name: "BD",
+                        url:
+                            `http://localhost:3001/VIDEO/${PARAM.VIDEOONE}`
+                    },
+                    {
+                        name: "FHD",
+                        url:
+                            `http://localhost:3001/VIDEO/${PARAM.VIDEOTWO}`
+                    },
+                    {
+                        name: "HD",
+                        url:
+                            `http://localhost:3001/VIDEO/${PARAM.VIDEOTHREE}`
+                    },
+                    {
+                        name: "SD",
+                        url:
+                            `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
+                    }
+                ]
+            }}
+            style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }}/>
         {/* <video src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="video/mp4" quality="100" style={{ width: "60%", border: "5px solid white", marginLeft: "-0%", backgroundColor: "black" }} controls></video> */}
         {
             USERVIDEO.map((val, i) => {
                 return USERVIDEOLIST.map((value, i) => {
-                    if (val.USERGENERATEDID == value.USERID && value.VIDEO == `VIDEO/${PARAM.VIDEOID}` && value.id == PARAM.ID) {
+                    if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEO/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "35%", borderRadius: "50%", width: "60px", height: "60px" }} /> */}
                             <h6 key={i}>{val.USERNAME}</h6>
                             <p style={{ marginRight: "100%" }}><h6>{value.TITLE}</h6></p>
                             <button type="button" class="btn btn-primary" style={{ marginLeft: "0.3%", marginTop: "-1.5%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button>
-                            <i class="bi bi-person-fill" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEO, PARAM.VIDEOID, value.id, PARAM.ID, val.USERNAME)}></i><br />
+                            <i class="bi bi-person-fill" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}></i><br />
                             {
                                 USERSTAUS.map((VAL, I) => {
                                     return COUNT.map((VALUE, INDEX) => {
@@ -275,7 +278,7 @@ const COMMENT = () => {
                             <h5 style={{ marginLeft: "-93%" }} >Listen</h5>
                             {
                                 SONG.map((VALUE, INDEX) => {
-                                    if (`VIDEO/${VALUE.USERVIDEO}` == `VIDEO/${PARAM.VIDEOID}`) {
+                                    if (`VIDEO/${VALUE.VIDEOONE}` == `VIDEO/${PARAM.VIDEOONE}`) {
                                         return <>
                                             <audio style={{ marginLeft: "0%" }} controls>
                                                 <source src={`http://localhost:3001/${VALUE.USERSONG}`} type="audio/mp3" />
@@ -298,7 +301,7 @@ const COMMENT = () => {
             <textarea id="form18" className="md-textarea form-control" rows="1" placeholder="Write Comment..." style={{ width: "50%", marginLeft: "0%", borderColor: "white", height: "5%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea><br />
             <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)}>View Comments</button>
         </div>
-        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '79%', marginTop: "-73%" }}>
+        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '50%', marginTop: "-72%" }}>
         </div>
         <VIDEOCOMMENT value={SEARCH} />
     </>
