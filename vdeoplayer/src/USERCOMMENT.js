@@ -46,7 +46,7 @@ const USERCOMMENT=()=>{
     useEffect(() => {
         axios.get(`http://localhost:3001/USERCOMMENT`)
             .then((RES) => {
-                console.log(RES.data);
+                console.log('USERCOMMENT',RES.data);
                 setUSERCOMET(RES.data);
             })
     }, [])

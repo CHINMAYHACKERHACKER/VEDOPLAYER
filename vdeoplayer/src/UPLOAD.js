@@ -85,7 +85,7 @@ const UPLOAD = () => {
                     </div>
                      <div className="form-group">
                         <label for="title" >Noise Reduction:</label>
-                        <input type="text" className="form-control"  placeholder="Type Yes If Your Video Contains Background Noise" onChange={(e) => setNOISEREDUCE(e.target.value)} required />
+                        <input type="text" className="form-control"  placeholder="Type Yes If Your Video Contains Background Noise" onChange={(e) => setNOISEREDUCE(e.target.value)}/>
                     </div>
                     <div className="form-group">
                         <label for="title" >Title:</label>

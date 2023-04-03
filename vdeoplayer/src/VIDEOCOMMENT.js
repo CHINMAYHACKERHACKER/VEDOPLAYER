@@ -33,8 +33,8 @@ const VIDEOCOMMENT = (props) => {
     }
 
 
-    const VIDEOFUNCTION = (ID, VIDEOONE, VIDEOTWO, VIDEOTHREE, VIDEOFIVE) => {
-        NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${ID}`);
+    const VIDEOFUNCTION = (ID, VIDEOONE, VIDEOTWO, VIDEOTHREE, VIDEOFIVE,VIDEONOISEREDUCE) => {
+        NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEONOISEREDUCE}/${ID}`);
         window.scrollTo(0, 0);
         window.location.reload();
     }
@@ -58,7 +58,7 @@ const VIDEOCOMMENT = (props) => {
             }).map((value, index) => (
                 <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                     <div class="video"><br/>
-                        <video src={`http://localhost:3001/${value.VIDEOFIVE}`} type="video/mp4" style={{ width: "15%", border: "5px solid white", marginLeft: "63%", marginTop: "0%" }} onClick={() => VIDEOFUNCTION(value.id, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE)}></video>
+                        <video src={`http://localhost:3001/${value.VIDEOFIVE}`} type="video/mp4" style={{ width: "15%", border: "5px solid white", marginLeft: "63%", marginTop: "0%" }} onClick={() => VIDEOFUNCTION(value.id, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE)}></video>
                         {
                             USERIMAGE.map((val, i) => {
 
