@@ -202,6 +202,22 @@ const COMMENT = () => {
 
     }
 
+    if (PARAM.VIDEOMUSIC == "yes") {
+        const toggle = () => {
+            videoRef.current.setVideoSrc(
+                `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+            );
+        };
+    }
+    else {
+        const toggle = () => {
+            videoRef.current.setVideoSrc(
+                `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
+            );
+        };
+
+    }
+
 
     return <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
@@ -233,8 +249,148 @@ const COMMENT = () => {
                 </div>
             </div>
         </nav>
-       
+
+
         {
+            PARAM.VIDEONOISEREDUCE === "yes" ? (
+                <JoLPlayer
+                    ref={videoRef}
+                    onProgressMouseUp={onProgressMouseUp}
+                    onEndEd={onEndEd}
+                    onPause={onPause}
+                    onProgressMouseDown={onProgressMouseDown}
+                    onPlay={onPlay}
+                    onTimeChange={onTimeChange}
+                    onvolumechange={onvolumechange}
+                    onError={onError}
+                    onQualityChange={onQualityChange}
+                    option={{
+                        videoSrc:
+                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`,
+                        theme,
+                        width: "50%",
+                        height: "50%",
+                        language: "en",
+                        isShowMultiple,
+                        pausePlacement: "center",
+                        quality: [
+                            {
+                                name: "BD",
+                                url:
+                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOONE}`
+                            },
+                            {
+                                name: "FHD",
+                                url:
+                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTWO}`
+                            },
+                            {
+                                name: "HD",
+                                url:
+                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTHREE}`
+                            },
+                            {
+                                name: "SD",
+                                url:
+                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                            }
+                        ]
+                    }}
+                    style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }} />
+            ) : PARAM.VIDEOMUSIC === "yes" ? (
+                <JoLPlayer
+                    ref={videoRef}
+                    onProgressMouseUp={onProgressMouseUp}
+                    onEndEd={onEndEd}
+                    onPause={onPause}
+                    onProgressMouseDown={onProgressMouseDown}
+                    onPlay={onPlay}
+                    onTimeChange={onTimeChange}
+                    onvolumechange={onvolumechange}
+                    onError={onError}
+                    onQualityChange={onQualityChange}
+                    option={{
+                        videoSrc:
+                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`,
+                        theme,
+                        width: "50%",
+                        height: "50%",
+                        language: "en",
+                        isShowMultiple,
+                        pausePlacement: "center",
+                        quality: [
+                            {
+                                name: "BD",
+                                url:
+                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOONE}`
+                            },
+                            {
+                                name: "FHD",
+                                url:
+                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTWO}`
+                            },
+                            {
+                                name: "HD",
+                                url:
+                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTHREE}`
+                            },
+                            {
+                                name: "SD",
+                                url:
+                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                            }
+                        ]
+                    }}
+                    style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }} />) : (
+                <JoLPlayer
+                    ref={videoRef}
+                    onProgressMouseUp={onProgressMouseUp}
+                    onEndEd={onEndEd}
+                    onPause={onPause}
+                    onProgressMouseDown={onProgressMouseDown}
+                    onPlay={onPlay}
+                    onTimeChange={onTimeChange}
+                    onvolumechange={onvolumechange}
+                    onError={onError}
+                    onQualityChange={onQualityChange}
+                    option={{
+                        videoSrc:
+                            `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`,
+                        theme,
+                        width: "50%",
+                        height: "50%",
+                        language: "en",
+                        isShowMultiple,
+                        pausePlacement: "center",
+                        quality: [
+                            {
+                                name: "BD",
+                                url:
+                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOONE}`
+                            },
+                            {
+                                name: "FHD",
+                                url:
+                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOTWO}`
+                            },
+                            {
+                                name: "HD",
+                                url:
+                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOTHREE}`
+                            },
+                            {
+                                name: "SD",
+                                url:
+                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
+                            }
+                        ]
+                    }}
+                    style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }} />
+
+            )
+        }
+
+        {/* {
             PARAM.VIDEONOISEREDUCE === "yes" ? (
                 <JoLPlayer
                     ref={videoRef}
@@ -327,7 +483,7 @@ const COMMENT = () => {
                     style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }} />
 
             )
-        }
+        } */}
         {/* <video src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="video/mp4" quality="100" style={{ width: "60%", border: "5px solid white", marginLeft: "-0%", backgroundColor: "black" }} controls></video> */}
 
         {PARAM.VIDEONOISEREDUCE == "yes" ? (
@@ -369,7 +525,45 @@ const COMMENT = () => {
                     }
                 })
             })
-        ) : (
+        ) : PARAM.VIDEOMUSIC == "yes" ? (
+            USERVIDEO.map((val, i) => {
+                return USERVIDEOLIST.map((value, i) => {
+                    if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
+                        return <>
+                            {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "35%", borderRadius: "50%", width: "60px", height: "60px" }} /> */}
+                            <h6 key={i}>{val.USERNAME}</h6>
+                            <p style={{ marginRight: "100%" }}><h6>{value.TITLE}</h6></p>
+                            <button type="button" class="btn btn-primary" style={{ marginLeft: "0.3%", marginTop: "-1.5%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button>
+                            <i class="bi bi-person-fill" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}></i><br />
+                            {
+                                USERSTAUS.map((VAL, I) => {
+                                    return COUNT.map((VALUE, INDEX) => {
+                                        if (VAL.USERID == PARAM.ID && VAL.USERID == VALUE.USERID) {
+                                            return <>
+                                                <p style={{ marginLeft: "-71%", marginTop: "-2.5%" }}>{VAL.STATUS}</p> <p style={{ marginLeft: "-63%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
+                                            </>
+                                        }
+                                    })
+
+                                })
+                            }
+                            <h5 style={{ marginLeft: "-93%" }} >Listen</h5>
+                            {
+                                SONG.map((VALUE, INDEX) => {
+                                    if (`VIDEONOISEREDUCE/${VALUE.VIDEOONE}` == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}`) {
+                                        return <>
+                                            <audio style={{ marginLeft: "0%" }} controls>
+                                                <source src={`http://localhost:3001/${VALUE.USERSONG}`} type="audio/mp3" />
+                                                Your browser does not support the audio tag.
+                                            </audio>
+                                        </>
+                                    }
+                                })
+                            }
+                        </>
+                    }
+                })
+            })) : (
             USERVIDEO.map((val, i) => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEO/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {

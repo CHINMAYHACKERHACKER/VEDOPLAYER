@@ -11,6 +11,8 @@ const UPLOAD = () => {
     const [VIDEO, setVIDEO] = useState("");
     const [USERUNIQUEID, setUSERUNIQUEID] = useState("");
     const [NOISEREDUCE, setNOISEREDUCE] = useState("");
+    const [AUDIO, setAUDIO] = useState("");
+
 
     console.log(VIDEO);
 
@@ -23,10 +25,13 @@ const UPLOAD = () => {
             const FORMDATA = new FormData();
             FORMDATA.append("TITLE", TITLE);
             // FORMDATA.append("DESCRIPTION", DESCRIPTION);
-            FORMDATA.append("VIDEO", VIDEO);
+            // FORMDATA.append("VIDEO", VIDEO);
             FORMDATA.append("USERUNIQUEID", USERUNIQUEID);
             FORMDATA.append("NOISEREDUCE", NOISEREDUCE);
-
+            FORMDATA.append("AUDIO", AUDIO);
+            for (let i = 0; i < VIDEO.length; i++) {
+                FORMDATA.append('VIDEO', VIDEO[i]);
+            }
 
             axios
                 .post("http://localhost:3001/VIDEO", FORMDATA);
@@ -81,11 +86,15 @@ const UPLOAD = () => {
                 <form>
                     <div className="form-group">
                         <label for="video" >Select Video:</label>
-                        <input type="file" className="form-control-file" onChange={(e) => setVIDEO(e.target.files[0])} required />
+                        <input type="file" className="form-control-file" multiple onChange={(e) => setVIDEO(e.target.files)} required />
                     </div>
-                     <div className="form-group">
+                    <div className="form-group">
                         <label for="title" >Noise Reduction:</label>
-                        <input type="text" className="form-control"  placeholder="Type Yes If Your Video Contains Background Noise" onChange={(e) => setNOISEREDUCE(e.target.value)}/>
+                        <input type="text" className="form-control" placeholder="Type Yes If Your Video Contains Background Noise" onChange={(e) => setNOISEREDUCE(e.target.value)} />
+                    </div>
+                    <div className="form-group">
+                        <label for="title" >Background Music:</label>
+                        <input type="text" className="form-control" placeholder="Type Yes If Your Video Contains Background Noise" onChange={(e) => setAUDIO(e.target.value)} />
                     </div>
                     <div className="form-group">
                         <label for="title" >Title:</label>

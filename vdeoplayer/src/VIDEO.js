@@ -87,8 +87,13 @@ const VIDEO = () => {
     //     NAVIGATE(`/COMMENT/${ID}`);
     // }
 
-    const VIDEOFUNCTION = (ID, VIDEOONE, VIDEOTWO, VIDEOTHREE, VIDEOFIVE,VIDEONOISEREDUCE) => {
-        NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEONOISEREDUCE}/${ID}`);
+    const VIDEOFUNCTION = (ID, VIDEOONE, VIDEOTWO, VIDEOTHREE, VIDEOFIVE,VIDEONOISEREDUCE,VIDEOMUSIC) => {
+        if(!VIDEONOISEREDUCE){
+            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEOMUSIC}/${ID}`);
+        }
+        else{
+            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEONOISEREDUCE}/${ID}`);
+        }
         window.scrollTo(0, 0);
     }
 
@@ -157,7 +162,7 @@ const VIDEO = () => {
                 }).map((value, index) => (
                     <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                         <div class="video"><br />
-                            <video src={`http://localhost:3001/${value.VIDEOONE}`} type="video/mp4" style={{ width: "70%", border: "5px solid white" }} onClick={() => VIDEOFUNCTION(value.id, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE)}></video>
+                            <video src={`http://localhost:3001/${value.VIDEOONE}`} type="video/mp4" style={{ width: "70%", border: "5px solid white" }} onClick={() => VIDEOFUNCTION(value.id, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE, value.VIDEOMUSIC)}></video>
                             {/* <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid white"}} onClick={VIDEOFUNCTION} controls></video> */}
 
                             {/* <div>
