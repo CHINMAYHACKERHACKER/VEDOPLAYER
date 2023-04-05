@@ -27,7 +27,7 @@ const USERHOMELOGIN = () => {
         e.preventDefault();
         USERLOGIN.map((value,i)=>{
             if(value.USERNAME==USER && value.PASSWORD==USERPASSWORD){
-                return NAVIGATE("/HOME");
+                return NAVIGATE("/VIDEO");
             }
             else{
                 return document.getElementById("PARAGRAPH").innerHTML="Wrong Credentials";

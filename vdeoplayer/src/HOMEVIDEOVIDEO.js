@@ -4,16 +4,17 @@ import { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./COMENT.css";
-import VIDEOCOMMENT from "./VIDEOCOMMENT.js";
+import HOMEVIDEOCOMPONENT from "./HOMEVIDEOCOMPONENT.js";
 import "./USERCOMMENT.css";
 import JoLPlayer, { callBackType, JoLPlayerRef, qualityKey } from "jol-player";
 import { Button, Input, Switch } from "antd";
 import { FilterChain } from 'react-ffmpeg';
 import FFMPEG from "react-ffmpeg";
+import { useNavigate } from "react-router-dom";
 
 
 
-const COMMENT = () => {
+const HOMEVIDEOVIDEO = () => {
     const [USERCOMMENT, setUSERCOMMENT] = useState("");
     const [STATUS, setSTATUS] = useState("Follow");
     const [USERCOLOR, setUSERCOLOR] = useState("black");
@@ -29,8 +30,11 @@ const COMMENT = () => {
     console.log("USERVIDEO", USERVIDEO);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
 
+
     const PARAM = useParams();
     console.log("PARAM", PARAM);
+
+    const NAVIGATE = useNavigate();
 
     const qualityOptions = [
         { value: '1080p', label: '1080p' },
@@ -218,6 +222,9 @@ const COMMENT = () => {
 
     }
 
+    const SIGN = () => {
+        NAVIGATE("/USERHOMELOGIN");
+    }
 
     return <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-white fixed-top">
@@ -233,23 +240,22 @@ const COMMENT = () => {
                         {/* <li className="nav-item">
                 <Link className="nav-link text-white" onClick={FUNCTION}>Chat</Link>
               </li> */}
-                        <li className="nav-item">
-                            {/* <Link className="nav-link" to="/HOME">Home</Link> */}
-                        </li>
+                        {/* <li className="nav-item">
+                            <Link className="nav-link text-white" to="/">Home</Link>
+                        </li> */}
                         {/* <li className="nav-item">
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
               </li> */}
                         <li className="nav-item">
-                            <Link className="nav-link" to="/VIDEO" onClick={METHODFUNCTION}>Videos</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/UPLOAD">Upload Videos</Link>
+                            {/* <Link className="nav-link text-white" to="/VIDEO" onClick={METHODFUNCTION}>Videos</Link> */}
                         </li>
                     </ul>
                 </div>
-                <div className="input-group input-group-sm mb-1 rounded-pill" style={{ maxWidth: '500px', marginRight: "29%" }}>
-                    <input type="text" className="form-control rounded-start" placeholder="Search Videos" aria-label="Search" aria-describedby="search-button"  onChange={(e) => setSEARCH(e.target.value)}/>
+                <div className="input-group input-group-sm mb-1 rounded-pill" style={{ maxWidth: '500px', marginRight: "20%" }}>
+                    <input type="text" className="form-control rounded-start" placeholder="Search Videos" aria-label="Search" aria-describedby="search-button"  onChange={(e) => setSEARCH(e.target.value)} />
                 </div>
+                    <Link className="nav-link" to="/">Home</Link>
+                <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={SIGN}>Sign Up</button>
                 {/* <div className="form-outline">
                     <input type="search" id="form1" className="form-control" placeholder="Search Videos" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
                 </div> */}
@@ -620,7 +626,7 @@ const COMMENT = () => {
         </div>
         <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '50%', marginTop: "-72%" }}>
         </div>
-        <VIDEOCOMMENT value={SEARCH} />
+        <HOMEVIDEOCOMPONENT value={SEARCH} />
     </>
 }
-export default COMMENT;
+export default HOMEVIDEOVIDEO;

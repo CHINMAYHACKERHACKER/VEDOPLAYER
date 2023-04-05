@@ -73,7 +73,7 @@ const LOGIN = (props) => {
                 <Link className="nav-link text-white" onClick={FUNCTION}>Chat</Link>
               </li> */}
               <li className="nav-item">
-                <Link className="nav-link text-white" to="/HOME">Home</Link>
+                {/* <Link className="nav-link text-white" to="/HOME">Home</Link> */}
               </li>
               {/* <li className="nav-item">
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>

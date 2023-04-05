@@ -41,7 +41,7 @@ const UPLOAD = () => {
 
     return <>
         <body className="UPLOAD">
-            <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary bg-white">
                 <div className="container-fluid">
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
@@ -55,10 +55,10 @@ const UPLOAD = () => {
                 <Link className="nav-link text-white" onClick={FUNCTION}>Chat</Link>
               </li> */}
                             <li className="nav-item">
-                                <Link className="nav-link text-white" to="/HOME">Home</Link>
+                                {/* <Link className="nav-link text-white" to="/HOME">Home</Link> */}
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link text-white" to="/FILE">Chat</Link>
+                                <Link className="nav-link " to="/FILE">Chat</Link>
                             </li>
                             {/* <li className="nav-item">
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
@@ -67,13 +67,13 @@ const UPLOAD = () => {
                                 <Link className="nav-link text-white" to="/DEV">Users</Link>
                             </li> */}
                             <li className="nav-item">
-                                <Link className="nav-link text-white" to="/VIDEO">Videos</Link>
+                                <Link className="nav-link" to="/VIDEO">Videos</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link text-white" to="/ABOUT">About Us</Link>
+                                <Link className="nav-link" to="/ABOUT">About Us</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link text-white" to="/CONTACT">Contact</Link>
+                                <Link className="nav-link" to="/CONTACT">Contact</Link>
                             </li>
                         </ul>
                     </div>
@@ -81,7 +81,7 @@ const UPLOAD = () => {
             </nav>
 
 
-            <div className="container"><br /><br /><br />
+            <div className="container"><br />
                 <h2 >Upload Video</h2>
                 <form>
                     <div className="form-group">

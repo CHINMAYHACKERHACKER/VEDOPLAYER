@@ -5,7 +5,7 @@ import axios from "axios";
 import "../src/VIDEO.css";
 import { useNavigate } from "react-router-dom";
 
-const VIDEO = () => {
+const HOMEVIDEO = () => {
 
     const [USERVIDEOLIST, setUSERVIDEOLIST] = useState([]);
     const [ADVIDEOLIST, setADVIDEOLIST] = useState([]);
@@ -89,10 +89,10 @@ const VIDEO = () => {
 
     const VIDEOFUNCTION = (ID, VIDEOONE, VIDEOTWO, VIDEOTHREE, VIDEOFIVE, VIDEONOISEREDUCE, VIDEOMUSIC) => {
         if (!VIDEONOISEREDUCE) {
-            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEOMUSIC}/${ID}`);
+            NAVIGATE(`/HOMEVIDEOVIDEO/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEOMUSIC}/${ID}`);
         }
         else {
-            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEONOISEREDUCE}/${ID}`);
+            NAVIGATE(`/HOMEVIDEOVIDEO/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEONOISEREDUCE}/${ID}`);
         }
         window.scrollTo(0, 0);
     }
@@ -105,6 +105,9 @@ const VIDEO = () => {
         console.log("LASTNAME", LASTNAME);
     }
 
+    const SIGN = () => {
+        NAVIGATE("/USERHOMELOGIN");
+    }
 
     useEffect(() => {
         METHOD();
@@ -128,10 +131,11 @@ const VIDEO = () => {
                 <Link className="nav-link text-white" onClick={FUNCTION}>Chat</Link>
               </li> */}
                         <li className="nav-item">
-                            {/* <Link className="nav-link text-white" to="/HOME">Home</Link> */}
+                            {/* <Link className="nav-link " to="/">Home</Link> */}
                         </li>
+
                         <li className="nav-item">
-                            <Link className="nav-link" to="/FILE">Chat</Link>
+                            {/* <Link className="nav-link text-white" to="/FILE">Chat</Link> */}
                         </li>
                         {/* <li className="nav-item">
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
@@ -140,13 +144,14 @@ const VIDEO = () => {
                                 <Link className="nav-link text-white" to="/DEV">Users</Link>
                             </li> */}
                         <li className="nav-item">
-                            <Link className="nav-link" to="/UPLOAD">Upload Videos</Link>
+                            {/* <Link className="nav-link text-white" to="/UPLOAD">Upload Videos</Link> */}
                         </li>
                     </ul>
                 </div>
-                <div className="input-group input-group-sm mb-1 rounded-pill" style={{ maxWidth: '500px', marginRight: "29%" }}>
+                <div className="input-group input-group-sm mb-1 rounded-pill" style={{ maxWidth: '500px', marginRight: "25%" }}>
                     <input type="text" className="form-control rounded-start" placeholder="Search Videos" aria-label="Search" aria-describedby="search-button" onChange={(e) => setSEARCH(e.target.value)} />
                 </div>
+                <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={SIGN}>Sign Up</button>
                 {/* <div className="form-outline">
                     <input type="search" id="form1" className="form-control" placeholder="Search Videos" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
                 </div> */}
@@ -160,7 +165,6 @@ const VIDEO = () => {
                 else if (value.TITLE.toLowerCase().includes(SEARCH.toLowerCase())) {
                     return value;
                 }
-
             }).map((value, index) => (
                 <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                     <div class="video"><br />
@@ -180,7 +184,7 @@ const VIDEO = () => {
                                 if (val.USERGENERATEDID === value.USERID) {
                                     return <>
                                         <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
-                                        <h4 key={i} >{val.USERNAME}</h4>
+                                        <h4 key={i}>{val.USERNAME}</h4>
                                     </>
                                 }
                             })
@@ -192,4 +196,5 @@ const VIDEO = () => {
         }
     </>
 }
-export default VIDEO;
+
+export default HOMEVIDEO;

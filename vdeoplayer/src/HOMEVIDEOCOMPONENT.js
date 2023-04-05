@@ -3,8 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-const VIDEOCOMMENT = (props) => {
+const HOMEVIDEOCOMPONENT = (props) => {
     console.log(props);
     const [USERVIDEOLIST, setUSERVIDEOLIST] = useState([]);
     const [USERIMAGE, setUSERIMAGE] = useState([]);
@@ -35,10 +34,10 @@ const VIDEOCOMMENT = (props) => {
 
     const VIDEOFUNCTION = (ID, VIDEOONE, VIDEOTWO, VIDEOTHREE, VIDEOFIVE, VIDEONOISEREDUCE, VIDEOMUSIC) => {
         if (!VIDEONOISEREDUCE) {
-            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEOMUSIC}/${ID}`);
+            NAVIGATE(`/HOMEVIDEOVIDEO/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEOMUSIC}/${ID}`);
         }
         else {
-            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEONOISEREDUCE}/${ID}`);
+            NAVIGATE(`/HOMEVIDEOVIDEO/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEONOISEREDUCE}/${ID}`);
         }
         window.scrollTo(0, 0);
     }
@@ -80,5 +79,7 @@ const VIDEOCOMMENT = (props) => {
             ))
         }
     </>
+
 }
-export default VIDEOCOMMENT;
+
+export default HOMEVIDEOCOMPONENT;
