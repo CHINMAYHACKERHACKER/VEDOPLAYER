@@ -12,6 +12,8 @@ const UPLOAD = () => {
     const [USERUNIQUEID, setUSERUNIQUEID] = useState("");
     const [NOISEREDUCE, setNOISEREDUCE] = useState("");
     const [AUDIO, setAUDIO] = useState("");
+    const [USERAUDIO, setUSERAUDIO] = useState("");
+    console.log(NOISEREDUCE);
 
 
     console.log(VIDEO);
@@ -29,6 +31,7 @@ const UPLOAD = () => {
             FORMDATA.append("USERUNIQUEID", USERUNIQUEID);
             FORMDATA.append("NOISEREDUCE", NOISEREDUCE);
             FORMDATA.append("AUDIO", AUDIO);
+            FORMDATA.append("USERAUDIO", USERAUDIO);
             for (let i = 0; i < VIDEO.length; i++) {
                 FORMDATA.append('VIDEO', VIDEO[i]);
             }
@@ -58,7 +61,7 @@ const UPLOAD = () => {
                                 {/* <Link className="nav-link text-white" to="/HOME">Home</Link> */}
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link " to="/FILE">Chat</Link>
+                                {/* <Link className="nav-link " to="/FILE">Chat</Link> */}
                             </li>
                             {/* <li className="nav-item">
                 <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
@@ -85,24 +88,47 @@ const UPLOAD = () => {
                 <h2 >Upload Video</h2>
                 <form>
                     <div className="form-group">
-                        <label for="video" >Select Video:</label>
+                        <label for="video" >Select Video:(Select Only Video or Select Both Video And Audio)</label>
                         <input type="file" className="form-control-file" multiple onChange={(e) => setVIDEO(e.target.files)} required />
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label for="title" >Noise Reduction:</label>
                         <input type="text" className="form-control" placeholder="Type Yes If Your Video Contains Background Noise" onChange={(e) => setNOISEREDUCE(e.target.value)} />
                     </div>
                     <div className="form-group">
                         <label for="title" >Background Music:</label>
                         <input type="text" className="form-control" placeholder="Type Yes If Your Video Contains Background Noise" onChange={(e) => setAUDIO(e.target.value)} />
-                    </div>
+                    </div> */}
                     <div className="form-group">
-                        <label for="title" >Title:</label>
+                        <label for="title" >Video Title:</label>
                         <input type="text" className="form-control" maxLength={67} placeholder="Enter Fourty Five Char" onChange={(e) => setTITLE(e.target.value)} required />
                     </div>
                     <div className="form-group">
-                        <label for="title" >Enter Saved Unique Id:</label>
+                        <label for="title" >Enter Unique Id:</label>
                         <input type="text" className="form-control" placeholder="Enter Saved Unique Id" onChange={(e) => setUSERUNIQUEID(e.target.value)} required />
+                    </div>
+                    <div style={{ display: "flex" }}>
+                        <div style={{ marginRight: "10px" }}>
+                        <label for="title" style={{ color: "black" }} ><h6>Only Noise Reduction:</h6></label>
+                            <select onChange={(e) => setNOISEREDUCE(e.target.value)}>
+                                <option>Select Option</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div style={{ marginRight: "10px" }}>
+                        <label for="title"  style={{ color: "black" }}><h6>Noise Reduction+Background Music:</h6></label>
+                            <select onChange={(e) => setAUDIO(e.target.value)} >
+                                <option>Select Option</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div style={{ marginRight: "10px" }}>
+                        <label for="title"  style={{ color: "black" }}><h6>Only Background Music:</h6></label>
+                            <select onChange={(e) => setUSERAUDIO(e.target.value)}>
+                                <option>Select Option</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
                     </div>
                     {/* <div className="form-group">
                     <label for="description" >Description:</label>

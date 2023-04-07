@@ -248,13 +248,13 @@ const COMMENT = () => {
                     </ul>
                 </div>
                 <div className="input-group input-group-sm mb-1 rounded-pill" style={{ maxWidth: '500px', marginRight: "29%" }}>
-                    <input type="text" className="form-control rounded-start" placeholder="Search Videos" aria-label="Search" aria-describedby="search-button"  onChange={(e) => setSEARCH(e.target.value)}/>
+                    <input type="text" className="form-control rounded-start" placeholder="Search Videos" aria-label="Search" aria-describedby="search-button" onChange={(e) => setSEARCH(e.target.value)} />
                 </div>
                 {/* <div className="form-outline">
                     <input type="search" id="form1" className="form-control" placeholder="Search Videos" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
                 </div> */}
             </div>
-        </nav><br/><br/>
+        </nav><br /><br />
 
 
         {
@@ -347,7 +347,51 @@ const COMMENT = () => {
                             }
                         ]
                     }}
-                    style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }} />) : (
+                    style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }} />) : PARAM.USERAUDIO === "yes" ? (
+                        <JoLPlayer
+                            ref={videoRef}
+                            onProgressMouseUp={onProgressMouseUp}
+                            onEndEd={onEndEd}
+                            onPause={onPause}
+                            onProgressMouseDown={onProgressMouseDown}
+                            onPlay={onPlay}
+                            onTimeChange={onTimeChange}
+                            onvolumechange={onvolumechange}
+                            onError={onError}
+                            onQualityChange={onQualityChange}
+                            option={{
+                                videoSrc:
+                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`,
+                                theme,
+                                width: "50%",
+                                height: "50%",
+                                language: "en",
+                                isShowMultiple,
+                                pausePlacement: "center",
+                                quality: [
+                                    {
+                                        name: "BD",
+                                        url:
+                                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOONE}`
+                                    },
+                                    {
+                                        name: "FHD",
+                                        url:
+                                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTWO}`
+                                    },
+                                    {
+                                        name: "HD",
+                                        url:
+                                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTHREE}`
+                                    },
+                                    {
+                                        name: "SD",
+                                        url:
+                                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                                    }
+                                ]
+                            }}
+                            style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }} />) : (
                 <JoLPlayer
                     ref={videoRef}
                     onProgressMouseUp={onProgressMouseUp}
@@ -396,100 +440,6 @@ const COMMENT = () => {
             )
         }
 
-        {/* {
-            PARAM.VIDEONOISEREDUCE === "yes" ? (
-                <JoLPlayer
-                    ref={videoRef}
-                    onProgressMouseUp={onProgressMouseUp}
-                    onEndEd={onEndEd}
-                    onPause={onPause}
-                    onProgressMouseDown={onProgressMouseDown}
-                    onPlay={onPlay}
-                    onTimeChange={onTimeChange}
-                    onvolumechange={onvolumechange}
-                    onError={onError}
-                    onQualityChange={onQualityChange}
-                    option={{
-                        videoSrc:
-                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`,
-                        theme,
-                        width: "50%",
-                        height: "50%",
-                        language: "en",
-                        isShowMultiple,
-                        pausePlacement: "center",
-                        quality: [
-                            {
-                                name: "BD",
-                                url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOONE}`
-                            },
-                            {
-                                name: "FHD",
-                                url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTWO}`
-                            },
-                            {
-                                name: "HD",
-                                url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTHREE}`
-                            },
-                            {
-                                name: "SD",
-                                url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
-                            }
-                        ]
-                    }}
-                    style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }} />
-            ) : (
-                <JoLPlayer
-                    ref={videoRef}
-                    onProgressMouseUp={onProgressMouseUp}
-                    onEndEd={onEndEd}
-                    onPause={onPause}
-                    onProgressMouseDown={onProgressMouseDown}
-                    onPlay={onPlay}
-                    onTimeChange={onTimeChange}
-                    onvolumechange={onvolumechange}
-                    onError={onError}
-                    onQualityChange={onQualityChange}
-                    option={{
-                        videoSrc:
-                            `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`,
-                        theme,
-                        width: "50%",
-                        height: "50%",
-                        language: "en",
-                        isShowMultiple,
-                        pausePlacement: "center",
-                        quality: [
-                            {
-                                name: "BD",
-                                url:
-                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOONE}`
-                            },
-                            {
-                                name: "FHD",
-                                url:
-                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOTWO}`
-                            },
-                            {
-                                name: "HD",
-                                url:
-                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOTHREE}`
-                            },
-                            {
-                                name: "SD",
-                                url:
-                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
-                            }
-                        ]
-                    }}
-                    style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }} />
-
-            )
-        } */}
         {/* <video src={`http://localhost:3001/VIDEO/${PARAM.VIDEOID}`} type="video/mp4" quality="100" style={{ width: "60%", border: "5px solid white", marginLeft: "-0%", backgroundColor: "black" }} controls></video> */}
 
         {PARAM.VIDEONOISEREDUCE == "yes" ? (
@@ -497,11 +447,11 @@ const COMMENT = () => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                            {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "35%", borderRadius: "50%", width: "60px", height: "60px" }} /> */}
-                            <h6 key={i}>{val.USERNAME}</h6>
-                            <p style={{ marginRight: "100%" }}><h6>{value.TITLE}</h6></p>
+                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p>
+                            <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "50px", height: "50px" }} />
+                            <h6 key={i} style={{ marginTop: "2%" }}>{val.USERNAME}</h6><br />
                             <button type="button" class="btn btn-primary" style={{ marginLeft: "0.3%", marginTop: "-1.5%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button>
-                            <i class="bi bi-person-fill" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}></i><br />
+                            <i class="bi bi-person-fill blue-icon" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}></i><br />
                             {
                                 USERSTAUS.map((VAL, I) => {
                                     return COUNT.map((VALUE, INDEX) => {
@@ -512,19 +462,6 @@ const COMMENT = () => {
                                         }
                                     })
 
-                                })
-                            }
-                            <h5 style={{ marginLeft: "-93%" }} >Listen</h5>
-                            {
-                                SONG.map((VALUE, INDEX) => {
-                                    if (`VIDEONOISEREDUCE/${VALUE.VIDEOONE}` == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}`) {
-                                        return <>
-                                            <audio style={{ marginLeft: "0%" }} controls>
-                                                <source src={`http://localhost:3001/${VALUE.USERSONG}`} type="audio/mp3" />
-                                                Your browser does not support the audio tag.
-                                            </audio>
-                                        </>
-                                    }
                                 })
                             }
                         </>
@@ -536,11 +473,11 @@ const COMMENT = () => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                            {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "35%", borderRadius: "50%", width: "60px", height: "60px" }} /> */}
-                            <h6 key={i}>{val.USERNAME}</h6>
-                            <p style={{ marginRight: "100%" }}><h6>{value.TITLE}</h6></p>
+                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p>
+                            <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "50px", height: "50px" }} />
+                            <h6 key={i} style={{ marginTop: "2%" }}>{val.USERNAME}</h6><br />
                             <button type="button" class="btn btn-primary" style={{ marginLeft: "0.3%", marginTop: "-1.5%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button>
-                            <i class="bi bi-person-fill" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}></i><br />
+                            <i class="bi bi-person-fill blue-icon" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}></i><br />
                             {
                                 USERSTAUS.map((VAL, I) => {
                                     return COUNT.map((VALUE, INDEX) => {
@@ -553,32 +490,45 @@ const COMMENT = () => {
 
                                 })
                             }
-                            <h5 style={{ marginLeft: "-93%" }} >Listen</h5>
-                            {
-                                SONG.map((VALUE, INDEX) => {
-                                    if (`VIDEONOISEREDUCE/${VALUE.VIDEOONE}` == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}`) {
-                                        return <>
-                                            <audio style={{ marginLeft: "0%" }} controls>
-                                                <source src={`http://localhost:3001/${VALUE.USERSONG}`} type="audio/mp3" />
-                                                Your browser does not support the audio tag.
-                                            </audio>
-                                        </>
-                                    }
-                                })
-                            }
                         </>
                     }
                 })
-            })) : (
+            })) : PARAM.USERAUDIO == "yes" ? (
+                USERVIDEO.map((val, i) => {
+                    return USERVIDEOLIST.map((value, i) => {
+                        if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
+                            return <>
+                                <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p>
+                                <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "50px", height: "50px" }} />
+                                <h6 key={i} style={{ marginTop: "2%" }}>{val.USERNAME}</h6><br />
+                                <button type="button" class="btn btn-primary" style={{ marginLeft: "0.3%", marginTop: "-1.5%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button>
+                                <i class="bi bi-person-fill blue-icon" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}></i><br />
+                                {
+                                    USERSTAUS.map((VAL, I) => {
+                                        return COUNT.map((VALUE, INDEX) => {
+                                            if (VAL.USERID == PARAM.ID && VAL.USERID == VALUE.USERID) {
+                                                return <>
+                                                    <p style={{ marginLeft: "-71%", marginTop: "-2.5%" }}>{VAL.STATUS}</p> <p style={{ marginLeft: "-63%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
+                                                </>
+                                            }
+                                        })
+
+                                    })
+                                }
+                            </>
+                        }
+                    })
+                })
+            ) : (
             USERVIDEO.map((val, i) => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEO/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                            {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "35%", borderRadius: "50%", width: "60px", height: "60px" }} /> */}
-                            <h6 key={i}>{val.USERNAME}</h6>
-                            <p style={{ marginRight: "100%" }}><h6>{value.TITLE}</h6></p>
+                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p>
+                            <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "50px", height: "50px" }} />
+                            <h6 key={i} style={{ marginTop: "2%" }}>{val.USERNAME}</h6><br />
                             <button type="button" class="btn btn-primary" style={{ marginLeft: "0.3%", marginTop: "-1.5%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button>
-                            <i class="bi bi-person-fill" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}></i><br />
+                            <i class="bi bi-person-fill blue-icon" style={{ marginLeft: "1%", fontSize: "39px" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}></i><br />
                             {
                                 USERSTAUS.map((VAL, I) => {
                                     return COUNT.map((VALUE, INDEX) => {
@@ -618,7 +568,7 @@ const COMMENT = () => {
             <textarea id="form18" className="md-textarea form-control" rows="1" placeholder="Write Comment..." style={{ width: "50%", marginLeft: "0%", borderColor: "white", height: "5%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea><br />
             <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)}>View Comments</button>
         </div>
-        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '50%', marginTop: "-72%" }}>
+        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '50%', marginTop: "-76%" }}>
         </div>
         <VIDEOCOMMENT value={SEARCH} />
     </>
