@@ -39,7 +39,7 @@ const COMMENT = () => {
     ];
 
 
-    const USERCOMMENTFUNCTION = (ID) => {
+    const USERCOMMENTFUNCTION = (ID,USERID) => {
         if (USERCOMMENT == "") {
             alert("Please Write Comment");
         }
@@ -47,6 +47,7 @@ const COMMENT = () => {
             axios.post(`http://localhost:3001/USERCOMMENT`, {
                 ID: ID,
                 USERCOMMENT: USERCOMMENT,
+                USERID: USERID
             })
             alert("Your Comment Posted Sucessfully");
             window.location.reload();
@@ -566,7 +567,7 @@ const COMMENT = () => {
         </div> */}
         <div className="md-form mb-3 pink-textarea active-pink-textarea"><br />
             <textarea id="form18" className="md-textarea form-control" rows="1" placeholder="Write Comment..." style={{ width: "50%", marginLeft: "0%", borderColor: "white", height: "5%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea><br />
-            <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)}>View Comments</button>
+            <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID, PARAM.USERID)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)}>View Comments</button>
         </div>
         <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '50%', marginTop: "-76%" }}>
         </div>

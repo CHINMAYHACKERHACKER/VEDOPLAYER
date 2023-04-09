@@ -4,6 +4,10 @@ import { useState } from "react";
 import axios from "axios";
 import "../src/VIDEO.css";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import NotificationBadge from 'react-notification-badge';
+import { Effect } from 'react-notification-badge';
 
 const VIDEO = () => {
 
@@ -16,6 +20,8 @@ const VIDEO = () => {
     const [USERLIKE, setUSERLIKE] = useState(0);
     const [USERDISLIKE, setUSERDISLIKE] = useState(0);
     const [COMENT, setCOMENT] = useState(0);
+    const [USERCOUNT, setUSERCOUNT] = useState(0);
+
 
 
     console.log("USERIMAGE", USERIMAGE);
@@ -87,18 +93,18 @@ const VIDEO = () => {
     //     NAVIGATE(`/COMMENT/${ID}`);
     // }
 
-    const VIDEOFUNCTION = (ID, VIDEOONE, VIDEOTWO, VIDEOTHREE, VIDEOFIVE, VIDEONOISEREDUCE, VIDEOMUSIC, USERAUDIO) => {
+    const VIDEOFUNCTION = (ID, USERID, VIDEOONE, VIDEOTWO, VIDEOTHREE, VIDEOFIVE, VIDEONOISEREDUCE, VIDEOMUSIC, USERAUDIO) => {
         if (VIDEOMUSIC == "yes") {
-            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEOMUSIC}/${ID}`);
+            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEOMUSIC}/${USERID}/${ID}`);
         }
         else if (VIDEONOISEREDUCE == "yes") {
-            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEONOISEREDUCE}/${ID}`);
+            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEONOISEREDUCE}/${USERID}/${ID}`);
         }
         else if (USERAUDIO == "yes") {
-            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${USERAUDIO}/${ID}`);
+            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${USERAUDIO}/${USERID}/${ID}`);
         }
         else {
-            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${null}/${ID}`);
+            NAVIGATE(`/COMMENT/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${null}/${USERID}/${ID}`);
         }
         window.scrollTo(0, 0);
     }
@@ -111,11 +117,19 @@ const VIDEO = () => {
         console.log("LASTNAME", LASTNAME);
     }
 
+    const notify = () => {
+        toast("Wow so easy!");
+    }
 
     useEffect(() => {
         METHOD();
         USERIMAGEDATA();
+        // notify();
     }, [])
+
+    const COUNT = () => {
+        setUSERCOUNT(USERCOUNT + 1)
+    }
 
 
     return <>
@@ -156,6 +170,10 @@ const VIDEO = () => {
                 {/* <div className="form-outline">
                     <input type="search" id="form1" className="form-control" placeholder="Search Videos" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
                 </div> */}
+                {/* <i class="fa-solid fa-bell"> <ToastContainer /></i> */}
+                <div>
+                    <NotificationBadge  count={USERCOUNT} class="fa-solid fa-bell" effect={Effect.SCALE}  style={{marginRight: "70%" }}/><i class="fa-solid fa-bell" onClick={COUNT}></i>
+                </div>
             </div>
         </nav>
         {
@@ -170,7 +188,7 @@ const VIDEO = () => {
             }).map((value, index) => (
                 <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                     <div class="video"><br />
-                        <video src={`http://localhost:3001/${value.VIDEOONE}`} type="video/mp4" style={{ width: "70%", border: "5px solid white" }} onClick={() => VIDEOFUNCTION(value.id, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE, value.VIDEOMUSIC, value.USERAUDIO)}></video>
+                        <video src={`http://localhost:3001/${value.VIDEOONE}`} type="video/mp4" style={{ width: "70%", border: "5px solid white" }} onClick={() => VIDEOFUNCTION(value.id, value.USERID, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE, value.VIDEOMUSIC, value.USERAUDIO)}></video>
                         {/* <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid white"}} onClick={VIDEOFUNCTION} controls></video> */}
 
                         {/* <div>

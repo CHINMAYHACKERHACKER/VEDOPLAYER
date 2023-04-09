@@ -45,6 +45,7 @@ const USERHOMELOGIN = () => {
         axios
             .post("http://localhost:3001/USERSIGNUP", FORMDATA);
         alert("You have signed up");
+        localStorage.setItem("USERGENERATEDID", USERGENERATEDID)
     }
 
     const USERGENERATE = () => {
@@ -123,5 +124,4 @@ const USERHOMELOGIN = () => {
             </div>
     </>
 }
-
 export default USERHOMELOGIN;
