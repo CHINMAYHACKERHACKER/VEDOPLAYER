@@ -14,6 +14,8 @@ import USERCOMMENT from "./USERCOMMENT.js";
 import USERHOMELOGIN from "./USERHOMELOGIN.js";
 import HOMEVIDEO from "./HOMEVIDEO.js";
 import HOMEVIDEOVIDEO from "./HOMEVIDEOVIDEO.js";
+import VIDEOUPLOAD from "./VIDEOUPLOAD.js";
+
 
 
 
@@ -51,6 +53,7 @@ const APP = () => {
 
 
         <Route path="/USERCOMMENT/:ID" element={<USERCOMMENT />} />
+        <Route path="/VIDEOUPLOAD" element={<VIDEOUPLOAD />} />
       </Routes>
     </BrowserRouter>
   </>

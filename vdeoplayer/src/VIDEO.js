@@ -8,6 +8,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NotificationBadge from 'react-notification-badge';
 import { Effect } from 'react-notification-badge';
+import NOTIFICATION from "../src/NOTIFICATION.mp3";
+
 
 const VIDEO = () => {
 
@@ -21,6 +23,10 @@ const VIDEO = () => {
     const [USERDISLIKE, setUSERDISLIKE] = useState(0);
     const [COMENT, setCOMENT] = useState(0);
     const [USERCOUNT, setUSERCOUNT] = useState(0);
+    const [USERLOGINDATA, setUSERLOGINDATA] = useState([]);
+    const [USERBELLSTATUS, setUSERBELLSTATUS] = useState([]);
+    const [USERFOLLOWSTATUS, setUSERFOLLOWSTATUS] = useState([]);
+    const [USERDATACRED, setUSERDATACRED] = useState([]);
 
 
 
@@ -30,6 +36,12 @@ const VIDEO = () => {
     const shouldShowAd = () => currentTime >= 10 && showAd;
 
     const NAVIGATE = useNavigate();
+
+    const audio = new Audio(NOTIFICATION);
+
+    let isBellRendered = false;
+    let isRendered = false;
+
 
     const METHOD = async () => {
         await axios.get("http://localhost:3001/USERVIDEOVIDEO")
@@ -89,6 +101,35 @@ const VIDEO = () => {
         }
     }, []);
 
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/TOTALUSERCOMMENTBELLSTATUS")
+            .then((RES) => {
+                console.log("TOTALUSERCOMMENTBELLSTATUS", RES.data);
+                setUSERBELLSTATUS(RES.data);
+            })
+        setUSERLOGINDATA(localStorage.getItem("USERGENERATEDID"));
+    }, [])
+
+
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/USERFOLLOWSTATUS")
+            .then((RES) => {
+                console.log("USERFOLLOWSTATUS", RES.data);
+                setUSERFOLLOWSTATUS(RES.data);
+            })
+    }, [])
+
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/USERLOGIN")
+            .then((RES) => {
+                console.log(RES.data);
+                setUSERDATACRED(RES.data);
+            })
+    }, [])
+
     // const COMMENTFUNCTION = (ID) => {
     //     NAVIGATE(`/COMMENT/${ID}`);
     // }
@@ -117,8 +158,13 @@ const VIDEO = () => {
         console.log("LASTNAME", LASTNAME);
     }
 
-    const notify = () => {
-        toast("Wow so easy!");
+    function showNames() {
+        const namesList = document.getElementById('names-card');
+        if (namesList.style.display === 'none') {
+            namesList.style.display = 'block';
+        } else {
+            namesList.style.display = 'none';
+        }
     }
 
     useEffect(() => {
@@ -126,11 +172,6 @@ const VIDEO = () => {
         USERIMAGEDATA();
         // notify();
     }, [])
-
-    const COUNT = () => {
-        setUSERCOUNT(USERCOUNT + 1)
-    }
-
 
     return <>
 
@@ -162,6 +203,9 @@ const VIDEO = () => {
                         <li className="nav-item">
                             <Link className="nav-link" to="/UPLOAD">Upload Videos</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/VIDEOUPLOAD">Your Videos</Link>
+                        </li>
                     </ul>
                 </div>
                 <div className="input-group input-group-sm mb-1 rounded-pill" style={{ maxWidth: '500px', marginRight: "29%" }}>
@@ -170,11 +214,59 @@ const VIDEO = () => {
                 {/* <div className="form-outline">
                     <input type="search" id="form1" className="form-control" placeholder="Search Videos" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
                 </div> */}
+                {/* {
+                    USERFOLLOWSTATUS.map((value) => {
+                        if (USERLOGINDATA == value.USERGENERATEID && !isRendered) { // Check if bell is not already rendered
+                            isRendered = true; // Update flag to true
+                            if (value.USERCOUNT > 0) {
+                                audio.play();
+                            }
+                            return <div>
+                                <NotificationBadge count={value.USERCOUNT} class="fa-solid fa-user" effect={Effect.SCALE} style={{ marginRight: "120%" }} /><i class="fa-solid fa-user" id="user-icon" style={{ marginLeft: "-50%" }} onClick={showNames} ></i>
+                            </div>
+                        }
+                        return USERDATACRED.map((val) => {
+                            if (USERLOGINDATA !== val.USERGENERATEDID) {
+                                return <div class="row">
+                                    <div class="column">
+                                        <div className="user-cards-container">
+                                            <div className="user-card" id="names-card" style={{ display: 'none', position: "absolute", top: "100%", right: "0", height: "150%", width: "20%" }}>
+                                                <div className="user-info">
+                                                    <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "50px", height: "50px" }} />
+                                                    <h6 style={{ marginLeft: "33%" }}>{value.USERNAME} Started Following You</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        })
+                    })
+                } */}
                 {/* <i class="fa-solid fa-bell"> <ToastContainer /></i> */}
-                <div>
-                    <NotificationBadge  count={USERCOUNT} class="fa-solid fa-bell" effect={Effect.SCALE}  style={{marginRight: "70%" }}/><i class="fa-solid fa-bell" onClick={COUNT}></i>
-                </div>
+                {
+                    USERBELLSTATUS.map((value) => {
+                        if (USERLOGINDATA == value.USERGENERATEDID && !isBellRendered) { // Check if bell is not already rendered
+                            isBellRendered = true; // Update flag to true
+                            if (value.USERCOUNT > 0) {
+                                audio.play();
+                            }
+                            return <div>
+                                <NotificationBadge count={value.USERCOUNT} class="fa-solid fa-comment" effect={Effect.SCALE} style={{ marginRight: "-35%" }} /><i class="fa-solid fa-comment" style={{ marginLeft: "100%" }} />
+                            </div>
+                        }
+                    })
+                }
             </div>
+            {
+                USERDATACRED.map((val) => {
+                    if (USERLOGINDATA == val.USERGENERATEDID) {
+                        return <div>
+                            <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "30px", height: "30px", marginLeft: "30%" }} />
+                        </div>
+                    }
+                })
+            }
         </nav>
         {
             USERVIDEOLIST.filter((value) => {
@@ -214,6 +306,7 @@ const VIDEO = () => {
                 </div>
             ))
         }
+
     </>
 }
 export default VIDEO;

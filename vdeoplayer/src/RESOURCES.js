@@ -99,7 +99,6 @@ const RESOURCES = () => {
                                         <span className="fa fa-star checked" />
                                         <span className="fa fa-star checked" />
                                         <span className="fa fa-star checked"/> */}
-                                        
                                     </div>
                                 </div>
                             </div>
