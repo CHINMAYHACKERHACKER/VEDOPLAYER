@@ -9,6 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import NotificationBadge from 'react-notification-badge';
 import { Effect } from 'react-notification-badge';
 import NOTIFICATION from "../src/NOTIFICATION.mp3";
+import NOTIFICATIN from "../src/NOTIFICATIONBELL.mp3";
+
 
 
 const VIDEO = () => {
@@ -27,8 +29,8 @@ const VIDEO = () => {
     const [USERBELLSTATUS, setUSERBELLSTATUS] = useState([]);
     const [USERFOLLOWSTATUS, setUSERFOLLOWSTATUS] = useState([]);
     const [USERDATACRED, setUSERDATACRED] = useState([]);
-
-
+    const [USERDATACOUNT, setUSERDATACOUNT] = useState([]);
+    const [USERFOLLOWDATACOUNT, setUSERFOLLOWDATA] = useState([]);
 
     console.log("USERIMAGE", USERIMAGE);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
@@ -38,6 +40,7 @@ const VIDEO = () => {
     const NAVIGATE = useNavigate();
 
     const audio = new Audio(NOTIFICATION);
+    const aud = new Audio(NOTIFICATIN);
 
     let isBellRendered = false;
     let isRendered = false;
@@ -109,16 +112,18 @@ const VIDEO = () => {
                 setUSERBELLSTATUS(RES.data);
             })
         setUSERLOGINDATA(localStorage.getItem("USERGENERATEDID"));
+        setUSERDATACOUNT(localStorage.getItem("USERCOUNTCOUNT"));
     }, [])
 
 
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERFOLLOWSTATUS")
+        axios.get("http://localhost:3001/USERDATAFOLLOWSTATUS")
             .then((RES) => {
                 console.log("USERFOLLOWSTATUS", RES.data);
                 setUSERFOLLOWSTATUS(RES.data);
             })
+        setUSERFOLLOWDATA(localStorage.getItem("USERFOLLOWDATA"));
     }, [])
 
 
@@ -160,12 +165,14 @@ const VIDEO = () => {
 
     function showNames() {
         const namesList = document.getElementById('names-card');
+        console.log("NAMELIST", namesList);
         if (namesList.style.display === 'none') {
             namesList.style.display = 'block';
         } else {
             namesList.style.display = 'none';
         }
     }
+
 
     useEffect(() => {
         METHOD();
@@ -214,41 +221,49 @@ const VIDEO = () => {
                 {/* <div className="form-outline">
                     <input type="search" id="form1" className="form-control" placeholder="Search Videos" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
                 </div> */}
-                {/* {
+                {
                     USERFOLLOWSTATUS.map((value) => {
-                        if (USERLOGINDATA == value.USERGENERATEID && !isRendered) { // Check if bell is not already rendered
+                        if (USERLOGINDATA == value.USERGENERATEDID && !isRendered) { // Check if bell is not already rendered
                             isRendered = true; // Update flag to true
-                            if (value.USERCOUNT > 0) {
-                                audio.play();
+                            localStorage.setItem("USERFOLLOWDATA", value.USERCOUNT);
+                            if (value.USERCOUNT == USERFOLLOWDATACOUNT) {
+                                aud.pause();
+                            }
+                            else if (value.USERCOUNT > 0) {
+                                aud.play();
                             }
                             return <div>
-                                <NotificationBadge count={value.USERCOUNT} class="fa-solid fa-user" effect={Effect.SCALE} style={{ marginRight: "120%" }} /><i class="fa-solid fa-user" id="user-icon" style={{ marginLeft: "-50%" }} onClick={showNames} ></i>
+                                <NotificationBadge count={value.USERCOUNT} class="fa-solid fa-user" effect={Effect.SCALE} style={{ marginRight: "300%" }} /><i class="fa-solid fa-user" id="user-icon" style={{ marginLeft: "-250%" }} onClick={showNames} ></i>
                             </div>
                         }
-                        return USERDATACRED.map((val) => {
-                            if (USERLOGINDATA !== val.USERGENERATEDID) {
-                                return <div class="row">
-                                    <div class="column">
-                                        <div className="user-cards-container">
-                                            <div className="user-card" id="names-card" style={{ display: 'none', position: "absolute", top: "100%", right: "0", height: "150%", width: "20%" }}>
-                                                <div className="user-info">
-                                                    <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "50px", height: "50px" }} />
-                                                    <h6 style={{ marginLeft: "33%" }}>{value.USERNAME} Started Following You</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        })
+                        // return USERDATACRED.map((val) => {
+                        //     if (USERLOGINDATA !== val.USERGENERATEDID) {
+                        //         return <div class="row">
+                        //             <div class="column">
+                        //                 <div className="user-cards-container">
+                        //                     <div className="user-card" id="names-card" style={{ display: 'none', position: "absolute", top: "100%", right: "0", height: "150%", width: "20%" }}>
+                        //                         <div className="user-info">
+                        //                             <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "50px", height: "50px" }} />
+                        //                             <h6 style={{ marginLeft: "33%" }}>{value.USERNAME} Started Following You</h6>
+                        //                         </div>
+                        //                     </div>
+                        //                 </div>
+                        //             </div>
+                        //         </div>
+                        //     }
+                        // })
                     })
-                } */}
+                }
                 {/* <i class="fa-solid fa-bell"> <ToastContainer /></i> */}
                 {
                     USERBELLSTATUS.map((value) => {
                         if (USERLOGINDATA == value.USERGENERATEDID && !isBellRendered) { // Check if bell is not already rendered
                             isBellRendered = true; // Update flag to true
-                            if (value.USERCOUNT > 0) {
+                            localStorage.setItem("USERCOUNTCOUNT", value.USERCOUNT);
+                            if (value.USERCOUNT == USERDATACOUNT) {
+                                audio.pause();
+                            }
+                            else if (value.USERCOUNT > 0) {
                                 audio.play();
                             }
                             return <div>

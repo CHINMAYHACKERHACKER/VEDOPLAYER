@@ -75,7 +75,7 @@ const COMMENT = () => {
 
     const METHOD = (USERGENERATEDID, USERID, VIDEO, VIDEOONE, id, ID, USERNAME, VIDEOFIVE) => {
         if (USERGENERATEDID == USERID && VIDEO == `VIDEO/${VIDEOONE}` && id == ID) {
-            alert("You Started Following" + " " + USERNAME);
+            // alert("You Started Following" + " " + USERNAME);
             axios.post("http://localhost:3001/STATUS", {
                 id: id,
                 USERNAME: USERNAME,
@@ -132,6 +132,12 @@ const COMMENT = () => {
         window.location.reload();
         window.location.pathname = '/VIDEO';
     }
+
+    function SUBSCRIBEFUNCTION() {
+        alert("For now This Feature Is Not Available");
+    }
+
+    
 
     useEffect(() => {
         axios.get("http://localhost:3001/USERIMAGEDATA")
@@ -502,7 +508,7 @@ const COMMENT = () => {
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
                             <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
                             <div class="d-flex justify-content-start">
-                            <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button>
+                            <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button>
                             <i class="fa-solid fa-heart" style={{ marginLeft: "2%", fontSize: "29px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i><br />
                             </div>
                            
@@ -511,7 +517,7 @@ const COMMENT = () => {
                                     return COUNT.map((VALUE, INDEX) => {
                                         if (VAL.USERID == PARAM.ID && VAL.USERID == VALUE.USERID) {
                                             return <>
-                                                <p style={{ marginRight: "80%", marginTop: "-3%" }}>{VAL.STATUS}</p> <p style={{ marginRight: "75%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
+                                                <p style={{ marginRight: "80%", marginTop: "-3%" }}></p> <p style={{ marginRight: "75%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
                                             </>
                                         }
                                     })
@@ -542,7 +548,7 @@ const COMMENT = () => {
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
                             <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
                             <div class="d-flex justify-content-start">
-                            <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button>
+                            <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button>
                             <i class="fa-solid fa-heart" style={{ marginLeft: "2%", fontSize: "29px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i><br />
                             </div>
                            
@@ -551,7 +557,7 @@ const COMMENT = () => {
                                     return COUNT.map((VALUE, INDEX) => {
                                         if (VAL.USERID == PARAM.ID && VAL.USERID == VALUE.USERID) {
                                             return <>
-                                                <p style={{ marginRight: "80%", marginTop: "-3%" }}>{VAL.STATUS}</p> <p style={{ marginRight: "75%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
+                                                <p style={{ marginRight: "80%", marginTop: "-3%" }}></p> <p style={{ marginRight: "75%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
                                             </>
                                         }
                                     })
@@ -581,7 +587,7 @@ const COMMENT = () => {
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
                             <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
                             <div class="d-flex justify-content-start">
-                            <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button>
+                            <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button>
                             <i class="fa-solid fa-heart" style={{ marginLeft: "2%", fontSize: "29px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i><br />
                             </div>
                            
@@ -590,7 +596,7 @@ const COMMENT = () => {
                                     return COUNT.map((VALUE, INDEX) => {
                                         if (VAL.USERID == PARAM.ID && VAL.USERID == VALUE.USERID) {
                                             return <>
-                                                <p style={{ marginRight: "80%", marginTop: "-3%" }}>{VAL.STATUS}</p> <p style={{ marginRight: "75%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
+                                                <p style={{ marginRight: "80%", marginTop: "-3%" }}></p> <p style={{ marginRight: "75%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
                                             </>
                                         }
                                     })
@@ -621,7 +627,7 @@ const COMMENT = () => {
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
                             <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
                             <div class="d-flex justify-content-start">
-                            <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }}>{USERSUBSCRIBE}</button>
+                            <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button>
                             <i class="fa-solid fa-heart" style={{ marginLeft: "2%", fontSize: "29px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i><br />
                             </div>
                            
@@ -630,7 +636,7 @@ const COMMENT = () => {
                                     return COUNT.map((VALUE, INDEX) => {
                                         if (VAL.USERID == PARAM.ID && VAL.USERID == VALUE.USERID) {
                                             return <>
-                                                <p style={{ marginRight: "80%", marginTop: "-3%" }}>{VAL.STATUS}</p> <p style={{ marginRight: "75%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
+                                                <p style={{ marginRight: "80%", marginTop: "-3%" }}></p> <p style={{ marginRight: "75%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
                                             </>
                                         }
                                     })

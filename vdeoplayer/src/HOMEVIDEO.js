@@ -4,6 +4,12 @@ import { useState } from "react";
 import axios from "axios";
 import "../src/VIDEO.css";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import NotificationBadge from 'react-notification-badge';
+import { Effect } from 'react-notification-badge';
+import NOTIFICATION from "../src/NOTIFICATION.mp3";
+import NOTIFICATIN from "../src/NOTIFICATIONBELL.mp3";
 
 const HOMEVIDEO = () => {
 
@@ -16,7 +22,13 @@ const HOMEVIDEO = () => {
     const [USERLIKE, setUSERLIKE] = useState(0);
     const [USERDISLIKE, setUSERDISLIKE] = useState(0);
     const [COMENT, setCOMENT] = useState(0);
-
+    const [USERCOUNT, setUSERCOUNT] = useState(0);
+    const [USERLOGINDATA, setUSERLOGINDATA] = useState([]);
+    const [USERBELLSTATUS, setUSERBELLSTATUS] = useState([]);
+    const [USERFOLLOWSTATUS, setUSERFOLLOWSTATUS] = useState([]);
+    const [USERDATACRED, setUSERDATACRED] = useState([]);
+    const [USERDATACOUNT, setUSERDATACOUNT] = useState([]);
+    const [USERFOLLOWDATACOUNT, setUSERFOLLOWDATA] = useState([]);
 
     console.log("USERIMAGE", USERIMAGE);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
@@ -24,6 +36,13 @@ const HOMEVIDEO = () => {
     const shouldShowAd = () => currentTime >= 10 && showAd;
 
     const NAVIGATE = useNavigate();
+
+    const audio = new Audio(NOTIFICATION);
+    const aud = new Audio(NOTIFICATIN);
+
+    let isBellRendered = false;
+    let isRendered = false;
+
 
     const METHOD = async () => {
         await axios.get("http://localhost:3001/USERVIDEOVIDEO")
@@ -83,22 +102,53 @@ const HOMEVIDEO = () => {
         }
     }, []);
 
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/TOTALUSERCOMMENTBELLSTATUS")
+            .then((RES) => {
+                console.log("TOTALUSERCOMMENTBELLSTATUS", RES.data);
+                setUSERBELLSTATUS(RES.data);
+            })
+        setUSERLOGINDATA(localStorage.getItem("USERGENERATEDID"));
+        setUSERDATACOUNT(localStorage.getItem("USERCOUNTCOUNT"));
+    }, [])
+
+
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/USERDATAFOLLOWSTATUS")
+            .then((RES) => {
+                console.log("USERFOLLOWSTATUS", RES.data);
+                setUSERFOLLOWSTATUS(RES.data);
+            })
+        setUSERFOLLOWDATA(localStorage.getItem("USERFOLLOWDATA"));
+    }, [])
+
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/USERLOGIN")
+            .then((RES) => {
+                console.log(RES.data);
+                setUSERDATACRED(RES.data);
+            })
+    }, [])
+
     // const COMMENTFUNCTION = (ID) => {
     //     NAVIGATE(`/COMMENT/${ID}`);
     // }
 
-    const VIDEOFUNCTION = (ID, VIDEOONE, VIDEOTWO, VIDEOTHREE, VIDEOFIVE, VIDEONOISEREDUCE, VIDEOMUSIC, USERAUDIO) => {
+    const VIDEOFUNCTION = (ID, USERID, VIDEOONE, VIDEOTWO, VIDEOTHREE, VIDEOFIVE, VIDEONOISEREDUCE, VIDEOMUSIC, USERAUDIO) => {
         if (VIDEOMUSIC == "yes") {
-            NAVIGATE(`/HOMEVIDEOVIDEO/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEOMUSIC}/${ID}`);
+            NAVIGATE(`/HOMEVIDEOVIDEO/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEOMUSIC}/${USERID}/${ID}`);
         }
         else if (VIDEONOISEREDUCE == "yes") {
-            NAVIGATE(`/HOMEVIDEOVIDEO/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEONOISEREDUCE}/${ID}`);
+            NAVIGATE(`/HOMEVIDEOVIDEO/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${VIDEONOISEREDUCE}/${USERID}/${ID}`);
         }
         else if (USERAUDIO == "yes") {
-            NAVIGATE(`/HOMEVIDEOVIDEO/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${USERAUDIO}/${ID}`);
+            NAVIGATE(`/HOMEVIDEOVIDEO/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${USERAUDIO}/${USERID}/${ID}`);
         }
         else {
-            NAVIGATE(`/HOMEVIDEOVIDEO/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${null}/${ID}`);
+            NAVIGATE(`/HOMEVIDEOVIDEO/${VIDEOONE}/${VIDEOTWO}/${VIDEOTHREE}/${VIDEOFIVE}/${null}/${USERID}/${ID}`);
         }
         window.scrollTo(0, 0);
     }
@@ -111,6 +161,16 @@ const HOMEVIDEO = () => {
         console.log("LASTNAME", LASTNAME);
     }
 
+    function showNames() {
+        const namesList = document.getElementById('names-card');
+        console.log("NAMELIST", namesList);
+        if (namesList.style.display === 'none') {
+            namesList.style.display = 'block';
+        } else {
+            namesList.style.display = 'none';
+        }
+    }
+
     const SIGN = () => {
         NAVIGATE("/USERHOMELOGIN");
     }
@@ -118,12 +178,12 @@ const HOMEVIDEO = () => {
     useEffect(() => {
         METHOD();
         USERIMAGEDATA();
+        // notify();
     }, [])
-
 
     return <>
 
-        <nav className="navbar navbar-expand-lg bg-body-tertiary bg-white fixed-top">
+<nav className="navbar navbar-expand-lg bg-body-tertiary bg-white fixed-top">
             <div className="container-fluid">
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
@@ -171,10 +231,11 @@ const HOMEVIDEO = () => {
                 else if (value.TITLE.toLowerCase().includes(SEARCH.toLowerCase())) {
                     return value;
                 }
+
             }).map((value, index) => (
                 <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                     <div class="video"><br />
-                        <video src={`http://localhost:3001/${value.VIDEOONE}`} type="video/mp4" style={{ width: "70%", border: "5px solid white" }} onClick={() => VIDEOFUNCTION(value.id, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE, value.VIDEOMUSIC, value.USERAUDIO)}></video>
+                        <video src={`http://localhost:3001/${value.VIDEOONE}`} type="video/mp4" style={{ width: "70%", border: "5px solid white" }} onClick={() => VIDEOFUNCTION(value.id, value.USERID, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE, value.VIDEOMUSIC, value.USERAUDIO)}></video>
                         {/* <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid white"}} onClick={VIDEOFUNCTION} controls></video> */}
 
                         {/* <div>
@@ -190,7 +251,7 @@ const HOMEVIDEO = () => {
                                 if (val.USERGENERATEDID === value.USERID) {
                                     return <>
                                         <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
-                                        <h4 key={i}>{val.USERNAME}</h4>
+                                        <h4 key={i} >{val.USERNAME}</h4>
                                     </>
                                 }
                             })
@@ -200,6 +261,7 @@ const HOMEVIDEO = () => {
                 </div>
             ))
         }
+
     </>
 }
 

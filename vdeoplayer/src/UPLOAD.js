@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./UPLOADIMAGE.css";
+import { useEffect } from "react";
 
 const UPLOAD = () => {
     const [TITLE, setTITLE] = useState("");
@@ -13,6 +14,12 @@ const UPLOAD = () => {
     const [NOISEREDUCE, setNOISEREDUCE] = useState("");
     const [AUDIO, setAUDIO] = useState("");
     const [USERAUDIO, setUSERAUDIO] = useState("");
+    const [USERSTATUSDATA, setUSERSTATUSDATA] = useState([]);
+    const [USERLOGINDATA, setUSERLOGINDATA] = useState([]);
+    const [USERID, setUSERID] = useState([]);
+
+
+
     console.log(NOISEREDUCE);
 
 
@@ -40,7 +47,35 @@ const UPLOAD = () => {
                 .post("http://localhost:3001/VIDEO", FORMDATA);
             alert("Video Uploaded Sucessfully");
         }
+        // METHODSTATUS(TITLE);
     }
+
+    // const METHODSTATUS=(TITLE)=>{
+    //     USERSTATUSDATA.map((value)=>{
+    //         USERLOGINDATA.map((val)=>{
+    //                 if(value.USERGENERATEDID==val.USERGENERATEDID ){
+    //                     return alert(TITLE+"Uploaded");
+    //             }
+    //         })
+    //     })
+    // }
+
+    useEffect(()=>{
+        axios.get("http://localhost:3001/USERFOLLOWUSERDATA")
+            .then((RES)=>{
+                console.log("USERFOLLOWUSERDATA",RES.data);
+                setUSERSTATUSDATA(RES.data)
+            })
+    }, [])
+
+    useEffect(()=>{
+        axios.get("http://localhost:3001/USERLOGIN")
+            .then((RES)=>{
+                console.log("USERLOGIN",RES.data);
+                setUSERLOGINDATA(RES.data)
+            })
+            setUSERID(localStorage.getItem("USERGENERATEDID"));
+    }, [])
 
     return <>
         <body className="UPLOAD">

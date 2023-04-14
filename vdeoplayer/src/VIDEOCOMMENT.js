@@ -80,8 +80,8 @@ const VIDEOCOMMENT = (props) => {
                                                     if (val.USERGENERATEDID === value.USERID) {
                                                         return (
                                                             <div key={i} style={{ marginLeft: "30%", marginTop: "-9%" }}>
-                                                                <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ borderRadius: "50%", width: "25px", height: "25px", marginLeft: "-120px" }} />
-                                                                <h5 style={{ marginLeft: "-60px"}}>{val.USERNAME}</h5>
+                                                                <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ borderRadius: "50%", width: "25px", height: "25px", marginLeft: "-80px" }} />
+                                                                <h5 style={{ marginLeft: "-39px"}}>{val.USERNAME}</h5>
                                                             </div>
                                                         )
                                                     }

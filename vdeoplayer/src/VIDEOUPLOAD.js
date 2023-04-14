@@ -14,6 +14,11 @@ const VIDEOUPLOAD = () => {
         window.open(`http://localhost:3000/USERCOMMENT/${ID}`, "bfs", "fullscreen,scrollbars");
     }
 
+    function DELETEFUNCTION(ID) {
+        axios.delete(`http://localhost:3001/USERVIDEODELETE/${ID}`)
+        alert("Your Video Deleted");
+    }
+
 
     useEffect(() => {
         axios.get("http://localhost:3001/USERVIDEOVIDEO")
@@ -55,11 +60,22 @@ const VIDEOUPLOAD = () => {
                 USERVIDEOLIST.map((value, index) => {
                     return USERFOLLOWSTATUS.map((val, index) => {
                         return USERCOMMENTSTATUS.map((VALUE, index) => {
-                            if (value.USERID === USERLOGINDATA && val.USERGENERATEID === USERLOGINDATA && VALUE.USERGENERATEDID === USERLOGINDATA && value.VIDEOFIVE === val.USERVIDEO && value.VIDEOFIVE == `VIDEO/${VALUE.USERCOMMENTVIDEO}`){
+                            if (value.USERID === USERLOGINDATA && val.USERGENERATEID === USERLOGINDATA && VALUE.USERGENERATEDID === USERLOGINDATA && value.VIDEOFIVE === val.USERVIDEO && value.VIDEOFIVE == `VIDEO/${VALUE.USERCOMMENTVIDEO}`) {
                                 return <>
                                     <tbody>
                                         <tr>
-                                            <td> <video src={`http://localhost:3001/${value.VIDEOFIVE}`} type="video/mp4" style={{ width: "25%", marginLeft: "-0%" }}></video> <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "5%", marginTop: "-7%" }} onClick={() => FULLWINDOWPOPUP(value.id)}>View Comments</button><button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "5%", marginTop: "-7%" }} onClick={() => FULLWINDOWPOPUP(value.id)}>Delete Video</button></td>
+                                            <td> <video src={`http://localhost:3001/${value.VIDEOFIVE}`} type="video/mp4" style={{ width: "25%", marginLeft: "-0%" }}></video> <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "5%", marginTop: "-7%" }} onClick={() => FULLWINDOWPOPUP(value.id)}>View Comments</button><button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "5%", marginTop: "-7%" }} onClick={() => DELETEFUNCTION(value.id)}>Delete Video</button></td>
+                                            <td>{val.USERCOUNT}</td>
+                                            <td>{VALUE.USERCOUNT}</td>
+                                        </tr>
+                                    </tbody>
+                                </>
+                            }
+                            if (value.USERID === USERLOGINDATA && val.USERGENERATEID === USERLOGINDATA && VALUE.USERGENERATEDID === USERLOGINDATA && value.VIDEOFIVE === val.USERVIDEO && value.VIDEOFIVE === `VIDEONOISEREDUCE/${VALUE.USERCOMMENTVIDEO}`) {
+                                return <>
+                                    <tbody>
+                                        <tr>
+                                            <td> <video src={`http://localhost:3001/${value.VIDEOFIVE}`} type="video/mp4" style={{ width: "25%", marginLeft: "-0%" }}></video> <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "5%", marginTop: "-7%" }} onClick={() => FULLWINDOWPOPUP(value.id)}>View Comments</button><button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "5%", marginTop: "-7%" }} onClick={() => DELETEFUNCTION(value.id)}>Delete Video</button></td>
                                             <td>{val.USERCOUNT}</td>
                                             <td>{VALUE.USERCOUNT}</td>
                                         </tr>
@@ -69,6 +85,7 @@ const VIDEOUPLOAD = () => {
                         })
                     })
                 })
+
             }
         </table>
     </>
