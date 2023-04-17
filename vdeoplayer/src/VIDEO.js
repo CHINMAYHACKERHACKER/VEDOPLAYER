@@ -31,6 +31,8 @@ const VIDEO = () => {
     const [USERDATACRED, setUSERDATACRED] = useState([]);
     const [USERDATACOUNT, setUSERDATACOUNT] = useState([]);
     const [USERFOLLOWDATACOUNT, setUSERFOLLOWDATA] = useState([]);
+    const [USERVIEWVIEW, setUSERVIEWVIEW] = useState([]);
+    const [USERID, setUSERID] = useState([]);
 
     console.log("USERIMAGE", USERIMAGE);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
@@ -186,6 +188,15 @@ const VIDEO = () => {
     //     })
     // }, [])
 
+    useEffect(() => {
+        axios.get("http://localhost:3001/USERVIEWDATA")
+            .then((RES) => {
+                console.log("USERVIEWDATA", RES.data);
+                setUSERVIEWVIEW(RES.data);
+            })
+        setUSERID(localStorage.getItem("USERGENERATEDID"));
+    }, [])
+
 
     useEffect(() => {
         METHOD();
@@ -309,6 +320,18 @@ const VIDEO = () => {
                 <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                     <div class="video"><br />
                         <video src={`http://localhost:3001/${value.VIDEOONE}`} type="video/mp4" style={{ width: "70%", border: "5px solid white" }} onClick={() => VIDEOFUNCTION(value.id, value.USERID, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE, value.VIDEOMUSIC, value.USERAUDIO)}></video>
+                        {
+                            USERVIEWVIEW.map((VALUE, i) => {
+                                if (VALUE.VIDEOID == value.id) {
+                                    return <>
+                                    <div>
+                                    {/* <i class="fa-solid fa-eye" style={{ fontSize: "15px", marginLeft: "5%" }}> {VALUE.USERCOUNT}</i> */}
+                                    <p style={{  marginLeft: "-87%" }}>Views {VALUE.USERCOUNT}</p>
+                                    </div>
+                                    </>
+                                }
+                            })
+                        }
                         {/* <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid white"}} onClick={VIDEOFUNCTION} controls></video> */}
 
                         {/* <div>
@@ -317,7 +340,6 @@ const VIDEO = () => {
                                         <i style={{ border: '1px solid' }} class="fas fa-comment fa-border fa-1x  bg-white" aria-hidden="true" onClick={() => COMMENTFUNCTION(value.id)}></i>
                                     </div> */}
                     </div>
-
                     <div class="text">
                         {
                             USERIMAGE.map((val, i) => {

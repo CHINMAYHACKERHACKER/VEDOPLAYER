@@ -15,7 +15,6 @@ const VIDEOCOMMENT = (props) => {
 
     const NAVIGATE = useNavigate();
 
-
     const METHOD = async () => {
         await axios.get("http://localhost:3001/USERVIDEOVIDEO")
             .then((RES) => {
@@ -51,6 +50,8 @@ const VIDEOCOMMENT = (props) => {
         window.scrollTo(0, 0);
     }
 
+
+
     useEffect(() => {
         METHOD();
         USERIMAGEDATA();
@@ -72,7 +73,7 @@ const VIDEOCOMMENT = (props) => {
                                         return value;
                                     }
                                 }).map((value, index) => (
-                                    <li className="nav-item" key={index}><br/>
+                                    <li className="nav-item" key={index}>
                                         <div style={{ display: "flex", alignItems: "center" }}>
                                             <video src={`http://localhost:3001/${value.VIDEOFIVE}`} type="video/mp4" style={{ width: "30%", border: "5px solid white", marginLeft: "0%", marginTop: "0%" }} onClick={() => VIDEOFUNCTION(value.id, value.USERID, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE, value.VIDEOMUSIC, value.USERAUDIO)}></video>
                                             {
@@ -81,14 +82,15 @@ const VIDEOCOMMENT = (props) => {
                                                         return (
                                                             <div key={i} style={{ marginLeft: "30%", marginTop: "-9%" }}>
                                                                 <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ borderRadius: "50%", width: "25px", height: "25px", marginLeft: "-80px" }} />
-                                                                <h5 style={{ marginLeft: "-39px"}}>{val.USERNAME}</h5>
+                                                                <h5 style={{ marginLeft: "-39px" }}>{val.USERNAME}</h5>
                                                             </div>
                                                         )
                                                     }
                                                 })
                                             }
+
                                         </div>
-                                        <p><h6 style={{marginRight: "-29%", marginTop: "-7%"}}>{value.TITLE.substring(0, 40)}</h6></p>
+                                        <p><h6 style={{ marginRight: "-29%", marginTop: "-7%" }}>{value.TITLE.substring(0, 40)}</h6></p>
                                     </li>
                                 ))
                             }

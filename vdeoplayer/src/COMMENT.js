@@ -28,8 +28,9 @@ const COMMENT = () => {
     const [STATUSFOLLOW, setSTATUSFOLLOW] = useState("Follow");
     const [USERFOLLOWDATA, setUSERFOLLOWDATA] = useState([]);
     const [USERUNIQUEID, setUSERUNIQUEID] = useState([]);
+    const [VIDEODATA, setVIDEODATA] = useState([]);
 
-
+    console.log("VIDEODATA", VIDEODATA);
     console.log("USERVIDEO", USERVIDEO);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
 
@@ -188,6 +189,8 @@ const COMMENT = () => {
             })
     }, [])
 
+  
+
     useEffect(() => {
         setUSERUNIQUEID(localStorage.getItem("USERGENERATEDID"));
     }, [])
@@ -214,6 +217,7 @@ const COMMENT = () => {
     };
     const onTimeChange = (val) => {
         console.log("onTimeChange", val);
+        setVIDEODATA(Math.floor(val.currentTime));
     };
     const onvolumechange = (val) => {
         console.log("onvolumechange", val);
@@ -274,6 +278,15 @@ const COMMENT = () => {
             );
         };
 
+    }
+
+    if (VIDEODATA == 25) {
+        axios.post("http://localhost:3001/USERVIEWDATA", {
+            ID: PARAM.ID,
+            USERID: PARAM.USERID,
+            VIDEOFIVE: PARAM.VIDEOFIVE,
+            USERUNIQUEID: USERUNIQUEID,
+        })
     }
 
 

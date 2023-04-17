@@ -108,7 +108,7 @@ const UPLOAD = () => {
                                 <Link className="nav-link" to="/VIDEO">Videos</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/ABOUT">About Us</Link>
+                                <Link className="nav-link" to="/ABOUT">Guidelines</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/CONTACT">Contact</Link>

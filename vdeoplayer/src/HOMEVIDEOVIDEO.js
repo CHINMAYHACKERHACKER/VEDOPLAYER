@@ -30,13 +30,6 @@ const HOMEVIDEOVIDEO = () => {
     const [SONG, setSONG] = useState([]);
     const [STATUSFOLLOW, setSTATUSFOLLOW] = useState("Follow");
     const [USERFOLLOWDATA, setUSERFOLLOWDATA] = useState([]);
-    const [VIDEODATA, setVIDEODATA] = useState([]);
-    console.log("VIDEODATA",VIDEODATA);
-
-    if(VIDEODATA== 25){
-        alert("ROBOT");
-    }
-
 
     console.log("USERVIDEO", USERVIDEO);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
@@ -222,7 +215,6 @@ const HOMEVIDEOVIDEO = () => {
     };
     const onTimeChange = (val) => {
         console.log("onTimeChange", val);
-        setVIDEODATA(Math.floor(val.currentTime));
     };
     const onvolumechange = (val) => {
         console.log("onvolumechange", val);
@@ -317,7 +309,7 @@ const HOMEVIDEOVIDEO = () => {
                 <div className="input-group input-group-sm mb-1 rounded-pill" style={{ maxWidth: '500px', marginRight: "20%" }}>
                     <input type="text" className="form-control rounded-start" placeholder="Search Videos" aria-label="Search" aria-describedby="search-button" onChange={(e) => setSEARCH(e.target.value)} />
                 </div>
-                    <Link className="nav-link" to="/HOMEVIDEO">Home</Link>
+                <Link className="nav-link" to="/HOMEVIDEO">Home</Link>
                 <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={SIGN}>Sign Up</button>
                 {/* <div className="form-outline">
                     <input type="search" id="form1" className="form-control" placeholder="Search Videos" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
