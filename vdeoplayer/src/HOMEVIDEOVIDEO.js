@@ -55,18 +55,19 @@ const HOMEVIDEOVIDEO = () => {
 
 
     const USERCOMMENTFUNCTION = (ID, USERID, VIDEOFIVE) => {
+        alert("Sign Up To Use Comment Feature");
         if (USERCOMMENT == "") {
-            alert("Please Write Comment");
+            // alert("Please Write Comment");
         }
         else {
-            axios.post(`http://localhost:3001/USERCOMMENT`, {
-                ID: ID,
-                USERCOMMENT: USERCOMMENT,
-                USERID: USERID,
-                VIDEOFIVE: VIDEOFIVE
-            })
-            alert("Your Comment Posted Sucessfully");
-            window.location.reload();
+            // axios.post(`http://localhost:3001/USERCOMMENT`, {
+            //     ID: ID,
+            //     USERCOMMENT: USERCOMMENT,
+            //     USERID: USERID,
+            //     VIDEOFIVE: VIDEOFIVE
+            // })
+            // alert("Your Comment Posted Sucessfully");
+            // window.location.reload();
         }
     }
 
@@ -87,57 +88,59 @@ const HOMEVIDEOVIDEO = () => {
     }
 
     const METHOD = (USERGENERATEDID, USERID, VIDEO, VIDEOONE, id, ID, USERNAME, VIDEOFIVE) => {
+        alert("Sign Up To Use Like Feature");
         if (USERGENERATEDID == USERID && VIDEO == `VIDEO/${VIDEOONE}` && id == ID) {
-            // alert("You Started Following" + " " + USERNAME);
-            axios.post("http://localhost:3001/STATUS", {
-                id: id,
-                USERNAME: USERNAME,
-                STATUS: STATUS,
-                USERGENERATEDID: USERGENERATEDID,
-                VIDEOFIVE: VIDEOFIVE
-            })
+            // // alert("You Started Following" + " " + USERNAME);
+            // axios.post("http://localhost:3001/STATUS", {
+            //     id: id,
+            //     USERNAME: USERNAME,
+            //     STATUS: STATUS,
+            //     USERGENERATEDID: USERGENERATEDID,
+            //     VIDEOFIVE: VIDEOFIVE
+            // })
         }
         else if (USERGENERATEDID == USERID && VIDEO == `VIDEONOISEREDUCE/${VIDEOONE}` && id == ID) {
-            alert("You Started Following" + " " + USERNAME);
-            axios.post("http://localhost:3001/STATUS", {
-                id: id,
-                USERNAME: USERNAME,
-                STATUS: STATUS,
-                USERGENERATEDID: USERGENERATEDID,
-                VIDEOFIVE: VIDEOFIVE
-            })
+            // alert("You Started Following" + " " + USERNAME);
+            // axios.post("http://localhost:3001/STATUS", {
+            //     id: id,
+            //     USERNAME: USERNAME,
+            //     STATUS: STATUS,
+            //     USERGENERATEDID: USERGENERATEDID,
+            //     VIDEOFIVE: VIDEOFIVE
+            // })
         }
         else {
-            setSTATUS("Follow");
+            // setSTATUS("Follow");
         }
-        window.location.reload();
+        // window.location.reload();
     }
 
 
 
     //USERFOLLOWFUNCTION
     const USERFOLLOWFUNCTION = (USERGENERATEDID, USERID, VIDEO, VIDEOONE, id, ID, USERNAME) => {
+        alert("Sign Up To Use Follow Feature");
         if (USERGENERATEDID == USERID && VIDEO == `VIDEO/${VIDEOONE}` && id == ID) {
-            alert("You Started Following" + " " + USERNAME);
-            axios.post("http://localhost:3001/FOLLOWSTATUS", {
-                id: id,
-                USERNAME: USERNAME,
-                STATUSFOLLOW: STATUSFOLLOW,
-                USERGENERATEDID: USERGENERATEDID,
-            })
+            // alert("You Started Following" + " " + USERNAME);
+            // axios.post("http://localhost:3001/FOLLOWSTATUS", {
+            //     id: id,
+            //     USERNAME: USERNAME,
+            //     STATUSFOLLOW: STATUSFOLLOW,
+            //     USERGENERATEDID: USERGENERATEDID,
+            // })
         }
         else if (USERGENERATEDID == USERID && VIDEO == `VIDEONOISEREDUCE/${VIDEOONE}` && id == ID) {
-            axios.post("http://localhost:3001/FOLLOWSTATUS", {
-                id: id,
-                USERNAME: USERNAME,
-                STATUSFOLLOW: STATUSFOLLOW,
-                USERGENERATEDID: USERGENERATEDID,
-            })
+            // axios.post("http://localhost:3001/FOLLOWSTATUS", {
+            //     id: id,
+            //     USERNAME: USERNAME,
+            //     STATUSFOLLOW: STATUSFOLLOW,
+            //     USERGENERATEDID: USERGENERATEDID,
+            // })
         }
         else {
-            setSTATUSFOLLOW("Follow");
+            // setSTATUSFOLLOW("Follow");
         }
-        window.location.reload();
+        // window.location.reload();
     }
 
     function METHODFUNCTION(e) {
@@ -314,7 +317,7 @@ const HOMEVIDEOVIDEO = () => {
                 <div className="input-group input-group-sm mb-1 rounded-pill" style={{ maxWidth: '500px', marginRight: "20%" }}>
                     <input type="text" className="form-control rounded-start" placeholder="Search Videos" aria-label="Search" aria-describedby="search-button" onChange={(e) => setSEARCH(e.target.value)} />
                 </div>
-                    <Link className="nav-link" to="/">Home</Link>
+                    <Link className="nav-link" to="/HOMEVIDEO">Home</Link>
                 <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={SIGN}>Sign Up</button>
                 {/* <div className="form-outline">
                     <input type="search" id="form1" className="form-control" placeholder="Search Videos" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />

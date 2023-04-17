@@ -27,6 +27,8 @@ const COMMENT = () => {
     const [SONG, setSONG] = useState([]);
     const [STATUSFOLLOW, setSTATUSFOLLOW] = useState("Follow");
     const [USERFOLLOWDATA, setUSERFOLLOWDATA] = useState([]);
+    const [USERUNIQUEID, setUSERUNIQUEID] = useState([]);
+
 
     console.log("USERVIDEO", USERVIDEO);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
@@ -45,12 +47,14 @@ const COMMENT = () => {
         if (USERCOMMENT == "") {
             alert("Please Write Comment");
         }
-        else {
+        else if (PARAM.USERID == USERID) {
+            USERID = USERUNIQUEID;
             axios.post(`http://localhost:3001/USERCOMMENT`, {
                 ID: ID,
                 USERCOMMENT: USERCOMMENT,
                 USERID: USERID,
-                VIDEOFIVE: VIDEOFIVE
+                VIDEOFIVE: VIDEOFIVE,
+                PARAMID: PARAM.USERID
             })
             alert("Your Comment Posted Sucessfully");
             window.location.reload();
@@ -105,20 +109,24 @@ const COMMENT = () => {
     //USERFOLLOWFUNCTION
     const USERFOLLOWFUNCTION = (USERGENERATEDID, USERID, VIDEO, VIDEOONE, id, ID, USERNAME) => {
         if (USERGENERATEDID == USERID && VIDEO == `VIDEO/${VIDEOONE}` && id == ID) {
+            USERGENERATEDID = USERUNIQUEID;
             alert("You Started Following" + " " + USERNAME);
             axios.post("http://localhost:3001/FOLLOWSTATUS", {
                 id: id,
                 USERNAME: USERNAME,
                 STATUSFOLLOW: STATUSFOLLOW,
                 USERGENERATEDID: USERGENERATEDID,
+                USERID: USERID,
             })
         }
         else if (USERGENERATEDID == USERID && VIDEO == `VIDEONOISEREDUCE/${VIDEOONE}` && id == ID) {
+            USERGENERATEDID = USERUNIQUEID;
             axios.post("http://localhost:3001/FOLLOWSTATUS", {
                 id: id,
                 USERNAME: USERNAME,
                 STATUSFOLLOW: STATUSFOLLOW,
                 USERGENERATEDID: USERGENERATEDID,
+                USERID: USERID,
             })
         }
         else {
@@ -137,7 +145,7 @@ const COMMENT = () => {
         alert("For now This Feature Is Not Available");
     }
 
-    
+
 
     useEffect(() => {
         axios.get("http://localhost:3001/USERIMAGEDATA")
@@ -178,6 +186,10 @@ const COMMENT = () => {
                 console.log("COUNT", RES.data);
                 setUSERFOLLOWDATA(RES.data);
             })
+    }, [])
+
+    useEffect(() => {
+        setUSERUNIQUEID(localStorage.getItem("USERGENERATEDID"));
     }, [])
 
 
@@ -493,7 +505,7 @@ const COMMENT = () => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                             <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br /><br />
+                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br /><br />
                             <h6 key={i} style={{ marginTop: "0%", marginLeft: "0%" }}>{val.USERNAME}</h6>  <button type="button" class="btn btn-primary rounded-pill" style={{ backgroundColor: "black", borderColor: "black", marginLeft: "5%", marginTop: "-13%" }} onClick={() => USERFOLLOWFUNCTION(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}>Follow</button> <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "-7%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
                             {
                                 USERFOLLOWDATA.map((VAL, I) => {
@@ -503,15 +515,15 @@ const COMMENT = () => {
                                         </>
                                     }
                                 })
-                            }<br/>
+                            }<br />
                             {/* <h6 key={i} style={{ marginTop: "0%", marginLeft: "-55%"}}>{val.USERNAME}</h6><br/> */}
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
                             <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
                             <div class="d-flex justify-content-start">
-                            <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button>
-                            <i class="fa-solid fa-heart" style={{ marginLeft: "2%", fontSize: "29px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i><br />
+                                <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button>
+                                <i class="fa-solid fa-heart" style={{ marginLeft: "2%", fontSize: "29px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i><br />
                             </div>
-                           
+
                             {
                                 USERSTAUS.map((VAL, I) => {
                                     return COUNT.map((VALUE, INDEX) => {
@@ -533,7 +545,7 @@ const COMMENT = () => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                         <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br /><br />
+                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br /><br />
                             <h6 key={i} style={{ marginTop: "0%", marginLeft: "0%" }}>{val.USERNAME}</h6>  <button type="button" class="btn btn-primary rounded-pill" style={{ backgroundColor: "black", borderColor: "black", marginLeft: "5%", marginTop: "-13%" }} onClick={() => USERFOLLOWFUNCTION(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}>Follow</button> <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "-7%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
                             {
                                 USERFOLLOWDATA.map((VAL, I) => {
@@ -543,15 +555,15 @@ const COMMENT = () => {
                                         </>
                                     }
                                 })
-                            }<br/>
+                            }<br />
                             {/* <h6 key={i} style={{ marginTop: "0%", marginLeft: "-55%"}}>{val.USERNAME}</h6><br/> */}
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
                             <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
                             <div class="d-flex justify-content-start">
-                            <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button>
-                            <i class="fa-solid fa-heart" style={{ marginLeft: "2%", fontSize: "29px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i><br />
+                                <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button>
+                                <i class="fa-solid fa-heart" style={{ marginLeft: "2%", fontSize: "29px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i><br />
                             </div>
-                           
+
                             {
                                 USERSTAUS.map((VAL, I) => {
                                     return COUNT.map((VALUE, INDEX) => {
@@ -572,37 +584,37 @@ const COMMENT = () => {
                     return USERVIDEOLIST.map((value, i) => {
                         if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                             return <>
-                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br /><br />
-                            <h6 key={i} style={{ marginTop: "0%", marginLeft: "0%" }}>{val.USERNAME}</h6>  <button type="button" class="btn btn-primary rounded-pill" style={{ backgroundColor: "black", borderColor: "black", marginLeft: "5%", marginTop: "-13%" }} onClick={() => USERFOLLOWFUNCTION(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}>Follow</button> <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "-7%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
-                            {
-                                USERFOLLOWDATA.map((VAL, I) => {
-                                    if (VAL.USERID == PARAM.ID) {
-                                        return <>
-                                            <p style={{ marginRight: "72%", marginTop: "-7.7%" }}>{VAL.USERFOLLOWSTATUS}</p> <p style={{ marginRight: "63%", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p><br />
-                                        </>
-                                    }
-                                })
-                            }<br/>
-                            {/* <h6 key={i} style={{ marginTop: "0%", marginLeft: "-55%"}}>{val.USERNAME}</h6><br/> */}
-                            {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
-                            <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
-                            <div class="d-flex justify-content-start">
-                            <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button>
-                            <i class="fa-solid fa-heart" style={{ marginLeft: "2%", fontSize: "29px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i><br />
-                            </div>
-                           
-                            {
-                                USERSTAUS.map((VAL, I) => {
-                                    return COUNT.map((VALUE, INDEX) => {
-                                        if (VAL.USERID == PARAM.ID && VAL.USERID == VALUE.USERID) {
+                                <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br /><br />
+                                <h6 key={i} style={{ marginTop: "0%", marginLeft: "0%" }}>{val.USERNAME}</h6>  <button type="button" class="btn btn-primary rounded-pill" style={{ backgroundColor: "black", borderColor: "black", marginLeft: "5%", marginTop: "-13%" }} onClick={() => USERFOLLOWFUNCTION(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}>Follow</button> <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "-7%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
+                                {
+                                    USERFOLLOWDATA.map((VAL, I) => {
+                                        if (VAL.USERID == PARAM.ID) {
                                             return <>
-                                                <p style={{ marginRight: "80%", marginTop: "-3%" }}></p> <p style={{ marginRight: "75%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
+                                                <p style={{ marginRight: "72%", marginTop: "-7.7%" }}>{VAL.USERFOLLOWSTATUS}</p> <p style={{ marginRight: "63%", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p><br />
                                             </>
                                         }
                                     })
+                                }<br />
+                                {/* <h6 key={i} style={{ marginTop: "0%", marginLeft: "-55%"}}>{val.USERNAME}</h6><br/> */}
+                                {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
+                            <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
+                                <div class="d-flex justify-content-start">
+                                    <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button>
+                                    <i class="fa-solid fa-heart" style={{ marginLeft: "2%", fontSize: "29px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i><br />
+                                </div>
 
-                                })
-                            }
+                                {
+                                    USERSTAUS.map((VAL, I) => {
+                                        return COUNT.map((VALUE, INDEX) => {
+                                            if (VAL.USERID == PARAM.ID && VAL.USERID == VALUE.USERID) {
+                                                return <>
+                                                    <p style={{ marginRight: "80%", marginTop: "-3%" }}></p> <p style={{ marginRight: "75%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
+                                                </>
+                                            }
+                                        })
+
+                                    })
+                                }
                             </>
                         }
                     })
@@ -622,15 +634,15 @@ const COMMENT = () => {
                                         </>
                                     }
                                 })
-                            }<br/>
+                            }<br />
                             {/* <h6 key={i} style={{ marginTop: "0%", marginLeft: "-55%"}}>{val.USERNAME}</h6><br/> */}
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
                             <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
                             <div class="d-flex justify-content-start">
-                            <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button>
-                            <i class="fa-solid fa-heart" style={{ marginLeft: "2%", fontSize: "29px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i><br />
+                                <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", width: "7%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button>
+                                <i class="fa-solid fa-heart" style={{ marginLeft: "2%", fontSize: "29px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i><br />
                             </div>
-                           
+
                             {
                                 USERSTAUS.map((VAL, I) => {
                                     return COUNT.map((VALUE, INDEX) => {

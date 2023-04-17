@@ -60,7 +60,7 @@ const VIDEOUPLOAD = () => {
                 USERVIDEOLIST.map((value, index) => {
                     return USERFOLLOWSTATUS.map((val, index) => {
                         return USERCOMMENTSTATUS.map((VALUE, index) => {
-                            if (value.USERID === USERLOGINDATA && val.USERGENERATEID === USERLOGINDATA && VALUE.USERGENERATEDID === USERLOGINDATA && value.VIDEOFIVE === val.USERVIDEO && value.VIDEOFIVE == `VIDEO/${VALUE.USERCOMMENTVIDEO}`) {
+                            if (value.USERID === USERLOGINDATA && val.USERGENERATEID === USERLOGINDATA && VALUE.USERGENERATEDID !== USERLOGINDATA && value.VIDEOFIVE === val.USERVIDEO && value.VIDEOFIVE == `VIDEO/${VALUE.USERCOMMENTVIDEO}`){
                                 return <>
                                     <tbody>
                                         <tr>
@@ -71,7 +71,7 @@ const VIDEOUPLOAD = () => {
                                     </tbody>
                                 </>
                             }
-                            if (value.USERID === USERLOGINDATA && val.USERGENERATEID === USERLOGINDATA && VALUE.USERGENERATEDID === USERLOGINDATA && value.VIDEOFIVE === val.USERVIDEO && value.VIDEOFIVE === `VIDEONOISEREDUCE/${VALUE.USERCOMMENTVIDEO}`) {
+                            if (value.USERID === USERLOGINDATA && val.USERGENERATEID === USERLOGINDATA && VALUE.USERGENERATEDID !== USERLOGINDATA && value.VIDEOFIVE === val.USERVIDEO && value.VIDEOFIVE === `VIDEONOISEREDUCE/${VALUE.USERCOMMENTVIDEO}`) {
                                 return <>
                                     <tbody>
                                         <tr>
@@ -85,7 +85,6 @@ const VIDEOUPLOAD = () => {
                         })
                     })
                 })
-
             }
         </table>
     </>

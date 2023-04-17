@@ -174,6 +174,19 @@ const VIDEO = () => {
     }
 
 
+    // useEffect(() => {
+    //     USERFOLLOWSTATUS.map((value) => {
+    //       return  USERVIDEOLIST.map((VAL) => {
+    //           return  USERDATACRED.map((VALUE) => {
+    //                 if (value.USERGENERATEDID == value.USERUSERID && value.USERGENERATEDID !== USERLOGINDATA) {
+    //                   return  alert(VALUE.USERNAME + "" + "Uploaded" + "" + VAL.TITLE);
+    //                 }
+    //             })
+    //         })
+    //     })
+    // }, [])
+
+
     useEffect(() => {
         METHOD();
         USERIMAGEDATA();
@@ -223,7 +236,7 @@ const VIDEO = () => {
                 </div> */}
                 {
                     USERFOLLOWSTATUS.map((value) => {
-                        if (USERLOGINDATA == value.USERGENERATEDID && !isRendered) { // Check if bell is not already rendered
+                        if (value.USERGENERATEDID !== USERLOGINDATA && value.USERUSERID == USERLOGINDATA && !isRendered) { // Check if bell is not already rendered
                             isRendered = true; // Update flag to true
                             localStorage.setItem("USERFOLLOWDATA", value.USERCOUNT);
                             if (value.USERCOUNT == USERFOLLOWDATACOUNT) {
@@ -257,7 +270,7 @@ const VIDEO = () => {
                 {/* <i class="fa-solid fa-bell"> <ToastContainer /></i> */}
                 {
                     USERBELLSTATUS.map((value) => {
-                        if (USERLOGINDATA == value.USERGENERATEDID && !isBellRendered) { // Check if bell is not already rendered
+                        if (value.USERGENERATEDID !== USERLOGINDATA && value.USERPARAMID == USERLOGINDATA && !isBellRendered) { // Check if bell is not already rendered
                             isBellRendered = true; // Update flag to true
                             localStorage.setItem("USERCOUNTCOUNT", value.USERCOUNT);
                             if (value.USERCOUNT == USERDATACOUNT) {
