@@ -12,7 +12,7 @@ const ABOUT = () => {
             </header><br />
             <main>
                 <ul>
-                    <li>In Vid Website There Are Three Features<br /> 1) Only Noise Reduction: This feature allows users to reduce background noise in their Videos<br />2) Noise Reduction+Background Music: This feature allows users to reduce background noise and add Background Music to Video<br />3) Only Background Music: This feature allows users to add Background Music without Noise Reduction .</li><br />
+                    <li>In Vid Website There Are Three Features<br /> 1) Only Noise Reduction: This feature allows users to reduce background noise in their Videos(Select Only Video)<br />2) Noise Reduction+Background Music: This feature allows users to reduce background noise and add Background Music to Video(Select Both Video(mp4) and Audio(mp3))<br />3) Only Background Music: This feature allows users to add Background Music to Video without Noise Reduction(Select Both Video(mp4) and Audio(mp3)).<br /><li>You can Upload Edited Video also But Dont Select Any Option Just Upload Edited Video.</li><br /><li>Dont Add Background Music In video When Selecting Only noise Reduction Option.</li><br /><li>Speak Little Louder.</li></li><br />
                     <p><b>Certainly, here are some strict guidelines to follow when uploading videos to avoid uploading offensive or inappropriate content:</b></p>
                     <li>Do not upload any explicit content, such as pornography, nudity, or sexually suggestive material.</li><br />
                     <li>Avoid uploading videos that contain hate speech, harassment, or bullying. This includes content that is discriminatory or offensive towards any particular group or individual.</li><br />
@@ -23,14 +23,6 @@ const ABOUT = () => {
                 </ul>
             </main>
         </div>
-        // <html>
-        //     <body><br/><br/>
-
-        //             <h1>About Us</h1><br/><br/><br/>
-        //             <p>A developer community is a group of developers who come together to share knowledge, collaborate on projects, and support one another in the field of software development. <br/> 
-        //                </p>
-        //     </body>
-        // </html>
     )
 }
 export default ABOUT;

@@ -16,6 +16,8 @@ import HOMEVIDEO from "./HOMEVIDEO.js";
 import HOMEVIDEOVIDEO from "./HOMEVIDEOVIDEO.js";
 import VIDEOUPLOAD from "./VIDEOUPLOAD.js";
 import MAINHOMEPAGE from "./MAINHOMEPAGE.js";
+import USERUNIQUEID from "./USERUNIQUEID.js";
+
 
 const APP = () => {
   return <>
@@ -51,6 +53,7 @@ const APP = () => {
 
         <Route path="/USERCOMMENT/:ID" element={<USERCOMMENT />} />
         <Route path="/VIDEOUPLOAD" element={<VIDEOUPLOAD />} />
+        <Route path="/USERUNIQUEID" element={<USERUNIQUEID />} />
       </Routes>
     </BrowserRouter>
   </>

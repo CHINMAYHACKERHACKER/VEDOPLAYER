@@ -60,21 +60,21 @@ const UPLOAD = () => {
     //     })
     // }
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.get("http://localhost:3001/USERFOLLOWUSERDATA")
-            .then((RES)=>{
-                console.log("USERFOLLOWUSERDATA",RES.data);
+            .then((RES) => {
+                console.log("USERFOLLOWUSERDATA", RES.data);
                 setUSERSTATUSDATA(RES.data)
             })
     }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.get("http://localhost:3001/USERLOGIN")
-            .then((RES)=>{
-                console.log("USERLOGIN",RES.data);
+            .then((RES) => {
+                console.log("USERLOGIN", RES.data);
                 setUSERLOGINDATA(RES.data)
             })
-            setUSERID(localStorage.getItem("USERGENERATEDID"));
+        setUSERID(localStorage.getItem("USERGENERATEDID"));
     }, [])
 
     return <>
@@ -111,6 +111,9 @@ const UPLOAD = () => {
                                 <Link className="nav-link" to="/ABOUT">Guidelines</Link>
                             </li>
                             <li className="nav-item">
+                                <Link className="nav-link" to="/USERUNIQUEID">Unique Id</Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/CONTACT">Contact</Link>
                             </li>
                         </ul>
@@ -144,21 +147,21 @@ const UPLOAD = () => {
                     </div>
                     <div style={{ display: "flex" }}>
                         <div style={{ marginRight: "10px" }}>
-                        <label for="title" style={{ color: "black" }} ><h6>Only Noise Reduction:</h6></label>
+                            <label for="title" style={{ color: "black" }} ><h6>Only Noise Reduction:</h6></label>
                             <select onChange={(e) => setNOISEREDUCE(e.target.value)}>
                                 <option>Select Option</option>
                                 <option value="yes">Yes</option>
                             </select>
                         </div>
                         <div style={{ marginRight: "10px" }}>
-                        <label for="title"  style={{ color: "black" }}><h6>Noise Reduction+Background Music:</h6></label>
+                            <label for="title" style={{ color: "black" }}><h6>Noise Reduction+Background Music:</h6></label>
                             <select onChange={(e) => setAUDIO(e.target.value)} >
                                 <option>Select Option</option>
                                 <option value="yes">Yes</option>
                             </select>
                         </div>
                         <div style={{ marginRight: "10px" }}>
-                        <label for="title"  style={{ color: "black" }}><h6>Only Background Music:</h6></label>
+                            <label for="title" style={{ color: "black" }}><h6>Only Background Music:</h6></label>
                             <select onChange={(e) => setUSERAUDIO(e.target.value)}>
                                 <option>Select Option</option>
                                 <option value="yes">Yes</option>
