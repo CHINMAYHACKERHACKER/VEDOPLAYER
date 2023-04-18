@@ -45,7 +45,7 @@ const UPLOAD = () => {
 
             axios
                 .post("http://localhost:3001/VIDEO", FORMDATA);
-            alert("Video Uploaded Sucessfully");
+            alert("Video Uploaded Pls Wait Until Its Complete Its Process");
         }
         // METHODSTATUS(TITLE);
     }
