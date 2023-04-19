@@ -11,8 +11,6 @@ import { Effect } from 'react-notification-badge';
 import NOTIFICATION from "../src/NOTIFICATION.mp3";
 import NOTIFICATIN from "../src/NOTIFICATIONBELL.mp3";
 
-
-
 const VIDEO = () => {
 
     const [USERVIDEOLIST, setUSERVIDEOLIST] = useState([]);
@@ -234,9 +232,6 @@ const VIDEO = () => {
                         <li className="nav-item">
                             <Link className="nav-link" to="/UPLOAD">Upload Videos</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/VIDEOUPLOAD">Your Videos</Link>
-                        </li>
                     </ul>
                 </div>
                 <div className="input-group input-group-sm mb-1 rounded-pill" style={{ maxWidth: '500px', marginRight: "29%" }}>
@@ -324,10 +319,10 @@ const VIDEO = () => {
                             USERVIEWVIEW.map((VALUE, i) => {
                                 if (VALUE.VIDEOID == value.id) {
                                     return <>
-                                    <div>
-                                    {/* <i class="fa-solid fa-eye" style={{ fontSize: "15px", marginLeft: "5%" }}> {VALUE.USERCOUNT}</i> */}
-                                    <p style={{  marginLeft: "-87%" }}>Views {VALUE.USERCOUNT}</p>
-                                    </div>
+                                        <div>
+                                            {/* <i class="fa-solid fa-eye" style={{ fontSize: "15px", marginLeft: "5%" }}> {VALUE.USERCOUNT}</i> */}
+                                            <p style={{ marginLeft: "-87%" }}>Views {VALUE.USERCOUNT}</p>
+                                        </div>
                                     </>
                                 }
                             })
@@ -356,7 +351,6 @@ const VIDEO = () => {
                 </div>
             ))
         }
-
     </>
 }
 export default VIDEO;

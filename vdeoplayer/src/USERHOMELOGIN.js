@@ -73,6 +73,29 @@ const USERHOMELOGIN = () => {
                         <div className="card-body">
                             <p id="PARAGRAPH" style={{ color: "red" }}></p>
                             <div className="tab-content">
+                                <form onSubmit={onSignup}>
+                                    <div className="form-group">
+                                        <label for="name">Username:</label>
+                                        <input type="text" className="form-control" placeholder="Enter name" onChange={(e) => setUSERNAME(e.target.value)} required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label for="email">Password:</label>
+                                        <input type="password" className="form-control" placeholder="Enter Password" onChange={(e) => setPASSWORD(e.target.value)} required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label for="pwd">Email:</label>
+                                        <input type="email" className="form-control" placeholder="Enter Email" onChange={(e) => setEMAIL(e.target.value)} required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label for="pwd">Click To Generate Id(Save your Unique Id):</label>
+                                        <input type="text" className="form-control" value={USERGENERATEDID} required /><button type="button" className="btn btn-primary" style={{ marginLeft: "1%" }} onClick={USERGENERATE}>Generate</button>
+                                    </div>
+                                    <div className="form-group">
+                                        <label for="pwd">Upload Your Image:</label>
+                                        <input type="file" className="form-control" onChange={(e) => setIMAGE(e.target.files[0])} required />
+                                    </div>
+                                    <button type="submit" className="btn btn-primary" style={{ marginLeft: "1%" }}>Sign Up</button>
+                                </form>
                                 {/* <div id="login" className="tab-pane active">
                                         <form onSubmit={onLogin}>
                                             <div className="form-group">
@@ -87,7 +110,7 @@ const USERHOMELOGIN = () => {
                                         </form>
                                     </div> */}
                                 <div id="signup" className="tab-pane">
-                                    <form onSubmit={onSignup}>
+                                    {/* <form onSubmit={onSignup}>
                                         <div className="form-group">
                                             <label for="name">Username:</label>
                                             <input type="text" className="form-control" placeholder="Enter name" onChange={(e) => setUSERNAME(e.target.value)} required />
@@ -109,7 +132,7 @@ const USERHOMELOGIN = () => {
                                             <input type="file" className="form-control" onChange={(e) => setIMAGE(e.target.files[0])} required />
                                         </div>
                                         <button type="submit" className="btn btn-primary" style={{ marginLeft: "1%" }}>Sign Up</button>
-                                    </form>
+                                    </form> */}
                                 </div>
                             </div>
                         </div>

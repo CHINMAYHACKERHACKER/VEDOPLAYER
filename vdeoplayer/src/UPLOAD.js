@@ -45,7 +45,7 @@ const UPLOAD = () => {
 
             axios
                 .post("http://localhost:3001/VIDEO", FORMDATA);
-            alert("Video Uploaded Pls Wait Until Its Complete Its Process");
+            alert("Video Uploaded Pls Wait Until Its Complete Its Process once Its Uploaded You see Your Videos In Uploaded Videos Tab");
         }
         // METHODSTATUS(TITLE);
     }
@@ -106,6 +106,12 @@ const UPLOAD = () => {
                             </li> */}
                             <li className="nav-item">
                                 <Link className="nav-link" to="/VIDEO">Videos</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/VIDEOUPLOAD">Your Videos</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/UPLOADEDVIDEO">Uploaded Videos</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/ABOUT">Guidelines</Link>

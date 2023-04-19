@@ -29,6 +29,8 @@ const HOMEVIDEO = () => {
     const [USERDATACRED, setUSERDATACRED] = useState([]);
     const [USERDATACOUNT, setUSERDATACOUNT] = useState([]);
     const [USERFOLLOWDATACOUNT, setUSERFOLLOWDATA] = useState([]);
+    const [USERVIEWVIEW, setUSERVIEWVIEW] = useState([]);
+
 
     console.log("USERIMAGE", USERIMAGE);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
@@ -130,6 +132,14 @@ const HOMEVIDEO = () => {
             .then((RES) => {
                 console.log(RES.data);
                 setUSERDATACRED(RES.data);
+            })
+    }, [])
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/USERVIEWDATA")
+            .then((RES) => {
+                console.log("USERVIEWDATA", RES.data);
+                setUSERVIEWVIEW(RES.data);
             })
     }, [])
 
@@ -236,6 +246,18 @@ const HOMEVIDEO = () => {
                 <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                     <div class="video"><br />
                         <video src={`http://localhost:3001/${value.VIDEOONE}`} type="video/mp4" style={{ width: "70%", border: "5px solid white" }} onClick={() => VIDEOFUNCTION(value.id, value.USERID, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE, value.VIDEOMUSIC, value.USERAUDIO)}></video>
+                        {
+                            USERVIEWVIEW.map((VALUE, i) => {
+                                if (VALUE.VIDEOID == value.id) {
+                                    return <>
+                                        <div>
+                                            {/* <i class="fa-solid fa-eye" style={{ fontSize: "15px", marginLeft: "5%" }}> {VALUE.USERCOUNT}</i> */}
+                                            <p style={{ marginLeft: "-87%" }}>Views {VALUE.USERCOUNT}</p>
+                                        </div>
+                                    </>
+                                }
+                            })
+                        }
                         {/* <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid white"}} onClick={VIDEOFUNCTION} controls></video> */}
 
                         {/* <div>
@@ -250,7 +272,7 @@ const HOMEVIDEO = () => {
                             USERIMAGE.map((val, i) => {
                                 if (val.USERGENERATEDID === value.USERID) {
                                     return <>
-                                        <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
+                                        <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User"/>
                                         <h4 key={i} >{val.USERNAME}</h4>
                                     </>
                                 }
