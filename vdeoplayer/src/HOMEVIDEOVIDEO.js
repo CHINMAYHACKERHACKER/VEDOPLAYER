@@ -508,7 +508,7 @@ const HOMEVIDEOVIDEO = () => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br />
+                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br/>
                             <i class="fa-solid fa-heart" style={{ marginLeft: "9%", fontSize: "20px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i>
                             {
                                 USERSTAUS.map((VAL, I) => {
@@ -547,7 +547,7 @@ const HOMEVIDEOVIDEO = () => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br />
+                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br/>
                             <i class="fa-solid fa-heart" style={{ marginLeft: "9%", fontSize: "20px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i>
                             {
                                 USERSTAUS.map((VAL, I) => {
@@ -585,7 +585,7 @@ const HOMEVIDEOVIDEO = () => {
                     return USERVIDEOLIST.map((value, i) => {
                         if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                             return <>
-                                <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br />
+                                <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br/>
                                 <i class="fa-solid fa-heart" style={{ marginLeft: "9%", fontSize: "20px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i>
                                 {
                                     USERSTAUS.map((VAL, I) => {
@@ -624,7 +624,7 @@ const HOMEVIDEOVIDEO = () => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEO/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br />
+                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br/>
                             <i class="fa-solid fa-heart" style={{ marginLeft: "9%", fontSize: "20px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i>
                             {
                                 USERSTAUS.map((VAL, I) => {

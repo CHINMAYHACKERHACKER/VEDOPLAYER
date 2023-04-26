@@ -280,7 +280,7 @@ const COMMENT = () => {
 
     }
 
-    if (VIDEODATA == 25) {
+    if (VIDEODATA == 29) {
         axios.post("http://localhost:3001/USERVIEWDATA", {
             ID: PARAM.ID,
             USERID: PARAM.USERID,
@@ -518,7 +518,7 @@ const COMMENT = () => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br />
+                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br/>
                             <i class="fa-solid fa-heart" style={{ marginLeft: "9%", fontSize: "20px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i>
                             {
                                 USERSTAUS.map((VAL, I) => {
@@ -557,7 +557,7 @@ const COMMENT = () => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br />
+                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br/>
                             <i class="fa-solid fa-heart" style={{ marginLeft: "9%", fontSize: "20px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i>
                             {
                                 USERSTAUS.map((VAL, I) => {
@@ -595,7 +595,7 @@ const COMMENT = () => {
                     return USERVIDEOLIST.map((value, i) => {
                         if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                             return <>
-                                <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br />
+                                <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br/>
                                 <i class="fa-solid fa-heart" style={{ marginLeft: "9%", fontSize: "20px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i>
                                 {
                                     USERSTAUS.map((VAL, I) => {
@@ -634,7 +634,7 @@ const COMMENT = () => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEO/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br />
+                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br/>
                             <i class="fa-solid fa-heart" style={{ marginLeft: "9%", fontSize: "20px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i>
                             {
                                 USERSTAUS.map((VAL, I) => {
@@ -692,7 +692,7 @@ const COMMENT = () => {
             <textarea id="form18" className="md-textarea form-control" rows="1" placeholder="Write Comment..." style={{ width: "50%", marginLeft: "0%", borderColor: "white", height: "5%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea><br />
             <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID, PARAM.USERID, PARAM.VIDEOFIVE)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)}>View Comments</button>
         </div>
-        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '50%', marginTop: "-79%" }}>
+        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '50%', marginTop: "-75%" }}>
         </div>
         <VIDEOCOMMENT value={SEARCH} />
     </>
