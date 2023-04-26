@@ -108,7 +108,7 @@ const UPLOAD = () => {
                                 <Link className="nav-link" to="/VIDEO">Videos</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/VIDEOUPLOAD">Your Videos</Link>
+                                <Link className="nav-link" to="/VIDEOUPLOAD">Your Videos(Like and Comment and Views)</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/UPLOADEDVIDEO">Uploaded Videos</Link>
