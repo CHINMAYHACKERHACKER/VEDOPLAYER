@@ -1,4 +1,5 @@
 import React from 'react';
+import { lazy,Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HOME from "./HOME.js";
 import LOGIN from "./LOGIN.js";
@@ -17,13 +18,12 @@ import HOMEVIDEOVIDEO from "./HOMEVIDEOVIDEO.js";
 import VIDEOUPLOAD from "./VIDEOUPLOAD.js";
 import MAINHOMEPAGE from "./MAINHOMEPAGE.js";
 import USERUNIQUEID from "./USERUNIQUEID.js";
-import UPLOADEDVIDEO from "./UPLOADEDVIDEO.js";
-
-
+const UPLOADEDVIDEO=lazy(()=>import("./UPLOADEDVIDEO.js"))
 
 const APP = () => {
   return <>
     <BrowserRouter>
+    <Suspense fallback={<div>Please wait loading</div>}>
       <Routes>
       <Route path="/" element={<MAINHOMEPAGE/>} />
         <Route path="/HOMEVIDEO" element={<HOMEVIDEO />} />
@@ -58,6 +58,7 @@ const APP = () => {
         <Route path="/USERUNIQUEID" element={<USERUNIQUEID />} />
         <Route path="/UPLOADEDVIDEO" element={<UPLOADEDVIDEO />} />
       </Routes>
+      </Suspense>
     </BrowserRouter>
   </>
 }

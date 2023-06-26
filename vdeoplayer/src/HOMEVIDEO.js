@@ -47,7 +47,7 @@ const HOMEVIDEO = () => {
 
 
     const METHOD = async () => {
-        await axios.get("http://localhost:3001/USERVIDEOVIDEO")
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERVIDEOVIDEO`)
             .then((RES) => {
                 console.log(RES);
                 setUSERVIDEOLIST(RES.data);
@@ -55,7 +55,7 @@ const HOMEVIDEO = () => {
     }
 
     const ADMETHOD = async (id) => {
-        await axios.get(`http://localhost:3001/ADVIDEO/${id}`)
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/ADVIDEO/${id}`)
             .then((RES) => {
                 console.log(RES);
                 setADVIDEOLIST(RES.data);
@@ -67,7 +67,7 @@ const HOMEVIDEO = () => {
     };
 
     const USERIMAGEDATA = async () => {
-        await axios.get("http://localhost:3001/USERIMAGEDATA")
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERIMAGEDATA`)
             .then((RES) => {
                 console.log(RES);
                 setUSERIMAGE(RES.data);
@@ -106,7 +106,7 @@ const HOMEVIDEO = () => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3001/TOTALUSERCOMMENTBELLSTATUS")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/TOTALUSERCOMMENTBELLSTATUS`)
             .then((RES) => {
                 console.log("TOTALUSERCOMMENTBELLSTATUS", RES.data);
                 setUSERBELLSTATUS(RES.data);
@@ -118,7 +118,7 @@ const HOMEVIDEO = () => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERDATAFOLLOWSTATUS")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERDATAFOLLOWSTATUS`)
             .then((RES) => {
                 console.log("USERFOLLOWSTATUS", RES.data);
                 setUSERFOLLOWSTATUS(RES.data);
@@ -128,7 +128,7 @@ const HOMEVIDEO = () => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERLOGIN")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERLOGIN`)
             .then((RES) => {
                 console.log(RES.data);
                 setUSERDATACRED(RES.data);
@@ -136,7 +136,7 @@ const HOMEVIDEO = () => {
     }, [])
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERVIEWDATA")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERVIEWDATA`)
             .then((RES) => {
                 console.log("USERVIEWDATA", RES.data);
                 setUSERVIEWVIEW(RES.data);
@@ -193,7 +193,7 @@ const HOMEVIDEO = () => {
 
     return <>
 
-<nav className="navbar navbar-expand-lg bg-body-tertiary bg-white fixed-top">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary bg-white fixed-top">
             <div className="container-fluid">
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
@@ -232,57 +232,69 @@ const HOMEVIDEO = () => {
                     <input type="search" id="form1" className="form-control" placeholder="Search Videos" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
                 </div> */}
             </div>
-        </nav>
-        {
-            USERVIDEOLIST.filter((value) => {
-                if (SEARCH == "") {
-                    return value;
-                }
-                else if (value.TITLE.toLowerCase().includes(SEARCH.toLowerCase())) {
-                    return value;
-                }
-
-            }).map((value, index) => (
-                <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                    <div class="video"><br />
-                        <video src={`http://localhost:3001/${value.VIDEOONE}`} type="video/mp4" style={{ width: "70%", border: "5px solid white" }} onClick={() => VIDEOFUNCTION(value.id, value.USERID, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE, value.VIDEOMUSIC, value.USERAUDIO)}></video>
-                        {
-                            USERVIEWVIEW.map((VALUE, i) => {
-                                if (VALUE.VIDEOID == value.id) {
-                                    return <>
-                                        <div>
-                                            {/* <i class="fa-solid fa-eye" style={{ fontSize: "15px", marginLeft: "5%" }}> {VALUE.USERCOUNT}</i> */}
-                                            <p style={{ marginLeft: "-87%" }}>Views {VALUE.USERCOUNT}</p>
-                                        </div>
-                                    </>
+        </nav><br/><br/><br/><br/><br/>
+        <div className="container">
+            <div className="row">
+                {USERVIDEOLIST.filter((value) => {
+                    if (SEARCH === '') {
+                        return value;
+                    } else if (value.TITLE.toLowerCase().includes(SEARCH.toLowerCase())) {
+                        return value;
+                    }
+                }).map((value, index) => (
+                    <div className="col-md-4" key={index}>
+                        <div className="video" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <video
+                                src={`${process.env.REACT_APP_BACKEND_URL}/${value.VIDEOONE}`}
+                                type="video/mp4"
+                                style={{ width: '100%', border: '5px solid white' }}
+                                onClick={() =>
+                                    VIDEOFUNCTION(
+                                        value.id,
+                                        value.USERID,
+                                        value.VIDEOONE,
+                                        value.VIDEOTWO,
+                                        value.VIDEOTHREE,
+                                        value.VIDEOFIVE,
+                                        value.VIDEONOISEREDUCE,
+                                        value.VIDEOMUSIC,
+                                        value.USERAUDIO
+                                    )
                                 }
-                            })
-                        }
-                        {/* <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid white"}} onClick={VIDEOFUNCTION} controls></video> */}
-
-                        {/* <div>
-                                        <i style={{ border: '1px solid' }} className="fas fa-thumbs-up fa-border fa-1x bg-white" onClick={() => USERLIKEFUNCTION(value.id)} />  <i className="text-white">{USERLIKE[value.id] || 0}</i> <i style={{ border: '1px solid' }} className="fas fa-thumbs-down fa-border fa-1x bg-white" onClick={() => USERDISLIKEFUNCTION(value.id)} />  <i className="text-white">{USERDISLIKE[value.id] || 0}</i><br />
-        
-                                        <i style={{ border: '1px solid' }} class="fas fa-comment fa-border fa-1x  bg-white" aria-hidden="true" onClick={() => COMMENTFUNCTION(value.id)}></i>
-                                    </div> */}
-                    </div>
-
-                    <div class="text">
-                        {
-                            USERIMAGE.map((val, i) => {
+                            />
+                        </div>
+                        <div className="text" style={{ textAlign: 'center' }}>
+                            {USERIMAGE.map((val, i) => {
                                 if (val.USERGENERATEDID === value.USERID) {
-                                    return <>
-                                        <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User"/>
-                                        <h4 key={i} >{val.USERNAME}</h4>
-                                    </>
+                                    return (
+                                        <>
+                                            <img
+                                                className="user-img"
+                                                src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`}
+                                                alt="User"
+                                            />
+                                            <h4 style={{ marginRight: '20%' }}>{val.USERNAME}</h4>
+                                        </>
+                                    );
                                 }
-                            })
-                        }
-                        <p style={{ marginRight: "100%" }}><h6>{value.TITLE}</h6></p>
+                            })}
+                            <p>
+                                <h6>{value.TITLE}</h6>
+                            </p>
+                        </div>
+                        {USERVIEWVIEW.map((VALUE, i) => {
+                            if (VALUE.VIDEOID == value.id) {
+                                return (
+                                    <div key={i}>
+                                        <p style={{ marginLeft: '-10%' }}>Views {VALUE.USERCOUNT}</p>
+                                    </div>
+                                );
+                            }
+                        })}
                     </div>
-                </div>
-            ))
-        }
+                ))}
+            </div>
+        </div>
 
     </>
 }

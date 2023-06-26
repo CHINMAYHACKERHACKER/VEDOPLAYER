@@ -10,14 +10,17 @@ P {
 
 .user-img {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 30px;
+    /* Adjust the width as desired */
+    height: 30px;
+    /* Adjust the height as desired */
     object-fit: cover;
     float: left;
     margin-right: 20px;
 }
 
-h5{
+
+h5 {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
@@ -29,4 +32,3 @@ h5{
     background-size: cover;
     height: 100050px;
 }
-

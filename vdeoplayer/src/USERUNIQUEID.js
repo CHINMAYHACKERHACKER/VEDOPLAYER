@@ -10,7 +10,6 @@ const USERUNIQUEID = () => {
         setUSERGENERATEDID(localStorage.getItem("USERGENERATEDID"));
     }, [])
     return <>
-        {USERGENERATEDID}
     </>
 }
 export default USERUNIQUEID;

@@ -38,7 +38,7 @@ const USERCOMMENT = () => {
     }
 
     const USERREPLYFUNCTION = (USERGENERATEDID, Value, USERUNIQUEID, ID) => {
-        axios.post("http://localhost:3001/REPLY", {
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/REPLY`, {
             ID: ID,
             INPUTVALUE: Value,
             USERGENERATEDID: USERGENERATEDID,
@@ -78,7 +78,7 @@ const USERCOMMENT = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/USERCOMMENT`)
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERCOMMENT`)
             .then((RES) => {
                 console.log('USERCOMMENT', RES.data);
                 setUSERCOMET(RES.data);
@@ -86,7 +86,7 @@ const USERCOMMENT = () => {
     }, [])
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERLOGIN")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERLOGIN`)
             .then((RES) => {
                 console.log('USERLOGIN', RES.data);
                 setUSERLOGINDATA(RES.data);
@@ -95,7 +95,7 @@ const USERCOMMENT = () => {
     }, [])
 
     useEffect(() => {
-        axios.get("http://localhost:3001/REPLY")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/REPLY`)
             .then((RES) => {
                 console.log('USERLOGIN', RES.data);
                 setUSERREPLYDATA(RES.data);
@@ -114,7 +114,7 @@ const USERCOMMENT = () => {
                                 <div className="user-cards-container">
                                     <div className="user-card" style={{ height: "1%", width: "90%", marginLeft: "-31%", backgroundColor: "grey"}}><br />
                                         <div className="user-info"> */}
-                            <img className="user-img" src={`http://localhost:3001/${VALUE.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "30px", height: "30px", marginLeft: "3%" }} />
+                            <img className="user-img" src={`${process.env.REACT_APP_BACKEND_URL}/${VALUE.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "30px", height: "30px", marginLeft: "3%" }} />
                             <h5 key={i} style={{ margin: "0%", display: "inline", color: "grey" }}><i style={{ color: "black" }}>{VALUE.USERNAME}:{value.USERCOMMENT}</i></h5><br />
                             <i class="fa-solid fa-reply" style={{ fontSize: "15px" }} onClick={() => METHOD(value.USERGENERATEDID, USERUNIQUEID, PARAM.ID)}></i>
                             <br />
@@ -140,7 +140,7 @@ const USERCOMMENT = () => {
                         if (value.USERID == USERUNIQUEID && VALUE.USERGENERATEDID !== USERUNIQUEID && value.USERREPLYEDID !== USERUNIQUEID && value.USERVIDEOID == PARAM.ID) {
                             return (
                                 <div key={j}>
-                                    <img className="user-img" src={`http://localhost:3001/${VALUE.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "30px", height: "30px", marginLeft: "3%" }} />
+                                    <img className="user-img" src={`${process.env.REACT_APP_BACKEND_URL}/${VALUE.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "30px", height: "30px", marginLeft: "3%" }} />
                                     <h5 key={i} style={{ margin: "0%", display: "inline", color: "grey" }}><i style={{ color: "black" }}>{value.REPLY}</i></h5><br/><br/>
                                 </div>
                             );

@@ -17,7 +17,7 @@ const RESOURCES = () => {
             alert("Provide Resource Name And Resource Link");
         }
         if (RESOURCE !== "" && RESOURCELINK !== "") {
-            axios.post("http://localhost:3001/USERRESOURCE", {
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/USERRESOURCE`, {
                 RESOURCE: RESOURCE,
                 RESOURCELINK: RESOURCELINK
             })
@@ -25,7 +25,7 @@ const RESOURCES = () => {
     }
 
     const FUNCTION = async () => {
-        await axios.get("http://localhost:3001/USERRESOURCE")
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERRESOURCE`)
             .then((RES) => {
                 console.log(RES);
                 setRES(RES.data);

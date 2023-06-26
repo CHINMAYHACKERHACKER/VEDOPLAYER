@@ -1,17 +1,12 @@
 import React, { useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./COMENT.css";
 import VIDEOCOMMENT from "./VIDEOCOMMENT.js";
 import "./USERCOMMENT.css";
-import JoLPlayer, { callBackType, JoLPlayerRef, qualityKey } from "jol-player";
-import { Button, Input, Switch } from "antd";
-import { FilterChain } from 'react-ffmpeg';
-import FFMPEG from "react-ffmpeg";
-
-
+import JoLPlayer from "jol-player";
 
 const COMMENT = () => {
     const [USERCOMMENT, setUSERCOMMENT] = useState("");
@@ -29,6 +24,11 @@ const COMMENT = () => {
     const [USERFOLLOWDATA, setUSERFOLLOWDATA] = useState([]);
     const [USERUNIQUEID, setUSERUNIQUEID] = useState([]);
     const [VIDEODATA, setVIDEODATA] = useState([]);
+    const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+
+    const toggleNavbar = () => {
+        setIsNavbarOpen(!isNavbarOpen);
+    };
 
     console.log("VIDEODATA", VIDEODATA);
     console.log("USERVIDEO", USERVIDEO);
@@ -36,6 +36,9 @@ const COMMENT = () => {
 
     const PARAM = useParams();
     console.log("PARAM", PARAM);
+
+    const NAVIGATE = useNavigate();
+
 
     const qualityOptions = [
         { value: '1080p', label: '1080p' },
@@ -50,7 +53,7 @@ const COMMENT = () => {
         }
         else if (PARAM.USERID == USERID) {
             USERID = USERUNIQUEID;
-            axios.post(`http://localhost:3001/USERCOMMENT`, {
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/USERCOMMENT`, {
                 ID: ID,
                 USERCOMMENT: USERCOMMENT,
                 USERID: USERID,
@@ -63,7 +66,7 @@ const COMMENT = () => {
     }
 
     function FULLWINDOWPOPUP(ID) {
-        window.open(`http://localhost:3000/USERCOMMENT/${ID}`, "bfs", "fullscreen,scrollbars");
+        window.open(`${process.env.REACT_APP_FRONTEND_URL}/USERCOMMENT/${ID}`, "bfs", "fullscreen,scrollbars");
     }
 
     const ONCHANGECOLOR = () => {
@@ -81,7 +84,7 @@ const COMMENT = () => {
     const METHOD = (USERGENERATEDID, USERID, VIDEO, VIDEOONE, id, ID, USERNAME, VIDEOFIVE) => {
         if (USERGENERATEDID == USERID && VIDEO == `VIDEO/${VIDEOONE}` && id == ID) {
             // alert("You Started Following" + " " + USERNAME);
-            axios.post("http://localhost:3001/STATUS", {
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/STATUS`, {
                 id: id,
                 USERNAME: USERNAME,
                 STATUS: STATUS,
@@ -91,7 +94,7 @@ const COMMENT = () => {
         }
         else if (USERGENERATEDID == USERID && VIDEO == `VIDEONOISEREDUCE/${VIDEOONE}` && id == ID) {
             alert("You Started Following" + " " + USERNAME);
-            axios.post("http://localhost:3001/STATUS", {
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/STATUS`, {
                 id: id,
                 USERNAME: USERNAME,
                 STATUS: STATUS,
@@ -112,7 +115,7 @@ const COMMENT = () => {
         if (USERGENERATEDID == USERID && VIDEO == `VIDEO/${VIDEOONE}` && id == ID) {
             USERGENERATEDID = USERUNIQUEID;
             alert("You Started Following" + " " + USERNAME);
-            axios.post("http://localhost:3001/FOLLOWSTATUS", {
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/FOLLOWSTATUS`, {
                 id: id,
                 USERNAME: USERNAME,
                 STATUSFOLLOW: STATUSFOLLOW,
@@ -122,7 +125,7 @@ const COMMENT = () => {
         }
         else if (USERGENERATEDID == USERID && VIDEO == `VIDEONOISEREDUCE/${VIDEOONE}` && id == ID) {
             USERGENERATEDID = USERUNIQUEID;
-            axios.post("http://localhost:3001/FOLLOWSTATUS", {
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/FOLLOWSTATUS`, {
                 id: id,
                 USERNAME: USERNAME,
                 STATUSFOLLOW: STATUSFOLLOW,
@@ -138,8 +141,9 @@ const COMMENT = () => {
 
     function METHODFUNCTION(e) {
         e.preventDefault();
-        window.location.reload();
-        window.location.pathname = '/VIDEO';
+        // window.location.reload();
+        // window.location.pathname = '/VIDEO';
+        NAVIGATE("/VIDEO");
     }
 
     function SUBSCRIBEFUNCTION() {
@@ -149,7 +153,7 @@ const COMMENT = () => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERIMAGEDATA")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERIMAGEDATA`)
             .then((RES) => {
                 console.log("USERVIDEO", RES.data);
                 setUSERVIDEO(RES.data);
@@ -158,7 +162,7 @@ const COMMENT = () => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERVIDEOLISTINFORMATION")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERVIDEOLISTINFORMATION`)
             .then((RES) => {
                 console.log("USERVIDEOLIST", RES.data);
                 setUSERVIDEOLIST(RES.data);
@@ -166,7 +170,7 @@ const COMMENT = () => {
     }, [])
 
     useEffect(() => {
-        axios.get("http://localhost:3001/STATUS")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/STATUS`)
             .then((RES) => {
                 console.log("STATUS", RES.data);
                 setUSERSTAUS(RES.data);
@@ -174,7 +178,7 @@ const COMMENT = () => {
     }, [])
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERCOUNTSTATUS")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERCOUNTSTATUS`)
             .then((RES) => {
                 console.log("COUNT", RES.data);
                 setCOUNT(RES.data);
@@ -182,7 +186,7 @@ const COMMENT = () => {
     }, [])
 
     useEffect(() => {
-        axios.get("http://localhost:3001/FOLLOWSTATUS")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/FOLLOWSTATUS`)
             .then((RES) => {
                 console.log("COUNT", RES.data);
                 setUSERFOLLOWDATA(RES.data);
@@ -251,14 +255,14 @@ const COMMENT = () => {
     if (PARAM.VIDEONOISEREDUCE == "yes") {
         const toggle = () => {
             videoRef.current.setVideoSrc(
-                `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
             );
         };
     }
     else {
         const toggle = () => {
             videoRef.current.setVideoSrc(
-                `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
+                `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
             );
         };
 
@@ -267,21 +271,21 @@ const COMMENT = () => {
     if (PARAM.VIDEOMUSIC == "yes") {
         const toggle = () => {
             videoRef.current.setVideoSrc(
-                `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
             );
         };
     }
     else {
         const toggle = () => {
             videoRef.current.setVideoSrc(
-                `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
+                `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
             );
         };
 
     }
 
     if (VIDEODATA == 29) {
-        axios.post("http://localhost:3001/USERVIEWDATA", {
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/USERVIEWDATA`, {
             ID: PARAM.ID,
             USERID: PARAM.USERID,
             VIDEOFIVE: PARAM.VIDEOFIVE,
@@ -293,9 +297,63 @@ const COMMENT = () => {
     return <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-white fixed-top">
             <div className="container-fluid">
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon" />
-                </button>
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    onClick={toggleNavbar}
+                    style={{
+                        border: 'none',
+                        borderRadius: '5px',
+                        padding: '5px',
+                        background: 'transparent',
+                        position: 'relative',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer'
+                    }}
+                >
+                    <span
+                        className="navbar-toggler-icon"
+                        style={{
+                            position: 'relative',
+                            width: '20px',
+                            height: '2px',
+                            backgroundColor: '#000',
+                            borderRadius: '2px',
+                            display: 'block'
+                        }}
+                    />
+                    <span
+                        className="navbar-toggler-icon"
+                        style={{
+                            position: 'absolute',
+                            top: '8px',
+                            width: '20px',
+                            height: '2px',
+                            backgroundColor: '#000',
+                            borderRadius: '2px',
+                            display: 'block'
+                        }}
+                    />
+                    <span
+                        className="navbar-toggler-icon"
+                        style={{
+                            position: 'absolute',
+                            top: '16px',
+                            width: '20px',
+                            height: '2px',
+                            backgroundColor: '#000',
+                            borderRadius: '2px',
+                            display: 'block'
+                        }}
+                    />
+                </button><br/><br/>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
@@ -325,8 +383,7 @@ const COMMENT = () => {
                     <input type="search" id="form1" className="form-control" placeholder="Search Videos" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
                 </div> */}
             </div>
-        </nav><br /><br />
-
+        </nav><br /><br /><br /><br />
 
         {
             PARAM.VIDEONOISEREDUCE === "yes" ? (
@@ -342,38 +399,42 @@ const COMMENT = () => {
                     onError={onError}
                     onQualityChange={onQualityChange}
                     option={{
-                        videoSrc:
-                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`,
+                        videoSrc: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`,
                         theme,
-                        width: "50%",
-                        height: "50%",
+                        width: "100%", // Set width to 100% for responsiveness
+                        height: "auto", // Let height adjust automatically
                         language: "en",
                         isShowMultiple,
                         pausePlacement: "center",
                         quality: [
                             {
                                 name: "BD",
-                                url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOONE}`
+                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOONE}`
                             },
                             {
                                 name: "FHD",
-                                url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTWO}`
+                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTWO}`
                             },
                             {
                                 name: "HD",
-                                url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTHREE}`
+                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTHREE}`
                             },
                             {
                                 name: "SD",
-                                url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
                             }
                         ]
                     }}
-                    style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }} />
+                    style={{
+                        width: "100%", // Set width to 100% for responsiveness
+                        paddingBottom: "56.25%", // Maintain 16:9 aspect ratio (adjust if needed)
+                        position: "relative",
+                        border: "5px solid white",
+                        backgroundColor: "black",
+                        objectFit: "cover",
+                        maxWidth: "100%" // Limit the max width to prevent it from becoming too big on web
+                    }}
+                />
             ) : PARAM.VIDEOMUSIC === "yes" ? (
                 <JoLPlayer
                     ref={videoRef}
@@ -387,82 +448,90 @@ const COMMENT = () => {
                     onError={onError}
                     onQualityChange={onQualityChange}
                     option={{
-                        videoSrc:
-                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`,
+                        videoSrc: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`,
                         theme,
-                        width: "50%",
-                        height: "50%",
+                        width: "100%", // Set width to 100% for responsiveness
+                        height: "auto", // Let height adjust automatically
                         language: "en",
                         isShowMultiple,
                         pausePlacement: "center",
                         quality: [
                             {
                                 name: "BD",
-                                url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOONE}`
+                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOONE}`
                             },
                             {
                                 name: "FHD",
-                                url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTWO}`
+                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTWO}`
                             },
                             {
                                 name: "HD",
-                                url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTHREE}`
+                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTHREE}`
                             },
                             {
                                 name: "SD",
-                                url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
                             }
                         ]
                     }}
-                    style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }} />) : PARAM.USERAUDIO === "yes" ? (
-                        <JoLPlayer
-                            ref={videoRef}
-                            onProgressMouseUp={onProgressMouseUp}
-                            onEndEd={onEndEd}
-                            onPause={onPause}
-                            onProgressMouseDown={onProgressMouseDown}
-                            onPlay={onPlay}
-                            onTimeChange={onTimeChange}
-                            onvolumechange={onvolumechange}
-                            onError={onError}
-                            onQualityChange={onQualityChange}
-                            option={{
-                                videoSrc:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`,
-                                theme,
-                                width: "50%",
-                                height: "50%",
-                                language: "en",
-                                isShowMultiple,
-                                pausePlacement: "center",
-                                quality: [
-                                    {
-                                        name: "BD",
-                                        url:
-                                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOONE}`
-                                    },
-                                    {
-                                        name: "FHD",
-                                        url:
-                                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTWO}`
-                                    },
-                                    {
-                                        name: "HD",
-                                        url:
-                                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTHREE}`
-                                    },
-                                    {
-                                        name: "SD",
-                                        url:
-                                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
-                                    }
-                                ]
-                            }}
-                            style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }} />) : (
+                    style={{
+                        width: "100%", // Set width to 100% for responsiveness
+                        paddingBottom: "56.25%", // Maintain 16:9 aspect ratio (adjust if needed)
+                        position: "relative",
+                        border: "5px solid white",
+                        backgroundColor: "black",
+                        objectFit: "cover",
+                        maxWidth: "100%" // Limit the max width to prevent it from becoming too big on web
+                    }}
+                />) : PARAM.USERAUDIO === "yes" ? (
+                    <JoLPlayer
+                        ref={videoRef}
+                        onProgressMouseUp={onProgressMouseUp}
+                        onEndEd={onEndEd}
+                        onPause={onPause}
+                        onProgressMouseDown={onProgressMouseDown}
+                        onPlay={onPlay}
+                        onTimeChange={onTimeChange}
+                        onvolumechange={onvolumechange}
+                        onError={onError}
+                        onQualityChange={onQualityChange}
+                        option={{
+                            videoSrc: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`,
+                            theme,
+                            width: "100%", // Set width to 100% for responsiveness
+                            height: "auto", // Let height adjust automatically
+                            language: "en",
+                            isShowMultiple,
+                            pausePlacement: "center",
+                            quality: [
+                                {
+                                    name: "BD",
+                                    url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOONE}`
+                                },
+                                {
+                                    name: "FHD",
+                                    url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTWO}`
+                                },
+                                {
+                                    name: "HD",
+                                    url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTHREE}`
+                                },
+                                {
+                                    name: "SD",
+                                    url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
+                                }
+                            ]
+                        }}
+                        style={{
+                            width: "100%", // Set width to 100% for responsiveness
+                            paddingBottom: "56.25%", // Maintain 16:9 aspect ratio (adjust if needed)
+                            position: "relative",
+                            border: "5px solid white",
+                            backgroundColor: "black",
+                            objectFit: "cover",
+                            maxWidth: "100%" // Limit the max width to prevent it from becoming too big on web
+                        }}
+                    />) : (
                 <JoLPlayer
                     ref={videoRef}
                     onProgressMouseUp={onProgressMouseUp}
@@ -475,39 +544,42 @@ const COMMENT = () => {
                     onError={onError}
                     onQualityChange={onQualityChange}
                     option={{
-                        videoSrc:
-                            `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`,
+                        videoSrc: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`,
                         theme,
-                        width: "50%",
-                        height: "50%",
+                        width: "100%", // Set width to 100% for responsiveness
+                        height: "auto", // Let height adjust automatically
                         language: "en",
                         isShowMultiple,
                         pausePlacement: "center",
                         quality: [
                             {
                                 name: "BD",
-                                url:
-                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOONE}`
+                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOONE}`
                             },
                             {
                                 name: "FHD",
-                                url:
-                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOTWO}`
+                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTWO}`
                             },
                             {
                                 name: "HD",
-                                url:
-                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOTHREE}`
+                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTHREE}`
                             },
                             {
                                 name: "SD",
-                                url:
-                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
+                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
                             }
                         ]
                     }}
-                    style={{ width: "59%", paddingBottom: "26%", position: "relative", border: "5px solid white", backgroundColor: "black", objectFit: "cover" }} />
-
+                    style={{
+                        width: "100%", // Set width to 100% for responsiveness
+                        paddingBottom: "56.25%", // Maintain 16:9 aspect ratio (adjust if needed)
+                        position: "relative",
+                        border: "5px solid white",
+                        backgroundColor: "black",
+                        objectFit: "cover",
+                        maxWidth: "100%" // Limit the max width to prevent it from becoming too big on web
+                    }}
+                />
             )
         }
 
@@ -518,36 +590,100 @@ const COMMENT = () => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br/>
-                            <i class="fa-solid fa-heart" style={{ marginLeft: "9%", fontSize: "20px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i>
-                            {
-                                USERSTAUS.map((VAL, I) => {
-                                    return COUNT.map((VALUE, INDEX) => {
-                                        if (VAL.USERID == PARAM.ID && VAL.USERID == VALUE.USERID) {
-                                            return <>
-                                                <p style={{ marginRight: "80%", marginTop: "-3%" }}></p> <p style={{ marginRight: "77%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
-                                            </>
-                                        }
-                                    })
+                            <div style={{ marginBottom: "10px" }}>
+                                <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
+                                    <h5 style={{ marginRight: "10px" }}>{value.TITLE}</h5>
+                                    {/* <i
+                                        className="fa-solid fa-heart"
+                                        style={{ fontSize: "20px", marginTop: "-0%" }}
+                                        onMouseOver={ONCHANGECOLOR}
+                                        onMouseOut={USERCHANGECOLOR}
+                                        onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}
+                                    ></i>
+                                    {USERSTAUS.map((VAL, I) => {
+                                        return COUNT.map((VALUE, INDEX) => {
+                                            if (VAL.USERID === PARAM.ID && VAL.USERID === VALUE.USERID) {
+                                                return (
+                                                    <div style={{ display: "flex", alignItems: "center" }} key={INDEX}>
+                                                        <p style={{ marginRight: "10px", marginTop: "-3%" }}></p>
+                                                        <p style={{ marginRight: "10px", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p>
+                                                    </div>
+                                                );
+                                            }
+                                        });
+                                    })} */}
+                                </div>
 
-                                })
-                            }
-                            <h6 key={i} style={{ marginTop: "-2%", marginLeft: "0%" }}>{val.USERNAME}</h6>   <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "-6%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} /><br />
-                            {/* <h6 key={i} style={{ marginTop: "0%", marginLeft: "-55%"}}>{val.USERNAME}</h6><br/> */}
-                            {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
-                            <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
-                            <div class="d-flex justify-content-start">
-                                <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button><button type="button" class="btn btn-primary rounded-pill" style={{ backgroundColor: "black", borderColor: "black", marginLeft: "1%", marginTop: "-1%", height: "5%" }} onClick={() => USERFOLLOWFUNCTION(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}>Follow</button>
+                                <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
+                                    <img
+                                        className="user-img"
+                                        src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`}
+                                        alt="User"
+                                        style={{ borderRadius: "50%", width: "50px", height: "50px", marginRight: "10px" }}
+                                    />
+                                    <div style={{ display: "flex", flexDirection: "column" }}>
+                                        <h6 style={{ marginTop: "-2%" }}>{val.USERNAME}</h6>
+                                        {USERFOLLOWDATA.map((VAL, I) => {
+                                            if (VAL.USERID === PARAM.ID) {
+                                                return (
+                                                    <div style={{ display: "flex", alignItems: "center" }} key={I}>
+                                                        <p style={{ marginRight: "10px", marginTop: "-2%" }}>{VAL.USERFOLLOWSTATUS}</p>
+                                                        <p style={{ marginRight: "10px", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p>
+                                                    </div>
+                                                );
+                                            }
+                                        })}
+                                    </div>
+                                    <i
+                                        className="fa-solid fa-heart"
+                                        style={{ fontSize: "20px", marginTop: "1%", marginLeft: "13%" }}
+                                        onMouseOver={ONCHANGECOLOR}
+                                        onMouseOut={USERCHANGECOLOR}
+                                        onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}
+                                    ></i>
+                                    {USERSTAUS.map((VAL, I) => {
+                                        return COUNT.map((VALUE, INDEX) => {
+                                            if (VAL.USERID === PARAM.ID && VAL.USERID === VALUE.USERID) {
+                                                return (
+                                                    <div style={{ display: "flex", alignItems: "center" }} key={INDEX}>
+                                                        <p style={{ marginRight: "10px", marginTop: "50%" }}></p>
+                                                        <p style={{ marginRight: "10px", marginTop: "50%" }}>{VALUE.USERCOUNT}</p>
+                                                    </div>
+                                                );
+                                            }
+                                        });
+                                    })}
+                                </div>
+
+                                <div className="d-flex justify-content-start">
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary rounded-pill"
+                                        style={{ backgroundColor: "black", borderColor: "black", marginTop: "10px", marginRight: "10px", flex: "1" }}
+                                        onClick={SUBSCRIBEFUNCTION}
+                                    >
+                                        {USERSUBSCRIBE}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary rounded-pill"
+                                        style={{ backgroundColor: "black", borderColor: "black", marginTop: "10px", flex: "1" }}
+                                        onClick={() => USERFOLLOWFUNCTION(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}
+                                    >
+                                        Follow
+                                    </button>
+                                    {/* {USERFOLLOWDATA.map((VAL, I) => {
+                                        if (VAL.USERID === PARAM.ID) {
+                                            return (
+                                                <div style={{ display: "flex", alignItems: "center" }} key={I}>
+                                                    <p style={{ marginRight: "10px", marginTop: "-2%" }}>{VAL.USERFOLLOWSTATUS}</p>
+                                                    <p style={{ marginRight: "10px", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p>
+                                                </div>
+                                            );
+                                        }
+                                    })} */}
+                                </div>
                             </div>
-                            {
-                                USERFOLLOWDATA.map((VAL, I) => {
-                                    if (VAL.USERID == PARAM.ID) {
-                                        return <>
-                                            <p style={{ marginRight: "64%", marginTop: "-2%" }}>{VAL.USERFOLLOWSTATUS}</p> <p style={{ marginRight: "57%", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p><br />
-                                        </>
-                                    }
-                                })
-                            }
                         </>
                     }
                 })
@@ -557,36 +693,100 @@ const COMMENT = () => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br/>
-                            <i class="fa-solid fa-heart" style={{ marginLeft: "9%", fontSize: "20px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i>
-                            {
-                                USERSTAUS.map((VAL, I) => {
-                                    return COUNT.map((VALUE, INDEX) => {
-                                        if (VAL.USERID == PARAM.ID && VAL.USERID == VALUE.USERID) {
-                                            return <>
-                                                <p style={{ marginRight: "80%", marginTop: "-3%" }}></p> <p style={{ marginRight: "77%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
-                                            </>
-                                        }
-                                    })
+                            <div style={{ marginBottom: "10px" }}>
+                                <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
+                                    <h5 style={{ marginRight: "10px" }}>{value.TITLE}</h5>
+                                    {/* <i
+                                        className="fa-solid fa-heart"
+                                        style={{ fontSize: "20px", marginTop: "-0%" }}
+                                        onMouseOver={ONCHANGECOLOR}
+                                        onMouseOut={USERCHANGECOLOR}
+                                        onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}
+                                    ></i>
+                                    {USERSTAUS.map((VAL, I) => {
+                                        return COUNT.map((VALUE, INDEX) => {
+                                            if (VAL.USERID === PARAM.ID && VAL.USERID === VALUE.USERID) {
+                                                return (
+                                                    <div style={{ display: "flex", alignItems: "center" }} key={INDEX}>
+                                                        <p style={{ marginRight: "10px", marginTop: "-3%" }}></p>
+                                                        <p style={{ marginRight: "10px", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p>
+                                                    </div>
+                                                );
+                                            }
+                                        });
+                                    })} */}
+                                </div>
 
-                                })
-                            }
-                            <h6 key={i} style={{ marginTop: "-2%", marginLeft: "0%" }}>{val.USERNAME}</h6>   <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "-6%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} /><br />
-                            {/* <h6 key={i} style={{ marginTop: "0%", marginLeft: "-55%"}}>{val.USERNAME}</h6><br/> */}
-                            {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
-                            <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
-                            <div class="d-flex justify-content-start">
-                                <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button><button type="button" class="btn btn-primary rounded-pill" style={{ backgroundColor: "black", borderColor: "black", marginLeft: "1%", marginTop: "-1%", height: "5%" }} onClick={() => USERFOLLOWFUNCTION(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}>Follow</button>
+                                <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
+                                    <img
+                                        className="user-img"
+                                        src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`}
+                                        alt="User"
+                                        style={{ borderRadius: "50%", width: "50px", height: "50px", marginRight: "10px" }}
+                                    />
+                                    <div style={{ display: "flex", flexDirection: "column" }}>
+                                        <h6 style={{ marginTop: "-2%" }}>{val.USERNAME}</h6>
+                                        {USERFOLLOWDATA.map((VAL, I) => {
+                                            if (VAL.USERID === PARAM.ID) {
+                                                return (
+                                                    <div style={{ display: "flex", alignItems: "center" }} key={I}>
+                                                        <p style={{ marginRight: "10px", marginTop: "-2%" }}>{VAL.USERFOLLOWSTATUS}</p>
+                                                        <p style={{ marginRight: "10px", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p>
+                                                    </div>
+                                                );
+                                            }
+                                        })}
+                                    </div>
+                                    <i
+                                        className="fa-solid fa-heart"
+                                        style={{ fontSize: "20px", marginTop: "1%", marginLeft: "13%" }}
+                                        onMouseOver={ONCHANGECOLOR}
+                                        onMouseOut={USERCHANGECOLOR}
+                                        onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}
+                                    ></i>
+                                    {USERSTAUS.map((VAL, I) => {
+                                        return COUNT.map((VALUE, INDEX) => {
+                                            if (VAL.USERID === PARAM.ID && VAL.USERID === VALUE.USERID) {
+                                                return (
+                                                    <div style={{ display: "flex", alignItems: "center" }} key={INDEX}>
+                                                        <p style={{ marginRight: "10px", marginTop: "50%" }}></p>
+                                                        <p style={{ marginRight: "10px", marginTop: "50%" }}>{VALUE.USERCOUNT}</p>
+                                                    </div>
+                                                );
+                                            }
+                                        });
+                                    })}
+                                </div>
+
+                                <div className="d-flex justify-content-start">
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary rounded-pill"
+                                        style={{ backgroundColor: "black", borderColor: "black", marginTop: "10px", marginRight: "10px", flex: "1" }}
+                                        onClick={SUBSCRIBEFUNCTION}
+                                    >
+                                        {USERSUBSCRIBE}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary rounded-pill"
+                                        style={{ backgroundColor: "black", borderColor: "black", marginTop: "10px", flex: "1" }}
+                                        onClick={() => USERFOLLOWFUNCTION(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}
+                                    >
+                                        Follow
+                                    </button>
+                                    {/* {USERFOLLOWDATA.map((VAL, I) => {
+                                        if (VAL.USERID === PARAM.ID) {
+                                            return (
+                                                <div style={{ display: "flex", alignItems: "center" }} key={I}>
+                                                    <p style={{ marginRight: "10px", marginTop: "-2%" }}>{VAL.USERFOLLOWSTATUS}</p>
+                                                    <p style={{ marginRight: "10px", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p>
+                                                </div>
+                                            );
+                                        }
+                                    })} */}
+                                </div>
                             </div>
-                            {
-                                USERFOLLOWDATA.map((VAL, I) => {
-                                    if (VAL.USERID == PARAM.ID) {
-                                        return <>
-                                            <p style={{ marginRight: "64%", marginTop: "-2%" }}>{VAL.USERFOLLOWSTATUS}</p> <p style={{ marginRight: "57%", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p><br />
-                                        </>
-                                    }
-                                })
-                            }
                         </>
                     }
                 })
@@ -595,36 +795,100 @@ const COMMENT = () => {
                     return USERVIDEOLIST.map((value, i) => {
                         if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEONOISEREDUCE/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                             return <>
-                                <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br/>
-                                <i class="fa-solid fa-heart" style={{ marginLeft: "9%", fontSize: "20px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i>
-                                {
-                                    USERSTAUS.map((VAL, I) => {
+                                <div style={{ marginBottom: "10px" }}>
+                                    <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
+                                        <h5 style={{ marginRight: "10px" }}>{value.TITLE}</h5>
+                                        {/* <i
+                                        className="fa-solid fa-heart"
+                                        style={{ fontSize: "20px", marginTop: "-0%" }}
+                                        onMouseOver={ONCHANGECOLOR}
+                                        onMouseOut={USERCHANGECOLOR}
+                                        onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}
+                                    ></i>
+                                    {USERSTAUS.map((VAL, I) => {
                                         return COUNT.map((VALUE, INDEX) => {
-                                            if (VAL.USERID == PARAM.ID && VAL.USERID == VALUE.USERID) {
-                                                return <>
-                                                    <p style={{ marginRight: "80%", marginTop: "-3%" }}></p> <p style={{ marginRight: "77%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
-                                                </>
+                                            if (VAL.USERID === PARAM.ID && VAL.USERID === VALUE.USERID) {
+                                                return (
+                                                    <div style={{ display: "flex", alignItems: "center" }} key={INDEX}>
+                                                        <p style={{ marginRight: "10px", marginTop: "-3%" }}></p>
+                                                        <p style={{ marginRight: "10px", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p>
+                                                    </div>
+                                                );
                                             }
-                                        })
+                                        });
+                                    })} */}
+                                    </div>
 
-                                    })
-                                }
-                                <h6 key={i} style={{ marginTop: "-2%", marginLeft: "0%" }}>{val.USERNAME}</h6>   <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "-6%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} /><br />
-                                {/* <h6 key={i} style={{ marginTop: "0%", marginLeft: "-55%"}}>{val.USERNAME}</h6><br/> */}
-                                {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
-                            <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
-                                <div class="d-flex justify-content-start">
-                                    <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button><button type="button" class="btn btn-primary rounded-pill" style={{ backgroundColor: "black", borderColor: "black", marginLeft: "1%", marginTop: "-1%", height: "5%" }} onClick={() => USERFOLLOWFUNCTION(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}>Follow</button>
-                                </div>
-                                {
-                                    USERFOLLOWDATA.map((VAL, I) => {
-                                        if (VAL.USERID == PARAM.ID) {
-                                            return <>
-                                                <p style={{ marginRight: "64%", marginTop: "-2%" }}>{VAL.USERFOLLOWSTATUS}</p> <p style={{ marginRight: "57%", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p><br />
-                                            </>
+                                    <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
+                                        <img
+                                            className="user-img"
+                                            src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`}
+                                            alt="User"
+                                            style={{ borderRadius: "50%", width: "50px", height: "50px", marginRight: "10px" }}
+                                        />
+                                        <div style={{ display: "flex", flexDirection: "column" }}>
+                                            <h6 style={{ marginTop: "-2%" }}>{val.USERNAME}</h6>
+                                            {USERFOLLOWDATA.map((VAL, I) => {
+                                                if (VAL.USERID === PARAM.ID) {
+                                                    return (
+                                                        <div style={{ display: "flex", alignItems: "center" }} key={I}>
+                                                            <p style={{ marginRight: "10px", marginTop: "-2%" }}>{VAL.USERFOLLOWSTATUS}</p>
+                                                            <p style={{ marginRight: "10px", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p>
+                                                        </div>
+                                                    );
+                                                }
+                                            })}
+                                        </div>
+                                        <i
+                                            className="fa-solid fa-heart"
+                                            style={{ fontSize: "20px", marginTop: "1%", marginLeft: "13%" }}
+                                            onMouseOver={ONCHANGECOLOR}
+                                            onMouseOut={USERCHANGECOLOR}
+                                            onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}
+                                        ></i>
+                                        {USERSTAUS.map((VAL, I) => {
+                                            return COUNT.map((VALUE, INDEX) => {
+                                                if (VAL.USERID === PARAM.ID && VAL.USERID === VALUE.USERID) {
+                                                    return (
+                                                        <div style={{ display: "flex", alignItems: "center" }} key={INDEX}>
+                                                            <p style={{ marginRight: "10px", marginTop: "50%" }}></p>
+                                                            <p style={{ marginRight: "10px", marginTop: "50%" }}>{VALUE.USERCOUNT}</p>
+                                                        </div>
+                                                    );
+                                                }
+                                            });
+                                        })}
+                                    </div>
+
+                                    <div className="d-flex justify-content-start">
+                                        <button
+                                            type="button"
+                                            className="btn btn-primary rounded-pill"
+                                            style={{ backgroundColor: "black", borderColor: "black", marginTop: "10px", marginRight: "10px", flex: "1" }}
+                                            onClick={SUBSCRIBEFUNCTION}
+                                        >
+                                            {USERSUBSCRIBE}
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="btn btn-primary rounded-pill"
+                                            style={{ backgroundColor: "black", borderColor: "black", marginTop: "10px", flex: "1" }}
+                                            onClick={() => USERFOLLOWFUNCTION(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}
+                                        >
+                                            Follow
+                                        </button>
+                                        {/* {USERFOLLOWDATA.map((VAL, I) => {
+                                        if (VAL.USERID === PARAM.ID) {
+                                            return (
+                                                <div style={{ display: "flex", alignItems: "center" }} key={I}>
+                                                    <p style={{ marginRight: "10px", marginTop: "-2%" }}>{VAL.USERFOLLOWSTATUS}</p>
+                                                    <p style={{ marginRight: "10px", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p>
+                                                </div>
+                                            );
                                         }
-                                    })
-                                }
+                                    })} */}
+                                    </div>
+                                </div>
                             </>
                         }
                     })
@@ -634,50 +898,100 @@ const COMMENT = () => {
                 return USERVIDEOLIST.map((value, i) => {
                     if (val.USERGENERATEDID == value.USERID && value.VIDEOONE == `VIDEO/${PARAM.VIDEOONE}` && value.id == PARAM.ID) {
                         return <>
-                            <p style={{ marginRight: "100%" }}><h5>{value.TITLE}</h5></p><br /><br/>
-                            <i class="fa-solid fa-heart" style={{ marginLeft: "9%", fontSize: "20px", marginTop: "-0%" }} onMouseOver={ONCHANGECOLOR} onMouseOut={USERCHANGECOLOR} onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}></i>
-                            {
-                                USERSTAUS.map((VAL, I) => {
-                                    return COUNT.map((VALUE, INDEX) => {
-                                        if (VAL.USERID == PARAM.ID && VAL.USERID == VALUE.USERID) {
-                                            return <>
-                                                <p style={{ marginRight: "80%", marginTop: "-3%" }}></p> <p style={{ marginRight: "77%", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p><br />
-                                            </>
+                            <div style={{ marginBottom: "10px" }}>
+                                <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
+                                    <h5 style={{ marginRight: "10px" }}>{value.TITLE}</h5>
+                                    {/* <i
+                                        className="fa-solid fa-heart"
+                                        style={{ fontSize: "20px", marginTop: "-0%" }}
+                                        onMouseOver={ONCHANGECOLOR}
+                                        onMouseOut={USERCHANGECOLOR}
+                                        onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}
+                                    ></i>
+                                    {USERSTAUS.map((VAL, I) => {
+                                        return COUNT.map((VALUE, INDEX) => {
+                                            if (VAL.USERID === PARAM.ID && VAL.USERID === VALUE.USERID) {
+                                                return (
+                                                    <div style={{ display: "flex", alignItems: "center" }} key={INDEX}>
+                                                        <p style={{ marginRight: "10px", marginTop: "-3%" }}></p>
+                                                        <p style={{ marginRight: "10px", marginTop: "-3%" }}>{VALUE.USERCOUNT}</p>
+                                                    </div>
+                                                );
+                                            }
+                                        });
+                                    })} */}
+                                </div>
+
+                                <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
+                                    <img
+                                        className="user-img"
+                                        src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`}
+                                        alt="User"
+                                        style={{ borderRadius: "50%", width: "50px", height: "50px", marginRight: "10px" }}
+                                    />
+                                    <div style={{ display: "flex", flexDirection: "column" }}>
+                                        <h6 style={{ marginTop: "-2%" }}>{val.USERNAME}</h6>
+                                        {USERFOLLOWDATA.map((VAL, I) => {
+                                            if (VAL.USERID === PARAM.ID) {
+                                                return (
+                                                    <div style={{ display: "flex", alignItems: "center" }} key={I}>
+                                                        <p style={{ marginRight: "10px", marginTop: "-2%" }}>{VAL.USERFOLLOWSTATUS}</p>
+                                                        <p style={{ marginRight: "10px", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p>
+                                                    </div>
+                                                );
+                                            }
+                                        })}
+                                    </div>
+                                    <i
+                                        className="fa-solid fa-heart"
+                                        style={{ fontSize: "20px", marginTop: "1%", marginLeft: "13%" }}
+                                        onMouseOver={ONCHANGECOLOR}
+                                        onMouseOut={USERCHANGECOLOR}
+                                        onClick={() => METHOD(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME, value.VIDEOFIVE)}
+                                    ></i>
+                                    {USERSTAUS.map((VAL, I) => {
+                                        return COUNT.map((VALUE, INDEX) => {
+                                            if (VAL.USERID === PARAM.ID && VAL.USERID === VALUE.USERID) {
+                                                return (
+                                                    <div style={{ display: "flex", alignItems: "center" }} key={INDEX}>
+                                                        <p style={{ marginRight: "10px", marginTop: "50%" }}></p>
+                                                        <p style={{ marginRight: "10px", marginTop: "50%" }}>{VALUE.USERCOUNT}</p>
+                                                    </div>
+                                                );
+                                            }
+                                        });
+                                    })}
+                                </div>
+
+                                <div className="d-flex justify-content-start">
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary rounded-pill"
+                                        style={{ backgroundColor: "black", borderColor: "black", marginTop: "10px", marginRight: "10px", flex: "1" }}
+                                        onClick={SUBSCRIBEFUNCTION}
+                                    >
+                                        {USERSUBSCRIBE}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary rounded-pill"
+                                        style={{ backgroundColor: "black", borderColor: "black", marginTop: "10px", flex: "1" }}
+                                        onClick={() => USERFOLLOWFUNCTION(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}
+                                    >
+                                        Follow
+                                    </button>
+                                    {/* {USERFOLLOWDATA.map((VAL, I) => {
+                                        if (VAL.USERID === PARAM.ID) {
+                                            return (
+                                                <div style={{ display: "flex", alignItems: "center" }} key={I}>
+                                                    <p style={{ marginRight: "10px", marginTop: "-2%" }}>{VAL.USERFOLLOWSTATUS}</p>
+                                                    <p style={{ marginRight: "10px", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p>
+                                                </div>
+                                            );
                                         }
-                                    })
-
-                                })
-                            }
-                            <h6 key={i} style={{ marginTop: "-2%", marginLeft: "0%" }}>{val.USERNAME}</h6>   <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "-6%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} /><br />
-                            {/* <h6 key={i} style={{ marginTop: "0%", marginLeft: "-55%"}}>{val.USERNAME}</h6><br/> */}
-                            {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
-                            <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
-                            <div class="d-flex justify-content-start">
-                                <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "0%", marginTop: "-1%", backgroundColor: "black", borderColor: "black" }} onClick={SUBSCRIBEFUNCTION}>{USERSUBSCRIBE}</button><button type="button" class="btn btn-primary rounded-pill" style={{ backgroundColor: "black", borderColor: "black", marginLeft: "1%", marginTop: "-1%", height: "5%" }} onClick={() => USERFOLLOWFUNCTION(val.USERGENERATEDID, value.USERID, value.VIDEOONE, PARAM.VIDEOONE, value.id, PARAM.ID, val.USERNAME)}>Follow</button>
+                                    })} */}
+                                </div>
                             </div>
-                            {
-                                USERFOLLOWDATA.map((VAL, I) => {
-                                    if (VAL.USERID == PARAM.ID) {
-                                        return <>
-                                            <p style={{ marginRight: "64%", marginTop: "-2%" }}>{VAL.USERFOLLOWSTATUS}</p> <p style={{ marginRight: "57%", marginTop: "-2.9%" }}>{VAL.USERCOUNT}</p><br />
-                                        </>
-                                    }
-                                })
-                            }
-
-                            {/* <h5 style={{ marginLeft: "-93%" }} >Listen</h5> */}
-                            {
-                                SONG.map((VALUE, INDEX) => {
-                                    if (`VIDEO/${VALUE.VIDEOONE}` == `VIDEO/${PARAM.VIDEOONE}`) {
-                                        return <>
-                                            <audio style={{ marginLeft: "0%" }} controls>
-                                                <source src={`http://localhost:3001/${VALUE.USERSONG}`} type="audio/mp3" />
-                                                Your browser does not support the audio tag.
-                                            </audio>
-                                        </>
-                                    }
-                                })
-                            }
                         </>
                     }
                 })
@@ -688,12 +1002,46 @@ const COMMENT = () => {
             <textarea className="form-control z-depth-1" id="exampleFormControlTextarea6" rows="2" placeholder="Write something here..." style={{ width: "70%", marginLeft: "0%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea>
             <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)}>View Comments</button>
         </div> */}
-        <div className="md-form mb-3 pink-textarea active-pink-textarea"><br />
-            <textarea id="form18" className="md-textarea form-control" rows="1" placeholder="Write Comment..." style={{ width: "50%", marginLeft: "0%", borderColor: "white", height: "5%" }} onChange={(e) => setUSERCOMMENT(e.target.value)}></textarea><br />
-            <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => USERCOMMENTFUNCTION(PARAM.ID, PARAM.USERID, PARAM.VIDEOFIVE)}>Comment</button> <button type="button" class="btn btn-primary" style={{ marginLeft: "0%" }} onClick={() => FULLWINDOWPOPUP(PARAM.ID)}>View Comments</button>
+        <div className="md-form mb-3 pink-textarea active-pink-textarea">
+            <textarea
+                id="form18"
+                className="md-textarea form-control"
+                rows="1"
+                placeholder="Write Comment..."
+                style={{
+                    width: "100%",
+                    borderColor: "white",
+                    resize: "none", // Disable textarea resizing
+                }}
+                onChange={(e) => setUSERCOMMENT(e.target.value)}
+            ></textarea>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "10px",
+                }}
+            >
+                <button
+                    type="button"
+                    className="btn btn-primary"
+                    style={{ marginRight: "10px" }}
+                    onClick={() => USERCOMMENTFUNCTION(PARAM.ID, PARAM.USERID, PARAM.VIDEOFIVE)}
+                >
+                    Comment
+                </button>
+                <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => FULLWINDOWPOPUP(PARAM.ID)}
+                >
+                    View Comments
+                </button>
+            </div>
         </div>
-        <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '50%', marginTop: "-75%" }}>
-        </div>
+
+        {/* <div className="" style={{ height: '18rem', width: '18rem', marginLeft: '50%', marginTop: "-80%" }}>
+        </div> */}
         <VIDEOCOMMENT value={SEARCH} />
     </>
 }

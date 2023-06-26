@@ -47,7 +47,7 @@ const HOME = () => {
             </li>
           </ul>
         </div>
-        <img className="user-img" src={`http://localhost:3001/uploads/${PARAM.IMAGE}`} alt="User"  style={{ borderRadius: "50%", width: "45px", height: "45px"}} />
+        <img className="user-img" src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${PARAM.IMAGE}`} alt="User"  style={{ borderRadius: "50%", width: "45px", height: "45px"}} />
       </div>
     </nav>
     <HOMECLONE/>

@@ -12,7 +12,7 @@ const DEV = () => {
   const [SEARCH, setSEARCH] = useState("");
 
   const METHOD = async() => {
-   await axios.get("http://localhost:3001/USERDATA")
+   await axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERDATA`)
       .then((RES) => {
         console.log(RES);
         setUSER(RES.data);

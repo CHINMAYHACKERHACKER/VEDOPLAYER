@@ -65,7 +65,7 @@ const HOMEVIDEOVIDEO = () => {
     }
 
     function FULLWINDOWPOPUP(ID) {
-        window.open(`http://localhost:3000/USERCOMMENT/${ID}`, "bfs", "fullscreen,scrollbars");
+        window.open(`${process.env.REACT_APP_FRONTEND_URL}/USERCOMMENT/${ID}`, "bfs", "fullscreen,scrollbars");
     }
 
     const ONCHANGECOLOR = () => {
@@ -153,7 +153,7 @@ const HOMEVIDEOVIDEO = () => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERIMAGEDATA")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERIMAGEDATA`)
             .then((RES) => {
                 console.log("USERVIDEO", RES.data);
                 setUSERVIDEO(RES.data);
@@ -162,7 +162,7 @@ const HOMEVIDEOVIDEO = () => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERVIDEOLISTINFORMATION")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERVIDEOLISTINFORMATION`)
             .then((RES) => {
                 console.log("USERVIDEOLIST", RES.data);
                 setUSERVIDEOLIST(RES.data);
@@ -170,7 +170,7 @@ const HOMEVIDEOVIDEO = () => {
     }, [])
 
     useEffect(() => {
-        axios.get("http://localhost:3001/STATUS")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/STATUS`)
             .then((RES) => {
                 console.log("STATUS", RES.data);
                 setUSERSTAUS(RES.data);
@@ -178,7 +178,7 @@ const HOMEVIDEOVIDEO = () => {
     }, [])
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERCOUNTSTATUS")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERCOUNTSTATUS`)
             .then((RES) => {
                 console.log("COUNT", RES.data);
                 setCOUNT(RES.data);
@@ -186,7 +186,7 @@ const HOMEVIDEOVIDEO = () => {
     }, [])
 
     useEffect(() => {
-        axios.get("http://localhost:3001/FOLLOWSTATUS")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/FOLLOWSTATUS`)
             .then((RES) => {
                 console.log("COUNT", RES.data);
                 setUSERFOLLOWDATA(RES.data);
@@ -248,14 +248,14 @@ const HOMEVIDEOVIDEO = () => {
     if (PARAM.VIDEONOISEREDUCE == "yes") {
         const toggle = () => {
             videoRef.current.setVideoSrc(
-                `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
             );
         };
     }
     else {
         const toggle = () => {
             videoRef.current.setVideoSrc(
-                `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
+                `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
             );
         };
 
@@ -264,14 +264,14 @@ const HOMEVIDEOVIDEO = () => {
     if (PARAM.VIDEOMUSIC == "yes") {
         const toggle = () => {
             videoRef.current.setVideoSrc(
-                `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
             );
         };
     }
     else {
         const toggle = () => {
             videoRef.current.setVideoSrc(
-                `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
+                `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
             );
         };
 
@@ -333,7 +333,7 @@ const HOMEVIDEOVIDEO = () => {
                     onQualityChange={onQualityChange}
                     option={{
                         videoSrc:
-                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`,
+                            `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`,
                         theme,
                         width: "50%",
                         height: "50%",
@@ -344,22 +344,22 @@ const HOMEVIDEOVIDEO = () => {
                             {
                                 name: "BD",
                                 url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOONE}`
+                                    `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOONE}`
                             },
                             {
                                 name: "FHD",
                                 url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTWO}`
+                                    `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOTWO}`
                             },
                             {
                                 name: "HD",
                                 url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTHREE}`
+                                    `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOTHREE}`
                             },
                             {
                                 name: "SD",
                                 url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                                    `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
                             }
                         ]
                     }}
@@ -378,7 +378,7 @@ const HOMEVIDEOVIDEO = () => {
                     onQualityChange={onQualityChange}
                     option={{
                         videoSrc:
-                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`,
+                            `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`,
                         theme,
                         width: "50%",
                         height: "50%",
@@ -389,22 +389,22 @@ const HOMEVIDEOVIDEO = () => {
                             {
                                 name: "BD",
                                 url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOONE}`
+                                    `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOONE}`
                             },
                             {
                                 name: "FHD",
                                 url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTWO}`
+                                    `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOTWO}`
                             },
                             {
                                 name: "HD",
                                 url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTHREE}`
+                                    `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOTHREE}`
                             },
                             {
                                 name: "SD",
                                 url:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                                    `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
                             }
                         ]
                     }}
@@ -422,7 +422,7 @@ const HOMEVIDEOVIDEO = () => {
                             onQualityChange={onQualityChange}
                             option={{
                                 videoSrc:
-                                    `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`,
+                                    `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`,
                                 theme,
                                 width: "50%",
                                 height: "50%",
@@ -433,22 +433,22 @@ const HOMEVIDEOVIDEO = () => {
                                     {
                                         name: "BD",
                                         url:
-                                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOONE}`
+                                            `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOONE}`
                                     },
                                     {
                                         name: "FHD",
                                         url:
-                                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTWO}`
+                                            `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOTWO}`
                                     },
                                     {
                                         name: "HD",
                                         url:
-                                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOTHREE}`
+                                            `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOTHREE}`
                                     },
                                     {
                                         name: "SD",
                                         url:
-                                            `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                                            `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
                                     }
                                 ]
                             }}
@@ -466,7 +466,7 @@ const HOMEVIDEOVIDEO = () => {
                     onQualityChange={onQualityChange}
                     option={{
                         videoSrc:
-                            `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`,
+                            `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`,
                         theme,
                         width: "50%",
                         height: "50%",
@@ -477,22 +477,22 @@ const HOMEVIDEOVIDEO = () => {
                             {
                                 name: "BD",
                                 url:
-                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOONE}`
+                                    `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOONE}`
                             },
                             {
                                 name: "FHD",
                                 url:
-                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOTWO}`
+                                    `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTWO}`
                             },
                             {
                                 name: "HD",
                                 url:
-                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOTHREE}`
+                                    `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTHREE}`
                             },
                             {
                                 name: "SD",
                                 url:
-                                    `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
+                                    `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
                             }
                         ]
                     }}
@@ -522,7 +522,7 @@ const HOMEVIDEOVIDEO = () => {
 
                                 })
                             }
-                            <h6 key={i} style={{ marginTop: "-2%", marginLeft: "0%" }}>{val.USERNAME}</h6>   <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "-6%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} /><br />
+                            <h6 key={i} style={{ marginTop: "-2%", marginLeft: "0%" }}>{val.USERNAME}</h6>   <img className="user-img" src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`} alt="User" style={{ marginTop: "-6%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} /><br />
                             {/* <h6 key={i} style={{ marginTop: "0%", marginLeft: "-55%"}}>{val.USERNAME}</h6><br/> */}
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
                             <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
@@ -561,7 +561,7 @@ const HOMEVIDEOVIDEO = () => {
 
                                 })
                             }
-                            <h6 key={i} style={{ marginTop: "-2%", marginLeft: "0%" }}>{val.USERNAME}</h6>   <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "-6%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} /><br />
+                            <h6 key={i} style={{ marginTop: "-2%", marginLeft: "0%" }}>{val.USERNAME}</h6>   <img className="user-img" src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`} alt="User" style={{ marginTop: "-6%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} /><br />
                             {/* <h6 key={i} style={{ marginTop: "0%", marginLeft: "-55%"}}>{val.USERNAME}</h6><br/> */}
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
                             <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
@@ -599,7 +599,7 @@ const HOMEVIDEOVIDEO = () => {
 
                                     })
                                 }
-                                <h6 key={i} style={{ marginTop: "-2%", marginLeft: "0%" }}>{val.USERNAME}</h6>   <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "-6%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} /><br />
+                                <h6 key={i} style={{ marginTop: "-2%", marginLeft: "0%" }}>{val.USERNAME}</h6>   <img className="user-img" src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`} alt="User" style={{ marginTop: "-6%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} /><br />
                                 {/* <h6 key={i} style={{ marginTop: "0%", marginLeft: "-55%"}}>{val.USERNAME}</h6><br/> */}
                                 {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
                             <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}
@@ -638,7 +638,7 @@ const HOMEVIDEOVIDEO = () => {
 
                                 })
                             }
-                            <h6 key={i} style={{ marginTop: "-2%", marginLeft: "0%" }}>{val.USERNAME}</h6>   <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "-6%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} /><br />
+                            <h6 key={i} style={{ marginTop: "-2%", marginLeft: "0%" }}>{val.USERNAME}</h6>   <img className="user-img" src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`} alt="User" style={{ marginTop: "-6%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} /><br />
                             {/* <h6 key={i} style={{ marginTop: "0%", marginLeft: "-55%"}}>{val.USERNAME}</h6><br/> */}
                             {/* <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", borderRadius: "50%", width: "50px", height: "50px" }} />
                             <h6 key={i} style={{ marginTop: "2%", marginRight: "5%" }}>{val.USERNAME}</h6><br /><br /> */}

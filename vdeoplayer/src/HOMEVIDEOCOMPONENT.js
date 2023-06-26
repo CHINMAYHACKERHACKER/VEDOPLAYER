@@ -16,7 +16,7 @@ const HOMEVIDEOCOMPONENT = (props) => {
 
 
     const METHOD = async () => {
-        await axios.get("http://localhost:3001/USERVIDEOVIDEO")
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERVIDEOVIDEO`)
             .then((RES) => {
                 console.log(RES);
                 setUSERVIDEOLIST(RES.data);
@@ -25,7 +25,7 @@ const HOMEVIDEOCOMPONENT = (props) => {
 
 
     const USERIMAGEDATA = async () => {
-        await axios.get("http://localhost:3001/USERIMAGEDATA")
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERIMAGEDATA`)
             .then((RES) => {
                 console.log(RES);
                 setUSERIMAGE(RES.data);
@@ -73,13 +73,13 @@ const HOMEVIDEOCOMPONENT = (props) => {
                                 }).map((value, index) => (
                                     <li className="nav-item" key={index}><br />
                                         <div style={{ display: "flex", alignItems: "center" }}>
-                                            <video src={`http://localhost:3001/${value.VIDEOFIVE}`} type="video/mp4" style={{ width: "30%", border: "5px solid white", marginLeft: "0%", marginTop: "0%" }} onClick={() => VIDEOFUNCTION(value.id, value.USERID, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE, value.VIDEOMUSIC, value.USERAUDIO)}></video>
+                                            <video src={`${process.env.REACT_APP_BACKEND_URL}/${value.VIDEOFIVE}`} type="video/mp4" style={{ width: "30%", border: "5px solid white", marginLeft: "0%", marginTop: "0%" }} onClick={() => VIDEOFUNCTION(value.id, value.USERID, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE, value.VIDEOMUSIC, value.USERAUDIO)}></video>
                                             {
                                                 USERIMAGE.map((val, i) => {
                                                     if (val.USERGENERATEDID === value.USERID) {
                                                         return (
                                                             <div key={i} style={{ marginLeft: "30%", marginTop: "-9%" }}>
-                                                                <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ borderRadius: "50%", width: "25px", height: "25px", marginLeft: "-80px" }} />
+                                                                <img className="user-img" src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`} alt="User" style={{ borderRadius: "50%", width: "25px", height: "25px", marginLeft: "-80px" }} />
                                                                 <h5 style={{ marginLeft: "-39px" }}>{val.USERNAME}</h5>
                                                             </div>
                                                         )

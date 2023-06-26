@@ -11,6 +11,7 @@ import { Effect } from 'react-notification-badge';
 import NOTIFICATION from "../src/NOTIFICATION.mp3";
 import NOTIFICATIN from "../src/NOTIFICATIONBELL.mp3";
 
+
 const VIDEO = () => {
 
     const [USERVIDEOLIST, setUSERVIDEOLIST] = useState([]);
@@ -31,6 +32,11 @@ const VIDEO = () => {
     const [USERFOLLOWDATACOUNT, setUSERFOLLOWDATA] = useState([]);
     const [USERVIEWVIEW, setUSERVIEWVIEW] = useState([]);
     const [USERID, setUSERID] = useState([]);
+    const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+
+    const toggleNavbar = () => {
+        setIsNavbarOpen(!isNavbarOpen);
+    };
 
     console.log("USERIMAGE", USERIMAGE);
     console.log("USERVIDEOLIST", USERVIDEOLIST);
@@ -47,7 +53,7 @@ const VIDEO = () => {
 
 
     const METHOD = async () => {
-        await axios.get("http://localhost:3001/USERVIDEOVIDEO")
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERVIDEOVIDEO`)
             .then((RES) => {
                 console.log(RES);
                 setUSERVIDEOLIST(RES.data);
@@ -55,7 +61,7 @@ const VIDEO = () => {
     }
 
     const ADMETHOD = async (id) => {
-        await axios.get(`http://localhost:3001/ADVIDEO/${id}`)
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/ADVIDEO/${id}`)
             .then((RES) => {
                 console.log(RES);
                 setADVIDEOLIST(RES.data);
@@ -67,7 +73,7 @@ const VIDEO = () => {
     };
 
     const USERIMAGEDATA = async () => {
-        await axios.get("http://localhost:3001/USERIMAGEDATA")
+        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERIMAGEDATA`)
             .then((RES) => {
                 console.log(RES);
                 setUSERIMAGE(RES.data);
@@ -106,7 +112,7 @@ const VIDEO = () => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3001/TOTALUSERCOMMENTBELLSTATUS")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/TOTALUSERCOMMENTBELLSTATUS`)
             .then((RES) => {
                 console.log("TOTALUSERCOMMENTBELLSTATUS", RES.data);
                 setUSERBELLSTATUS(RES.data);
@@ -118,7 +124,7 @@ const VIDEO = () => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERDATAFOLLOWSTATUS")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERDATAFOLLOWSTATUS`)
             .then((RES) => {
                 console.log("USERFOLLOWSTATUS", RES.data);
                 setUSERFOLLOWSTATUS(RES.data);
@@ -128,16 +134,13 @@ const VIDEO = () => {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERLOGIN")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERLOGIN`)
             .then((RES) => {
                 console.log(RES.data);
                 setUSERDATACRED(RES.data);
             })
     }, [])
 
-    // const COMMENTFUNCTION = (ID) => {
-    //     NAVIGATE(`/COMMENT/${ID}`);
-    // }
 
     const VIDEOFUNCTION = (ID, USERID, VIDEOONE, VIDEOTWO, VIDEOTHREE, VIDEOFIVE, VIDEONOISEREDUCE, VIDEOMUSIC, USERAUDIO) => {
         if (VIDEOMUSIC == "yes") {
@@ -174,20 +177,8 @@ const VIDEO = () => {
     }
 
 
-    // useEffect(() => {
-    //     USERFOLLOWSTATUS.map((value) => {
-    //       return  USERVIDEOLIST.map((VAL) => {
-    //           return  USERDATACRED.map((VALUE) => {
-    //                 if (value.USERGENERATEDID == value.USERUSERID && value.USERGENERATEDID !== USERLOGINDATA) {
-    //                   return  alert(VALUE.USERNAME + "" + "Uploaded" + "" + VAL.TITLE);
-    //                 }
-    //             })
-    //         })
-    //     })
-    // }, [])
-
     useEffect(() => {
-        axios.get("http://localhost:3001/USERVIEWDATA")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERVIEWDATA`)
             .then((RES) => {
                 console.log("USERVIEWDATA", RES.data);
                 setUSERVIEWVIEW(RES.data);
@@ -199,36 +190,73 @@ const VIDEO = () => {
     useEffect(() => {
         METHOD();
         USERIMAGEDATA();
-        // notify();
     }, [])
+
+   
 
     return <>
 
         <nav className="navbar navbar-expand-lg bg-body-tertiary bg-white fixed-top">
             <div className="container-fluid">
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon" />
-                </button>
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    onClick={toggleNavbar}
+                    style={{
+                        border: 'none',
+                        borderRadius: '5px',
+                        padding: '5px',
+                        background: 'transparent',
+                        position: 'relative',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer'
+                    }}
+                >
+                    <span
+                        className="navbar-toggler-icon"
+                        style={{
+                            position: 'relative',
+                            width: '20px',
+                            height: '2px',
+                            backgroundColor: '#000',
+                            borderRadius: '2px',
+                            display: 'block'
+                        }}
+                    />
+                    <span
+                        className="navbar-toggler-icon"
+                        style={{
+                            position: 'absolute',
+                            top: '8px',
+                            width: '20px',
+                            height: '2px',
+                            backgroundColor: '#000',
+                            borderRadius: '2px',
+                            display: 'block'
+                        }}
+                    />
+                    <span
+                        className="navbar-toggler-icon"
+                        style={{
+                            position: 'absolute',
+                            top: '16px',
+                            width: '20px',
+                            height: '2px',
+                            backgroundColor: '#000',
+                            borderRadius: '2px',
+                            display: 'block'
+                        }}
+                    />
+                </button><br /><br />
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
-                        <li className="nav-item">
-                            {/* <Link className="nav-link text-white" aria-current="page" to="/HOME">Home</Link> */}
-                        </li>
-                        {/* <li className="nav-item">
-                <Link className="nav-link text-white" onClick={FUNCTION}>Chat</Link>
-              </li> */}
-                        <li className="nav-item">
-                            {/* <Link className="nav-link text-white" to="/HOME">Home</Link> */}
-                        </li>
-                        <li className="nav-item">
-                            {/* <Link className="nav-link" to="/FILE">Chat</Link> */}
-                        </li>
-                        {/* <li className="nav-item">
-                <Link className="nav-link text-white" onClick={METHOD}>Video call</Link>
-              </li> */}
-                        {/* <li className="nav-item">
-                                <Link className="nav-link text-white" to="/DEV">Users</Link>
-                            </li> */}
                         <li className="nav-item">
                             <Link className="nav-link" to="/UPLOAD">Upload Videos</Link>
                         </li>
@@ -237,11 +265,10 @@ const VIDEO = () => {
                 <div className="input-group input-group-sm mb-1 rounded-pill" style={{ maxWidth: '500px', marginRight: "29%" }}>
                     <input type="text" className="form-control rounded-start" placeholder="Search Videos" aria-label="Search" aria-describedby="search-button" onChange={(e) => setSEARCH(e.target.value)} />
                 </div>
-                {/* <div className="form-outline">
-                    <input type="search" id="form1" className="form-control" placeholder="Search Videos" aria-label="Search" onChange={(e) => setSEARCH(e.target.value)} />
-                </div> */}
+
                 {
                     USERFOLLOWSTATUS.map((value) => {
+                        console.log("VAXVALUE",value);
                         if (value.USERGENERATEDID !== USERLOGINDATA && value.USERUSERID == USERLOGINDATA && !isRendered) { // Check if bell is not already rendered
                             isRendered = true; // Update flag to true
                             localStorage.setItem("USERFOLLOWDATA", value.USERCOUNT);
@@ -252,28 +279,12 @@ const VIDEO = () => {
                                 aud.play();
                             }
                             return <div>
-                                <NotificationBadge count={value.USERCOUNT} class="fa-solid fa-user" effect={Effect.SCALE} style={{ marginRight: "300%" }} /><i class="fa-solid fa-user" id="user-icon" style={{ marginLeft: "-250%" }} onClick={showNames} ></i>
+                                <NotificationBadge count={value.USERCOUNT} class="fa-solid fa-user" effect={Effect.SCALE} style={{ marginRight: "120%" }} /><i class="fa-solid fa-user" id="user-icon" style={{ marginLeft: "-55%" }} onClick={showNames} ></i>
                             </div>
                         }
-                        // return USERDATACRED.map((val) => {
-                        //     if (USERLOGINDATA !== val.USERGENERATEDID) {
-                        //         return <div class="row">
-                        //             <div class="column">
-                        //                 <div className="user-cards-container">
-                        //                     <div className="user-card" id="names-card" style={{ display: 'none', position: "absolute", top: "100%", right: "0", height: "150%", width: "20%" }}>
-                        //                         <div className="user-info">
-                        //                             <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "50px", height: "50px" }} />
-                        //                             <h6 style={{ marginLeft: "33%" }}>{value.USERNAME} Started Following You</h6>
-                        //                         </div>
-                        //                     </div>
-                        //                 </div>
-                        //             </div>
-                        //         </div>
-                        //     }
-                        // })
                     })
                 }
-                {/* <i class="fa-solid fa-bell"> <ToastContainer /></i> */}
+                
                 {
                     USERBELLSTATUS.map((value) => {
                         if (value.USERGENERATEDID !== USERLOGINDATA && value.USERPARAMID == USERLOGINDATA && !isBellRendered) { // Check if bell is not already rendered
@@ -296,61 +307,75 @@ const VIDEO = () => {
                 USERDATACRED.map((val) => {
                     if (USERLOGINDATA == val.USERGENERATEDID) {
                         return <div>
-                            <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "30px", height: "30px", marginLeft: "30%" }} />
+                            <img className="user-img" src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "30px", height: "30px", marginLeft: "30%" }} />
                         </div>
                     }
                 })
             }
-        </nav>
-        {
-            USERVIDEOLIST.filter((value) => {
-                if (SEARCH == "") {
-                    return value;
-                }
-                else if (value.TITLE.toLowerCase().includes(SEARCH.toLowerCase())) {
-                    return value;
-                }
+        </nav><br /><br /><br /><br /><br /><br />
 
-            }).map((value, index) => (
-                <div class="container" style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                    <div class="video"><br />
-                        <video src={`http://localhost:3001/${value.VIDEOONE}`} type="video/mp4" style={{ width: "70%", border: "5px solid white" }} onClick={() => VIDEOFUNCTION(value.id, value.USERID, value.VIDEOONE, value.VIDEOTWO, value.VIDEOTHREE, value.VIDEOFIVE, value.VIDEONOISEREDUCE, value.VIDEOMUSIC, value.USERAUDIO)}></video>
-                        {
-                            USERVIEWVIEW.map((VALUE, i) => {
-                                if (VALUE.VIDEOID == value.id) {
-                                    return <>
-                                        <div>
-                                            {/* <i class="fa-solid fa-eye" style={{ fontSize: "15px", marginLeft: "5%" }}> {VALUE.USERCOUNT}</i> */}
-                                            <p style={{ marginLeft: "-87%" }}>Views {VALUE.USERCOUNT}</p>
-                                        </div>
-                                    </>
+        <div className="container">
+            <div className="row">
+                {USERVIDEOLIST.filter((value) => {
+                    if (SEARCH === '') {
+                        return value;
+                    } else if (value.TITLE.toLowerCase().includes(SEARCH.toLowerCase())) {
+                        return value;
+                    }
+                }).map((value, index) => (
+                    <div className="col-md-4" key={index}>
+                        <div className="video" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <video
+                                src={`${process.env.REACT_APP_BACKEND_URL}/${value.VIDEOONE}`}
+                                type="video/mp4"
+                                style={{ width: '100%', border: '5px solid white' }}
+                                onClick={() =>
+                                    VIDEOFUNCTION(
+                                        value.id,
+                                        value.USERID,
+                                        value.VIDEOONE,
+                                        value.VIDEOTWO,
+                                        value.VIDEOTHREE,
+                                        value.VIDEOFIVE,
+                                        value.VIDEONOISEREDUCE,
+                                        value.VIDEOMUSIC,
+                                        value.USERAUDIO
+                                    )
                                 }
-                            })
-                        }
-                        {/* <video src={`http://localhost:3001/${value.VIDEO}`} type="video/mp4" style={{ width: "70%", border: "5px solid white"}} onClick={VIDEOFUNCTION} controls></video> */}
-
-                        {/* <div>
-                                        <i style={{ border: '1px solid' }} className="fas fa-thumbs-up fa-border fa-1x bg-white" onClick={() => USERLIKEFUNCTION(value.id)} />  <i className="text-white">{USERLIKE[value.id] || 0}</i> <i style={{ border: '1px solid' }} className="fas fa-thumbs-down fa-border fa-1x bg-white" onClick={() => USERDISLIKEFUNCTION(value.id)} />  <i className="text-white">{USERDISLIKE[value.id] || 0}</i><br />
-        
-                                        <i style={{ border: '1px solid' }} class="fas fa-comment fa-border fa-1x  bg-white" aria-hidden="true" onClick={() => COMMENTFUNCTION(value.id)}></i>
-                                    </div> */}
-                    </div>
-                    <div class="text">
-                        {
-                            USERIMAGE.map((val, i) => {
+                            />
+                        </div>
+                        <div className="text" style={{ textAlign: 'center' }}>
+                            {USERIMAGE.map((val, i) => {
                                 if (val.USERGENERATEDID === value.USERID) {
-                                    return <>
-                                        <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" />
-                                        <h4 key={i} >{val.USERNAME}</h4>
-                                    </>
+                                    return (
+                                        <>
+                                            <img
+                                                className="user-img"
+                                                src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`}
+                                                alt="User"
+                                            />
+                                            <h4 style={{ marginRight: '20%' }}>{val.USERNAME}</h4>
+                                        </>
+                                    );
                                 }
-                            })
-                        }
-                        <p style={{ marginRight: "100%" }}><h6>{value.TITLE}</h6></p>
+                            })}
+                            <p>
+                                <h6>{value.TITLE}</h6>
+                            </p>
+                        </div>
+                        {USERVIEWVIEW.map((VALUE, i) => {
+                            if (VALUE.VIDEOID == value.id) {
+                                return (
+                                    <div key={i}>
+                                        <p style={{ marginLeft: '-10%' }}>Views {VALUE.USERCOUNT}</p>
+                                    </div>
+                                );
+                            }
+                        })}
                     </div>
-                </div>
-            ))
-        }
+                ))}
+            </div>
+        </div>
     </>
 }
 export default VIDEO;

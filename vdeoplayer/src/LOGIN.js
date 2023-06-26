@@ -21,7 +21,7 @@ const LOGIN = (props) => {
   const onLogin = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/login", { username, secret })
+      .post(`${process.env.REACT_APP_BACKEND_URL}/login`, { username, secret })
       .then((r) => props.onAuth({ ...r.data, secret })) // NOTE: over-ride secret
       .catch((e) => console.log(JSON.stringify(e.response.data)));
   };
@@ -29,7 +29,7 @@ const LOGIN = (props) => {
 
   const onSignup = (e) => {
     axios
-      .post("http://localhost:3001/signup", {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
         username,
         secret,
         email,
@@ -51,7 +51,7 @@ const LOGIN = (props) => {
     FORMDATA.append("USERGENERATEDID", USERGENERATEDID);
 
     axios
-      .post("http://localhost:3001/USERDATA", FORMDATA);
+      .post(`${process.env.REACT_APP_BACKEND_URL}/USERDATA`, FORMDATA);
       
   }
 

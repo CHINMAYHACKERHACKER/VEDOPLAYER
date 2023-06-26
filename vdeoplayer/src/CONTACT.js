@@ -13,7 +13,7 @@ const CONTACT = () => {
   const [MESSAGE, setMESSAGE] = useState("");
 
   const METHOD = () => {
-    axios.post("http://localhost:3001/contact", {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/contact`, {
       MESSAGE: MESSAGE
     })
       .then(() => {

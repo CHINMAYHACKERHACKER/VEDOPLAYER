@@ -9,12 +9,12 @@ const UPLOADEDVIDEO = () => {
 
 
     function DELETEFUNCTION(ID) {
-        axios.delete(`http://localhost:3001/USERVIDEODELETE/${ID}`)
+        axios.delete(`${process.env.REACT_APP_BACKEND_URL}/USERVIDEODELETE/${ID}`)
         alert("Your Video Deleted");
     }
 
     useEffect(() => {
-        axios.get("http://localhost:3001/USERVIDEOVIDEO")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERVIDEOVIDEO`)
             .then((RES) => {
                 console.log("USERVIDEOVIDEO", RES.data);
                 setUSERVIDEOLIST(RES.data);
@@ -35,7 +35,7 @@ const UPLOADEDVIDEO = () => {
                         return <>
                             <tbody>
                                 <tr>
-                                    <td> <video src={`http://localhost:3001/${value.VIDEOFIVE}`} type="video/mp4" style={{ width: "25%", marginLeft: "-0%" }}></video> <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "5%", marginTop: "-7%" }} onClick={() => DELETEFUNCTION(value.id)}>Delete Video</button></td>
+                                    <td> <video src={`${process.env.REACT_APP_BACKEND_URL}/${value.VIDEOFIVE}`} type="video/mp4" style={{ width: "25%", marginLeft: "-0%" }}></video> <button type="button" class="btn btn-primary rounded-pill" style={{ marginLeft: "5%", marginTop: "-7%" }} onClick={() => DELETEFUNCTION(value.id)}>Delete Video</button></td>
                                 </tr>
                             </tbody>
                         </>

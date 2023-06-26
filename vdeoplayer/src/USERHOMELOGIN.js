@@ -37,22 +37,19 @@ const USERHOMELOGIN = () => {
         FORMDATA.append("IMAGE", IMAGE);
         FORMDATA.append("USERGENERATEDID", USERGENERATEDID);
         axios
-            .post("http://localhost:3001/USERSIGNUP", FORMDATA);
+            .post(`${process.env.REACT_APP_BACKEND_URL}/USERSIGNUP`, FORMDATA);
         alert("You have signed up");
         localStorage.setItem("USERGENERATEDID", USERGENERATEDID);
         onLogin();
     }
 
-    const USERGENERATE = () => {
-        setUSERGENERATEDID(passwordHintId);
-    }
-
     useEffect(() => {
-        axios.get("http://localhost:3001/USERLOGIN")
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERLOGIN`)
             .then((RES) => {
                 console.log(RES.data);
                 setUSERLOGIN(RES.data);
             })
+        setUSERGENERATEDID(passwordHintId);
     }, [])
 
     return <>
@@ -86,10 +83,10 @@ const USERHOMELOGIN = () => {
                                         <label for="pwd">Email:</label>
                                         <input type="email" className="form-control" placeholder="Enter Email" onChange={(e) => setEMAIL(e.target.value)} required />
                                     </div>
-                                    <div className="form-group">
+                                    {/* <div className="form-group">
                                         <label for="pwd">Click To Generate Id(Save your Unique Id):</label>
                                         <input type="text" className="form-control" value={USERGENERATEDID} required /><button type="button" className="btn btn-primary" style={{ marginLeft: "1%" }} onClick={USERGENERATE}>Generate</button>
-                                    </div>
+                                    </div> */}
                                     <div className="form-group">
                                         <label for="pwd">Upload Your Image:</label>
                                         <input type="file" className="form-control" onChange={(e) => setIMAGE(e.target.files[0])} required />
