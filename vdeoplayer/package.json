@@ -40,7 +40,6 @@
     "shaka-player": "^4.3.5",
     "shaka-player-react": "^1.1.5",
     "shaka-player-ui-controls": "^1.0.8",
-    "socket.io": "^4.5.4",
     "unzipper": "^0.10.11",
     "uuid": "^9.0.0",
     "video-to-audio": "^1.0.1",
