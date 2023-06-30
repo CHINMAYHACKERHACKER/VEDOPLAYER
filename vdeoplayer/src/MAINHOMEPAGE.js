@@ -9,17 +9,13 @@ const MAINHOMEPAGE = () => {
     const history = useNavigate();
 
     const handleSignUp = () => {
-        history("/userhomelogin");
-    }
-
-    const handleWatchVideos = () => {
-        history("/homevideo");
+        history("/USERHOMELOGIN");
     }
 
     const isAndroid = /Android/.test(navigator.userAgent); // Check if user agent corresponds to an Android device
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/userlogin`)
+        axios.get(`http://localhost:3001/USERLOGIN`)
             .then((res) => {
                 console.log(res.data);
                 setUserLogin(res.data);
@@ -64,8 +60,8 @@ const MAINHOMEPAGE = () => {
         backgroundColor: '#fff',
         order: -1, // Brings the logo above the title
         backgroundImage: `url(${logo})`, // Replace "your-image-url" with the actual URL of the image
-        backgroundRepeat:"no-repeat",
-        backgroundSize:"contain"
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "contain"
     };
 
     const titleStyle = {

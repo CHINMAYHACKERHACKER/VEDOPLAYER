@@ -37,14 +37,14 @@ const USERHOMELOGIN = () => {
         FORMDATA.append("IMAGE", IMAGE);
         FORMDATA.append("USERGENERATEDID", USERGENERATEDID);
         axios
-            .post(`${process.env.REACT_APP_BACKEND_URL}/USERSIGNUP`, FORMDATA);
+            .post(`http://localhost:3001/USERSIGNUP`, FORMDATA);
         alert("You have signed up");
         localStorage.setItem("USERGENERATEDID", USERGENERATEDID);
         onLogin();
     }
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERLOGIN`)
+        axios.get(`http://localhost:3001/USERLOGIN`)
             .then((RES) => {
                 console.log(RES.data);
                 setUSERLOGIN(RES.data);

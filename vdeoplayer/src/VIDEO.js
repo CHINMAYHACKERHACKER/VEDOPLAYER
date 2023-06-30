@@ -53,7 +53,7 @@ const VIDEO = () => {
 
 
     const METHOD = async () => {
-        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERVIDEOVIDEO`)
+        await axios.get(`http://localhost:3001/USERVIDEOVIDEO`)
             .then((RES) => {
                 console.log(RES);
                 setUSERVIDEOLIST(RES.data);
@@ -61,7 +61,7 @@ const VIDEO = () => {
     }
 
     const ADMETHOD = async (id) => {
-        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/ADVIDEO/${id}`)
+        await axios.get(`http://localhost:3001/ADVIDEO/${id}`)
             .then((RES) => {
                 console.log(RES);
                 setADVIDEOLIST(RES.data);
@@ -73,7 +73,7 @@ const VIDEO = () => {
     };
 
     const USERIMAGEDATA = async () => {
-        await axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERIMAGEDATA`)
+        await axios.get(`http://localhost:3001/USERIMAGEDATA`)
             .then((RES) => {
                 console.log(RES);
                 setUSERIMAGE(RES.data);
@@ -112,7 +112,7 @@ const VIDEO = () => {
 
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/TOTALUSERCOMMENTBELLSTATUS`)
+        axios.get(`http://localhost:3001/TOTALUSERCOMMENTBELLSTATUS`)
             .then((RES) => {
                 console.log("TOTALUSERCOMMENTBELLSTATUS", RES.data);
                 setUSERBELLSTATUS(RES.data);
@@ -124,7 +124,7 @@ const VIDEO = () => {
 
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERDATAFOLLOWSTATUS`)
+        axios.get(`http://localhost:3001/USERDATAFOLLOWSTATUS`)
             .then((RES) => {
                 console.log("USERFOLLOWSTATUS", RES.data);
                 setUSERFOLLOWSTATUS(RES.data);
@@ -134,7 +134,7 @@ const VIDEO = () => {
 
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERLOGIN`)
+        axios.get(`http://localhost:3001/USERLOGIN`)
             .then((RES) => {
                 console.log(RES.data);
                 setUSERDATACRED(RES.data);
@@ -178,7 +178,7 @@ const VIDEO = () => {
 
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERVIEWDATA`)
+        axios.get(`http://localhost:3001/USERVIEWDATA`)
             .then((RES) => {
                 console.log("USERVIEWDATA", RES.data);
                 setUSERVIEWVIEW(RES.data);
@@ -192,7 +192,7 @@ const VIDEO = () => {
         USERIMAGEDATA();
     }, [])
 
-   
+
 
     return <>
 
@@ -268,7 +268,7 @@ const VIDEO = () => {
 
                 {
                     USERFOLLOWSTATUS.map((value) => {
-                        console.log("VAXVALUE",value);
+                        console.log("VAXVALUE", value);
                         if (value.USERGENERATEDID !== USERLOGINDATA && value.USERUSERID == USERLOGINDATA && !isRendered) { // Check if bell is not already rendered
                             isRendered = true; // Update flag to true
                             localStorage.setItem("USERFOLLOWDATA", value.USERCOUNT);
@@ -284,7 +284,7 @@ const VIDEO = () => {
                         }
                     })
                 }
-                
+
                 {
                     USERBELLSTATUS.map((value) => {
                         if (value.USERGENERATEDID !== USERLOGINDATA && value.USERPARAMID == USERLOGINDATA && !isBellRendered) { // Check if bell is not already rendered
@@ -307,7 +307,7 @@ const VIDEO = () => {
                 USERDATACRED.map((val) => {
                     if (USERLOGINDATA == val.USERGENERATEDID) {
                         return <div>
-                            <img className="user-img" src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "30px", height: "30px", marginLeft: "30%" }} />
+                            <img className="user-img" src={`http://localhost:3001/${val.IMAGE}`} alt="User" style={{ marginTop: "0%", borderRadius: "50%", width: "30px", height: "30px", marginLeft: "30%" }} />
                         </div>
                     }
                 })
@@ -326,7 +326,7 @@ const VIDEO = () => {
                     <div className="col-md-4" key={index}>
                         <div className="video" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <video
-                                src={`${process.env.REACT_APP_BACKEND_URL}/${value.VIDEOONE}`}
+                                src={`http://localhost:3001/${value.VIDEOONE}`}
                                 type="video/mp4"
                                 style={{ width: '100%', border: '5px solid white' }}
                                 onClick={() =>
@@ -351,7 +351,7 @@ const VIDEO = () => {
                                         <>
                                             <img
                                                 className="user-img"
-                                                src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`}
+                                                src={`http://localhost:3001/${val.IMAGE}`}
                                                 alt="User"
                                             />
                                             <h4 style={{ marginRight: '20%' }}>{val.USERNAME}</h4>

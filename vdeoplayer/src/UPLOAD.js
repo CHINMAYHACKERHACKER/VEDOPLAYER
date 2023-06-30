@@ -32,7 +32,7 @@ const UPLOAD = () => {
                 FORMDATA.append("VIDEO", VIDEO[i]);
             }
 
-            axios.post(`${process.env.REACT_APP_BACKEND_URL}/VIDEO`, FORMDATA);
+            axios.post(`http://localhost:3001/VIDEO`, FORMDATA);
             alert(
                 "Video Uploaded! Please wait until the upload process is complete. Once it's uploaded, you will see your videos in the 'Uploaded Videos' tab."
             );

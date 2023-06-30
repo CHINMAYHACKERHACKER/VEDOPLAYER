@@ -20,7 +20,7 @@ const VIDEOUPLOAD = () => {
     }
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERVIDEOVIDEO`).then((RES) => {
+        axios.get(`http://localhost:3001/USERVIDEOVIDEO`).then((RES) => {
             console.log("USERVIDEOVIDEO", RES.data);
             setUSERVIDEOLIST(RES.data);
         });
@@ -28,21 +28,21 @@ const VIDEOUPLOAD = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERFOLLOWSTATUS`).then((RES) => {
+        axios.get(`http://localhost:3001/USERFOLLOWSTATUS`).then((RES) => {
             console.log("USERFOLLOWSTATUS", RES.data);
             setUSERFOLLOWSTATUS(RES.data);
         });
     }, []);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERCOMMENTBELLSTATUS`).then((RES) => {
+        axios.get(`http://localhost:3001/USERCOMMENTBELLSTATUS`).then((RES) => {
             console.log("USERCOMMENTBELLSTATUS", RES.data);
             setUSERCOMMENTSTATUS(RES.data);
         });
     }, []);
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERVIEWDATA`).then((RES) => {
+        axios.get(`http://localhost:3001/USERVIEWDATA`).then((RES) => {
             console.log("USERVIEWDATA", RES.data);
             setUSERVIEWVIEW(RES.data);
         });
@@ -83,7 +83,7 @@ const VIDEOUPLOAD = () => {
 
                     // Calculate the total views count
                     USERVIEWVIEW.forEach((DATA, index) => {
-                        if (value.VIDEOFIVE === `VIDEO/${DATA.USERVIDEO}` && DATA.USERUNIQUEID === USERLOGINDATA) {
+                        if (value.VIDEOFIVE == `VIDEO/${DATA.USERVIDEO}` && DATA.VIDEOUPLOADEDUSERID == USERLOGINDATA) {
                             viewCount += DATA.USERCOUNT;
                         } else if (value.VIDEOFIVE === `VIDEONOISEREDUCE/${DATA.USERVIDEO}` && DATA.USERUNIQUEID !== USERLOGINDATA) {
                             viewCount += DATA.USERCOUNT;
@@ -96,7 +96,7 @@ const VIDEOUPLOAD = () => {
                             <tbody key={index}>
                                 <tr>
                                     <td>
-                                        <video src={`${process.env.REACT_APP_BACKEND_URL}/${value.VIDEOFIVE}`} type="video/mp4" style={{ width: "100%", maxWidth: "400px", margin: "0 auto" }}></video>
+                                        <video src={`http://localhost:3001/${value.VIDEOFIVE}`} type="video/mp4" style={{ width: "100%", maxWidth: "400px", margin: "0 auto" }}></video>
                                         <div className="md-form mb-3 pink-textarea active-pink-textarea">
                                             <div
                                                 style={{

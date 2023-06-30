@@ -53,7 +53,7 @@ const COMMENT = () => {
         }
         else if (PARAM.USERID == USERID) {
             USERID = USERUNIQUEID;
-            axios.post(`${process.env.REACT_APP_BACKEND_URL}/USERCOMMENT`, {
+            axios.post(`http://localhost:3001/USERCOMMENT`, {
                 ID: ID,
                 USERCOMMENT: USERCOMMENT,
                 USERID: USERID,
@@ -84,7 +84,7 @@ const COMMENT = () => {
     const METHOD = (USERGENERATEDID, USERID, VIDEO, VIDEOONE, id, ID, USERNAME, VIDEOFIVE) => {
         if (USERGENERATEDID == USERID && VIDEO == `VIDEO/${VIDEOONE}` && id == ID) {
             // alert("You Started Following" + " " + USERNAME);
-            axios.post(`${process.env.REACT_APP_BACKEND_URL}/STATUS`, {
+            axios.post(`http://localhost:3001/STATUS`, {
                 id: id,
                 USERNAME: USERNAME,
                 STATUS: STATUS,
@@ -94,7 +94,7 @@ const COMMENT = () => {
         }
         else if (USERGENERATEDID == USERID && VIDEO == `VIDEONOISEREDUCE/${VIDEOONE}` && id == ID) {
             alert("You Started Following" + " " + USERNAME);
-            axios.post(`${process.env.REACT_APP_BACKEND_URL}/STATUS`, {
+            axios.post(`http://localhost:3001/STATUS`, {
                 id: id,
                 USERNAME: USERNAME,
                 STATUS: STATUS,
@@ -115,7 +115,7 @@ const COMMENT = () => {
         if (USERGENERATEDID == USERID && VIDEO == `VIDEO/${VIDEOONE}` && id == ID) {
             USERGENERATEDID = USERUNIQUEID;
             alert("You Started Following" + " " + USERNAME);
-            axios.post(`${process.env.REACT_APP_BACKEND_URL}/FOLLOWSTATUS`, {
+            axios.post(`http://localhost:3001/FOLLOWSTATUS`, {
                 id: id,
                 USERNAME: USERNAME,
                 STATUSFOLLOW: STATUSFOLLOW,
@@ -125,7 +125,7 @@ const COMMENT = () => {
         }
         else if (USERGENERATEDID == USERID && VIDEO == `VIDEONOISEREDUCE/${VIDEOONE}` && id == ID) {
             USERGENERATEDID = USERUNIQUEID;
-            axios.post(`${process.env.REACT_APP_BACKEND_URL}/FOLLOWSTATUS`, {
+            axios.post(`http://localhost:3001/FOLLOWSTATUS`, {
                 id: id,
                 USERNAME: USERNAME,
                 STATUSFOLLOW: STATUSFOLLOW,
@@ -153,7 +153,7 @@ const COMMENT = () => {
 
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERIMAGEDATA`)
+        axios.get(`http://localhost:3001/USERIMAGEDATA`)
             .then((RES) => {
                 console.log("USERVIDEO", RES.data);
                 setUSERVIDEO(RES.data);
@@ -162,7 +162,7 @@ const COMMENT = () => {
 
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERVIDEOLISTINFORMATION`)
+        axios.get(`http://localhost:3001/USERVIDEOLISTINFORMATION`)
             .then((RES) => {
                 console.log("USERVIDEOLIST", RES.data);
                 setUSERVIDEOLIST(RES.data);
@@ -170,7 +170,7 @@ const COMMENT = () => {
     }, [])
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/STATUS`)
+        axios.get(`http://localhost:3001/STATUS`)
             .then((RES) => {
                 console.log("STATUS", RES.data);
                 setUSERSTAUS(RES.data);
@@ -178,7 +178,7 @@ const COMMENT = () => {
     }, [])
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/USERCOUNTSTATUS`)
+        axios.get(`http://localhost:3001/USERCOUNTSTATUS`)
             .then((RES) => {
                 console.log("COUNT", RES.data);
                 setCOUNT(RES.data);
@@ -186,7 +186,7 @@ const COMMENT = () => {
     }, [])
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/FOLLOWSTATUS`)
+        axios.get(`http://localhost:3001/FOLLOWSTATUS`)
             .then((RES) => {
                 console.log("COUNT", RES.data);
                 setUSERFOLLOWDATA(RES.data);
@@ -255,14 +255,14 @@ const COMMENT = () => {
     if (PARAM.VIDEONOISEREDUCE == "yes") {
         const toggle = () => {
             videoRef.current.setVideoSrc(
-                `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
             );
         };
     }
     else {
         const toggle = () => {
             videoRef.current.setVideoSrc(
-                `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
+                `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
             );
         };
 
@@ -271,21 +271,21 @@ const COMMENT = () => {
     if (PARAM.VIDEOMUSIC == "yes") {
         const toggle = () => {
             videoRef.current.setVideoSrc(
-                `${process.env.REACT_APP_BACKEND_URL}/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
+                `http://localhost:3001/VIDEONOISEREDUCE/${PARAM.VIDEOFIVE}`
             );
         };
     }
     else {
         const toggle = () => {
             videoRef.current.setVideoSrc(
-                `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
+                `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
             );
         };
 
     }
 
     if (VIDEODATA == 29) {
-        axios.post(`${process.env.REACT_APP_BACKEND_URL}/USERVIEWDATA`, {
+        axios.post(`http://localhost:3001/USERVIEWDATA`, {
             ID: PARAM.ID,
             USERID: PARAM.USERID,
             VIDEOFIVE: PARAM.VIDEOFIVE,
@@ -399,7 +399,7 @@ const COMMENT = () => {
                     onError={onError}
                     onQualityChange={onQualityChange}
                     option={{
-                        videoSrc: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`,
+                        videoSrc: `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`,
                         theme,
                         width: "100%", // Set width to 100% for responsiveness
                         height: "auto", // Let height adjust automatically
@@ -409,19 +409,19 @@ const COMMENT = () => {
                         quality: [
                             {
                                 name: "BD",
-                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOONE}`
+                                url: `http://localhost:3001/VIDEO/${PARAM.VIDEOONE}`
                             },
                             {
                                 name: "FHD",
-                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTWO}`
+                                url: `http://localhost:3001/VIDEO/${PARAM.VIDEOTWO}`
                             },
                             {
                                 name: "HD",
-                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTHREE}`
+                                url: `http://localhost:3001/VIDEO/${PARAM.VIDEOTHREE}`
                             },
                             {
                                 name: "SD",
-                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
+                                url: `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
                             }
                         ]
                     }}
@@ -448,7 +448,7 @@ const COMMENT = () => {
                     onError={onError}
                     onQualityChange={onQualityChange}
                     option={{
-                        videoSrc: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`,
+                        videoSrc: `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`,
                         theme,
                         width: "100%", // Set width to 100% for responsiveness
                         height: "auto", // Let height adjust automatically
@@ -458,19 +458,19 @@ const COMMENT = () => {
                         quality: [
                             {
                                 name: "BD",
-                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOONE}`
+                                url: `http://localhost:3001/VIDEO/${PARAM.VIDEOONE}`
                             },
                             {
                                 name: "FHD",
-                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTWO}`
+                                url: `http://localhost:3001/VIDEO/${PARAM.VIDEOTWO}`
                             },
                             {
                                 name: "HD",
-                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTHREE}`
+                                url: `http://localhost:3001/VIDEO/${PARAM.VIDEOTHREE}`
                             },
                             {
                                 name: "SD",
-                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
+                                url: `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
                             }
                         ]
                     }}
@@ -496,7 +496,7 @@ const COMMENT = () => {
                         onError={onError}
                         onQualityChange={onQualityChange}
                         option={{
-                            videoSrc: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`,
+                            videoSrc: `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`,
                             theme,
                             width: "100%", // Set width to 100% for responsiveness
                             height: "auto", // Let height adjust automatically
@@ -506,19 +506,19 @@ const COMMENT = () => {
                             quality: [
                                 {
                                     name: "BD",
-                                    url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOONE}`
+                                    url: `http://localhost:3001/VIDEO/${PARAM.VIDEOONE}`
                                 },
                                 {
                                     name: "FHD",
-                                    url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTWO}`
+                                    url: `http://localhost:3001/VIDEO/${PARAM.VIDEOTWO}`
                                 },
                                 {
                                     name: "HD",
-                                    url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTHREE}`
+                                    url: `http://localhost:3001/VIDEO/${PARAM.VIDEOTHREE}`
                                 },
                                 {
                                     name: "SD",
-                                    url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
+                                    url: `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
                                 }
                             ]
                         }}
@@ -544,7 +544,7 @@ const COMMENT = () => {
                     onError={onError}
                     onQualityChange={onQualityChange}
                     option={{
-                        videoSrc: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`,
+                        videoSrc: `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`,
                         theme,
                         width: "100%", // Set width to 100% for responsiveness
                         height: "auto", // Let height adjust automatically
@@ -554,19 +554,19 @@ const COMMENT = () => {
                         quality: [
                             {
                                 name: "BD",
-                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOONE}`
+                                url: `http://localhost:3001/VIDEO/${PARAM.VIDEOONE}`
                             },
                             {
                                 name: "FHD",
-                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTWO}`
+                                url: `http://localhost:3001/VIDEO/${PARAM.VIDEOTWO}`
                             },
                             {
                                 name: "HD",
-                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOTHREE}`
+                                url: `http://localhost:3001/VIDEO/${PARAM.VIDEOTHREE}`
                             },
                             {
                                 name: "SD",
-                                url: `${process.env.REACT_APP_BACKEND_URL}/VIDEO/${PARAM.VIDEOFIVE}`
+                                url: `http://localhost:3001/VIDEO/${PARAM.VIDEOFIVE}`
                             }
                         ]
                     }}
@@ -617,7 +617,7 @@ const COMMENT = () => {
                                 <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
                                     <img
                                         className="user-img"
-                                        src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`}
+                                        src={`http://localhost:3001/${val.IMAGE}`}
                                         alt="User"
                                         style={{ borderRadius: "50%", width: "50px", height: "50px", marginRight: "10px" }}
                                     />
@@ -720,7 +720,7 @@ const COMMENT = () => {
                                 <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
                                     <img
                                         className="user-img"
-                                        src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`}
+                                        src={`http://localhost:3001/${val.IMAGE}`}
                                         alt="User"
                                         style={{ borderRadius: "50%", width: "50px", height: "50px", marginRight: "10px" }}
                                     />
@@ -822,7 +822,7 @@ const COMMENT = () => {
                                     <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
                                         <img
                                             className="user-img"
-                                            src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`}
+                                            src={`http://localhost:3001/${val.IMAGE}`}
                                             alt="User"
                                             style={{ borderRadius: "50%", width: "50px", height: "50px", marginRight: "10px" }}
                                         />
@@ -925,7 +925,7 @@ const COMMENT = () => {
                                 <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
                                     <img
                                         className="user-img"
-                                        src={`${process.env.REACT_APP_BACKEND_URL}/${val.IMAGE}`}
+                                        src={`http://localhost:3001/${val.IMAGE}`}
                                         alt="User"
                                         style={{ borderRadius: "50%", width: "50px", height: "50px", marginRight: "10px" }}
                                     />
